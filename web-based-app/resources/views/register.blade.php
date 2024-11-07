@@ -5,9 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Register</title>
 </head>
-<body>
+<body style="height: 100vh; background-image: url({{ asset('assets/bg.png') }}); background-size: cover;">
+    <img src="{{ asset('assets/schoollogo.png') }}" alt=""  style="width: 300px; float: left; padding: 10px;">
+
     <div class="container">
         @if (session('error'))
             <div class="alert alert-danger  alert-dismissible fade show mt-2" role="alert"  >
@@ -27,12 +30,12 @@
         @endif
         <div class="row justify-content-center align-items-center" style="height: 100vh;">
             <div class="col-md-6">
-                <div class="card mt-5">
-                    <div class="card-header text-center">
+                <div class="card " style="background-color: rgb(62,87,95); transition: transform 0.2s;">
+                    <div class="card-header text-center text-white">
                         <h4>Feeding Program Portal</h4>
                         <h6>Register</h6>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body text-white">
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
                             @method('POST') 
@@ -42,28 +45,28 @@
                                         <input type="hidden" name="role" value="user">
                                         <div class="form-group">
                                             <label for="name">Name</label>
-                                            <input type="text" class="form-control" id="name" name="name" required>
+                                            <input type="text" maxlength="30" class="form-control" id="name" name="name" required>
                                             @error('name')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="form-group">
                                             <label for="address">Address</label>
-                                            <input type="text" class="form-control" id="address" name="address" required>
+                                            <input type="text" maxlength="30" class="form-control" id="address" name="address" required>
                                             @error('address')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="form-group">
                                             <label for="phone_number">CP Number</label>
-                                            <input type="text" class="form-control" id="phone_number" name="phone_number" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
+                                            <input type="text"  class="form-control" id="phone_number" name="phone_number" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                             @error('phone_number')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="form-group">
                                             <label for="relation">Relation</label>
-                                            <input type="text" class="form-control" id="relation" name="relation" required>
+                                            <input type="text" maxlength="30" class="form-control" id="relation" name="relation" required>
                                             @error('relation')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
@@ -72,14 +75,14 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="email">Email address</label>
-                                            <input type="email" class="form-control" id="email" name="email" required>
+                                            <input type="email"  class="form-control" maxlength="30" id="email" name="email" required>
                                             @error('email')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="form-group">
                                             <label for="password">Password</label>
-                                            <input type="password" class="form-control" id="password" name="password" required oninput="checkPasswordMatch()">
+                                            <input type="password"  maxlength="16" class="form-control" id="password" name="password" required oninput="checkPasswordMatch()">
                                             @error('password')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror

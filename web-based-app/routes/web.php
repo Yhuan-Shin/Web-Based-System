@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin;
 use App\Http\Controllers\AdminLogin;
 use App\Http\Controllers\BMI;
 use App\Http\Controllers\Student;
+use App\Http\Controllers\SocialAuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserLogin;
 Route::get('/login', function () {
@@ -16,7 +17,9 @@ Route::get('/login/admin', function () {
 Route::get('/register', function () {
     return view('register');
 });
-
+// google login
+Route::get('login/google', [SocialAuthController::class, 'redirectToGoogle'])->name('google.login');
+Route::get('login/google/callback', [SocialAuthController::class, 'handleGoogleCallback']);
 //user
 Route::post('/login', [UserLogin::class, 'login'])->name('login');
 Route::post('/register', [UserLogin::class, 'register'])->name('register') ;

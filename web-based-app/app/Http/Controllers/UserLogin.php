@@ -34,7 +34,7 @@ class UserLogin extends Controller
             'address' => 'required|string|max:255',
             'phone_number' => 'required|string|max:15|unique:users',
             'relation' => 'required|string|max:255',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => 'required|string|min:8|confirmed|regex:/[a-zA-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/',
         ]);
 
         User::create([
