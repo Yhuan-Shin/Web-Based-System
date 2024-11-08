@@ -58,7 +58,7 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="phone_number">CP Number</label>
+                                            <label for="phone_number">Phone Number</label>
                                             <input type="text"  class="form-control" id="phone_number" name="phone_number" oninput="this.value = this.value.replace(/[^0-9]/g, '')" required>
                                             @error('phone_number')
                                                 <div class="text-danger">{{ $message }}</div>
@@ -66,7 +66,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="relation">Relation</label>
-                                            <input type="text" maxlength="30" class="form-control" id="relation" name="relation" required>
+                                            <input type="text" maxlength="30" class="form-control" value="Parent/Guardian" disabled  id="relation" name="relation" required>
                                             @error('relation')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror

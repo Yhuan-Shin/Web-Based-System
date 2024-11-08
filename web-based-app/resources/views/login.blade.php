@@ -9,7 +9,7 @@
 </head>
 <body style="height: 100vh; background-image: url({{ asset('assets/bg.png') }}); background-size: cover;">
 
-    <img src="{{ asset('assets/logo.jpg') }}" alt="" style="width: 150px; float: left; padding: 10px;">
+    <img src="{{ asset('assets/logo_.jpg') }}" alt="" style="width: 150px; float: left; padding: 10px;">
 
     <div class="container">
         <div class="d-flex justify-content-center">
@@ -62,11 +62,11 @@
                 </div>
                 <div class="social-media-icons text-center mt-3 px-3">
                     <p class="text-white">Click the icons below to login using:</p>
-                    <a href="" target="_blank" class="button btn btn-light mb-2" >
+                    <a href="" target="_blank" class="button btn btn-light mb-2 text-white" style="background-color: transparent; border: none;">
                         <img src="{{ asset('assets/facebook_logo.png') }}" alt="">
                         Sign in with Facebook
                     </a>
-                    <a href="{{ route('google.login') }}" target="_blank" class="button btn btn-light mb-2">
+                    <a href="{{ route('google.login') }}" target="_blank" class="button btn btn-light mb-2 text-white" style="background-color: transparent; border: none;">
                         <img src="{{ asset('assets/google_logo.png') }}" alt="">
                         Sign in with Google
                     </a>

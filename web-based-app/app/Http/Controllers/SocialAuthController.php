@@ -24,6 +24,9 @@ class SocialAuthController extends Controller
 
         if ($existingUser) {
             Auth::guard('user')->login($existingUser, true);  // Specify the 'user' guard
+            if(is_null($existingUser->address && $existingUser->phone_number)){
+                return view('auth/add_address_phone');
+            }
             return redirect()->to('/dashboard');
         }
 
@@ -41,6 +44,17 @@ class SocialAuthController extends Controller
         ]);
 
         Auth::guard('user')->login($newUser, true);  // Specify the 'user' guard
+        return redirect()->to('/profile');
+    }
+    public function add_address_phone(Request $request){
+        $request->validate([
+            'address' => 'required|string|max:255',
+        ]);
+    
+        $user = Auth::guard('user')->user();
+        $user->address = $request->input('address');
+        $user->phone_number = $request->input('phone_number');
+        User::where('id', $user->id)->update(['address' => $user->address, 'phone_number' => $user->phone_number]);
         return redirect()->to('/dashboard');
     }
 

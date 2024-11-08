@@ -7,8 +7,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <title>Dashboard Admin</title>
+    @livewireStyles
 </head>
-<body>
+<body style="height: 100vh; background-image: url({{ asset('assets/bg.png') }}); background-size: cover;">
 
        <div class="container justify-content-center">
             @if (session('success'))
@@ -26,6 +27,11 @@
        </div>
     {{-- Users Modal --}}
    @livewire('display-users')
+   {{-- reminder modal --}}
+   @livewire('create-reminder')
+    {{-- report modal --}}
+    @livewire('create-planner')
+
     <!-- Logout Confirmation Modal -->
     <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -46,7 +52,7 @@
     </div>
 
      <div class="p-3">
-        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+        <button class="btn btn-primary " style="float: left;" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
             <i class="bi bi-list"> </i>
           </button>
      </div>
@@ -77,16 +83,18 @@
             
             <ul class="list-group list-group-flush">
                 <li class="list-group-item border-0"><i class="bi bi-person-fill" style="font-size: 20px; color: gray;"></i>
-                <a href="" data-bs-toggle="modal" data-bs-target="#usersModal" class="text-decoration-none text-dark">Users</a>
+                <a href="" data-bs-toggle="modal" data-bs-target="#usersModal" class="text-decoration-none text-dark">Students</a>
                 </li>
 
                 <li class="list-group-item border-0"><i class="bi bi-calendar-check-fill" style="font-size: 20px; color: orange;"></i> Planner</li>
 
-              <li class="list-group-item border-0"><i class="bi bi-bell-fill" style="font-size: 20px; color: red;"></i> Weekly Report</li>
+              <li class="list-group-item border-0"><i class="bi bi-bell-fill" style="font-size: 20px; color: red;"></i> 
+                <a href="" data-bs-toggle="modal" data-bs-target="#reminderModal" class="text-decoration-none text-dark"> Reminders</a>
+            </li>
 
                <li class="list-group-item border-0"><i class="bi bi-egg-fill" style="font-size: 20px; color: green;"></i> Nutrition Support</li>
-
-                <li class="list-group-item border-0" data-bs-toggle="modal" data-bs-target="#childInfoModal"><i class="bi bi-info-circle-fill" style="font-size: 20px; color: blue;"></i> User Information</li>
+                <li class="list-group-item border-0"><i class="bi bi-pie-chart-fill" style="font-size: 20px; color: blue;"></i> Weekly Report</li>
+                <li class="list-group-item border-0" data-bs-toggle="modal" data-bs-target="#childInfoModal"><i class="bi bi-info-circle-fill" style="font-size: 20px; color: black;"></i> User Information</li>
 
             </ul>
           </div>
@@ -108,20 +116,18 @@
       </div>
 
     <div class="container">
-        <div class="row">
-            <div class="col">
-                
-                <h6>Homepage</h6>
-            </div>
+        <div class="d-flex justify-content-center">
+            <img src="{{ asset('assets/schoollogo.png') }}" alt="" style="width: 200px;">
         </div>
         <div class="row">
             <div class="col-md mt-2">
-                <div class="card shadow-sm" style="background-color: #f8f9fa; transition: transform 0.2s;  height: 200px;" data-bs-toggle="modal" data-bs-target="#usersModal">
+                <div class="card shadow-sm" style="background-color: rgb(111, 167, 185); transition: transform 0.2s;  height: 200px;" data-bs-toggle="modal" data-bs-target="#usersModal">
                     <div class="card-body">
                         <h5 class="card-title"><i class="bi bi-person-fill" style="font-size: 30px;
-                        color: gray;"></i> Users</h5>
+                        color: gray;"></i> Students</h5>
+                        <p>Click here to view Students</p>
                         @livewire('count-users')
-                        <p>Click here to view Users</p>
+
                     </div>
                 </div>
 
@@ -129,7 +135,7 @@
             </div>
             
             <div class="col-md mt-2">
-                <div class="card shadow-sm" style="background-color: #f8f9fa; transition: transform 0.2s; height: 200px;" data-bs-toggle="modal" data-bs-target="#scheduleModal" 
+                <div class="card shadow-sm" style="background-color: rgb(111, 167, 185); transition: transform 0.2s; height: 200px;" data-bs-toggle="modal" data-bs-target="#reportModal" 
                 data-bs-toggle="modal">
                     <div class="card-body">
                         <h5 class="card-title"><i class="bi bi-calendar-fill" style="font-size: 30px;
@@ -139,51 +145,61 @@
                 </div>
             </div>
             <div class="col-md mt-2">
-                <div class="card shadow-sm" style="background-color: #f8f9fa; transition: transform 0.2s; height: 200px;">
+                <div class="card shadow-sm" style="background-color: rgb(111, 167, 185); transition: transform 0.2s; height: 200px;" data-bs-target="#reminderModal" data-bs-toggle="modal">
                     <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-bell-fill" style="font-size: 30px; color: red;"></i> Report</h5>
-                        <p>Click here to create report</p>
+                        <h5 class="card-title"><i class="bi bi-bell-fill" style="font-size: 30px; color: red;"></i> Reminder</h5>
+                        <p>Click here to create reminder</p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row mt-2">
             <div class="col-md-4">
-                <div class="card shadow-sm" style="background-color: #f8f9fa; transition: transform 0.2s; height: 200px;">
+                <div class="card shadow-sm" style="background-color: rgb(111, 167, 185); transition: transform 0.2s; height: 200px;">
                     <div class="card-body">
                         <h5 class="card-title"><i class="bi bi-egg-fill" style="font-size: 30px; color: green;"></i> Nutrition Support</h5>
                         <p>Click here to create nutrition support</p>
                     </div>
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm" style="background-color: rgb(111, 167, 185); transition: transform 0.2s; height: 200px;" >
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi bi-pie-chart-fill" style="font-size: 30px; color: blue;"></i> Weekly Report</h5>
+                        <p>Click here to view weekly report</p>
+                    </div>
+                </div>
+            </div>
         </div>
+        
     </div>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
       <style>
         .card:hover {
-            transform: scale(1.05);
-            cursor: pointer;
-        }
-        .list-group-item {
-        transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for effects */
-    }
+                    transform: scale(1.05);
+                    cursor: pointer;
+                }
+                .list-group-item {
+                transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for effects */
+            }
 
-    .list-group-item:hover {
-        background-color: #f8f9fa; /* Change background on hover */
-        color: #007bff; /* Change text color on hover */
-        cursor: pointer; /* Change cursor to pointer */
-        transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for effects */
-    }
+            .list-group-item:hover {
+                background-color: #f8f9fa; /* Change background on hover */
+                color: #007bff; /* Change text color on hover */
+                cursor: pointer; /* Change cursor to pointer */
+                transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for effects */
+            }
 
-    .list-group-item i {
-        transition: color 0.3s ease; /* Smooth transition for icon color */
-    }
+            .list-group-item i {
+                transition: color 0.3s ease; /* Smooth transition for icon color */
+            }
 
-    .list-group-item:hover i {
-        color: #007bff; /* Change icon color on hover */
-        transition: color 0.3s ease; /* Smooth transition for icon color */
-    }
+            .list-group-item:hover i {
+                color: #007bff; /* Change icon color on hover */
+                transition: color 0.3s ease; /* Smooth transition for icon color */
+            }
     </style>
+    @livewireScripts
 </body>
 </html>

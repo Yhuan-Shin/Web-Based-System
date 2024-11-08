@@ -8,7 +8,7 @@
     <title>Login Admin</title>
 </head>
 <body style="height: 100vh; background-image: url({{ asset('assets/bg.png') }}); background-size: cover;">
-    <img src="{{ asset('assets/logo.jpg') }}" alt="" style="width: 150px; float: left; padding: 10px;">
+    <img src="{{ asset('assets/logo_.jpg') }}" alt="" style="width: 150px; float: left; padding: 10px;">
 
     <div class="container">
         <div class="d-flex justify-content-center">

@@ -18,6 +18,7 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Age</th>
                                 <th scope="col">BMI</th>
+                                <th scope = "col">Category</th>
                                 <th scope="col">Profile</th>
                             </tr>
                         </thead>
@@ -28,6 +29,7 @@
                                 <td>{{$student->name}}</td>
                                 <td>{{$student->age}}</td>
                                 <td>{{ $student->bmi ? $student->bmi->bmi : 'N/A' }}</td>
+                                <td>{{ $student->bmi ? $student->bmi->result : 'N/A' }}</td>
                                 <td>
                                     <button type="button" class="btn btn-primary" data-bs-trigger="hover" data-bs-toggle="popover"  data-bs-html="true" title="User Profile"
                                             data-bs-content="<h6>Name: {{ $student->name }}</h6><br>
@@ -35,9 +37,10 @@
                                             Gender: {{ $student->gender }}<br>
                                             Guardian: {{ $student->user ? $student->user->name : 'N/A' }}<br>
                                             Phone Number: {{ $student->user ? $student->user->phone_number : 'N/A' }}<br>
-                                            Height: {{ $student->bmi->height }} cm<br>
-                                            Weight: {{ $student->bmi->weight }} lbs<br>
-                                            BMI: {{ $student->bmi ? $student->bmi->bmi : 'N/A' }}">
+                                            Height: {{ $student->bmi ? $student->bmi->height : 'N/A' }} cm<br>
+                                            Weight: {{ $student->bmi ? $student->bmi->weight : 'N/A' }} lbs<br>
+                                            BMI: {{ $student->bmi ? $student->bmi->bmi : 'N/A' }}<br>
+                                            Category: {{ $student->bmi ? $student->bmi->result : 'N/A' }}">
                                         <i class="bi bi-eye"></i> See Profile
                                     </button>
                                 </td>

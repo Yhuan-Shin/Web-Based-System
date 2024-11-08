@@ -35,6 +35,8 @@ class UserLogin extends Controller
             'phone_number' => 'required|string|max:15|unique:users',
             'relation' => 'required|string|max:255',
             'password' => 'required|string|min:8|confirmed|regex:/[a-zA-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/',
+        ], [
+            'password.regex' => 'Password must contain at least one letter, one number, and one special character'
         ]);
 
         User::create([

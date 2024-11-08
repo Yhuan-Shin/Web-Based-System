@@ -73,22 +73,8 @@ class BMICalculator extends Component
                 session()->flash('message', $message);
             
             } else {
-                // Create a new student and a new BMI record for them
-                $student = StudentModel::create([
-                    'name' => $this->name,
-                    'user_id' => Auth::user()->id
-                ]);
-            
-                BMI::create([
-                    'weight' => $this->weight,
-                    'height' => $this->height,
-                    'bmi' => $this->bmi,
-                    'result' => $this->result,
-                    'name' => $this->name,
-                    'student_id' => $student->id
-                ]);
-            
-                session()->flash('message', 'BMI has been calculated successfully!');
+                // Flash an error message if the student name is not found
+                session()->flash('error', 'Student name not found.');
             }
             
             // Flash success message

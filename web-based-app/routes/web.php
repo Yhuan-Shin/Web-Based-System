@@ -18,6 +18,11 @@ Route::get('/register', function () {
     return view('register');
 });
 // google login
+Route::get('/profile', function () {
+    return view('auth/add_address_phone');
+});
+Route::post('/profile', [SocialAuthController::class, 'add_address_phone'])->name('add.address.phone');
+
 Route::get('login/google', [SocialAuthController::class, 'redirectToGoogle'])->name('google.login');
 Route::get('login/google/callback', [SocialAuthController::class, 'handleGoogleCallback']);
 //user
@@ -33,9 +38,9 @@ Route::post('/login/admin', [AdminLogin::class, 'login'])->name('admin.login');
 Route::middleware(['auth:user'])->group(function () {
     Route::get('/dashboard', [Student::class, 'index'])->name('index');
     // submit bmi
-   Route::post('/dashboard/bmi', [BMI::class, 'submit'])->name('bmi.submit');
    Route::post('/dashboard/student', [Student::class, 'submit'])->name('student.submit');
-
+    Route::put('/dashboard/student/{id}', [Student::class, 'update'])->name('student.update');
+    Route::delete('/dashboard/student/{id}', [Student::class, 'destroy'])->name('student.destroy');
 });
 Route::middleware(['auth:admin'])->group(function () {
     Route::get('/admin', [Admin::class, 'index'])->name('admin.index');

@@ -8,7 +8,7 @@
 
     <title>Dashboard</title>
 </head>
-<body>
+<body style="height: 100vh; background-image: url({{ asset('assets/bg.png') }}); background-size: cover;">
 
        <div class="container justify-content-center">
             @if (session('success'))
@@ -24,6 +24,31 @@
                 </div>
             @endif
        </div>
+       {{-- child's delete modal --}}
+         @foreach ($students as $child)
+         <!-- Child's Delete Modal -->
+         <div class="modal fade" id="childDeleteModal{{ $child->id }}" tabindex="-1" aria-labelledby="childDeleteModalLabel{{ $child->id }}" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="childDeleteModalLabel{{ $child->id }}">Confirm Delete</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete {{ $child->name }}'s information?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <form action="{{ route('student.destroy', $child->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
          <!-- Child's Update Modal -->
          @foreach ($students as $child)
          <div class="modal fade" id="childEditModal{{ $child->id }}" tabindex="-1" aria-labelledby="childInfoModalLabel" aria-hidden="true">
@@ -35,7 +60,7 @@
                     </div>
                     <div class="modal-body">
                         <!-- Child's Information content goes here -->
-                        <form action="" method="POST">
+                        <form action="{{ route('student.update', $child->id) }}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="mb-3">
@@ -44,7 +69,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="age" class="form-label">Age</label>
-                                <input type="number" class="form-control" id="age" name="age" value="{{ $child->age }}" required>
+                                <input type="number" class="form-control" id="age" min="1" name="age" value="{{ $child->age }}" required>
                             </div>
                             <div class="mb-3">
                                 <label for="gender" class="form-label">Gender</label>
@@ -81,7 +106,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="childAge" class="form-label">Child's Age</label>
-                            <input type="number" class="form-control" id="age" name="age" required>
+                            <input type="number" class="form-control" id="age" name="age" min="1" required>
                         </div>
                         <div class="mb-3">
                             <label for="childGender" class="form-label">Child's Gender</label>
@@ -108,22 +133,30 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    
                     <!-- Child's Information content goes here -->
                     <div class="list-group">
                         @forelse ($students as $child)
-                            <a href="#" class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#childEditModal{{ $child->id }}">
+                        <div class="list-group-item list-group-item-action border mb-2">
+                            <a href="#" class="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#childEditModal{{ $child->id }}">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h6 class="mb-1">{{ $child->name }}</h6>
-                                    <small>{{ $child->age }} years old</small>
+                                    <h6 class="mb-1">{{ $child->name }}</h6>  
+                                    <small>{{ $child->age }} years old </small>                                  
                                 </div>
-                                <p class="mb-1">Gender: 
+                            </a>
+                                <p class="mb-1 text-muted">Gender: 
                                     @if($child->gender == 'male')
                                         <span class="badge bg-primary rounded-pill">Male</span>
                                     @elseif($child->gender == 'female')
                                         <span class="badge bg-danger rounded-pill">Female</span>
                                     @endif
+                                    <i class="bi bi-trash-fill  float-end" style="color: red;" data-bs-toggle="modal" data-bs-target="#childDeleteModal{{ $child->id }}"></i>
+                                
                                 </p>
-                            </a>
+                       
+                        </div>
+                            
+
                            
 
                         @empty
@@ -161,6 +194,7 @@
     </div>
     @livewire('b-m-i-calculator')
     @livewire('schedule')   
+    @livewire('display-reminder')
 
 
 
@@ -190,7 +224,7 @@
                 </div>
             </div>
             @endif
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <button type="button" class="btn-close"  style="float: left;" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
             <hr>
@@ -203,7 +237,9 @@
 
                 <li class="list-group-item border-0"><i class="bi bi-calendar-fill" style="font-size: 20px; color: orange;"></i> Schedule</li>
 
-              <li class="list-group-item border-0"><i class="bi bi-bell-fill" style="font-size: 20px; color: red;"></i> Reminders</li>
+              <li class="list-group-item border-0"><i class="bi bi-bell-fill" style="font-size: 20px; color: red;"></i>
+                <a href="" data-bs-toggle="modal" data-bs-target="#reminderModal" class="text-decoration-none text-dark">Reminders</a>
+             </li>
 
                <li class="list-group-item border-0"><i class="bi bi-egg-fill" style="font-size: 20px; color: green;"></i> Dietary</li>
 
@@ -229,15 +265,12 @@
       </div>
 
     <div class="container">
-        <div class="row">
-            <div class="col">
-                
-                <h6>Homepage</h6>
-            </div>
+        <div class="d-flex justify-content-center">
+            <img src="{{ asset('assets/schoollogo.png') }}" alt="" style="width: 200px;">
         </div>
         <div class="row">
             <div class="col-md mt-2">
-                <div class="card shadow-sm" style="background-color: #f8f9fa; transition: transform 0.2s;  height: 200px;" data-bs-toggle="modal" data-bs-target="#bmiModal">
+                <div class="card shadow-sm" style="background-color: rgb(111, 167, 185); transition: transform 0.2s;  height: 200px;" data-bs-toggle="modal" data-bs-target="#bmiModal">
                     <div class="card-body">
                         <h5 class="card-title"><i class="bi bi-calculator-fill" style="font-size: 30px; color: gray;"></i> BMI</h5>
                         <p>Click here to calculate your BMI</p>
@@ -248,7 +281,7 @@
             </div>
             
             <div class="col-md mt-2">
-                <div class="card shadow-sm" style="background-color: #f8f9fa; transition: transform 0.2s; height: 200px;" data-bs-toggle="modal" data-bs-target="#scheduleModal" 
+                <div class="card shadow-sm" style="background-color: rgb(111, 167, 185); transition: transform 0.2s; height: 200px;" data-bs-toggle="modal" data-bs-target="#scheduleModal" 
                 data-bs-toggle="modal">
                     <div class="card-body">
                         <h5 class="card-title"><i class="bi bi-calendar-fill" style="font-size: 30px; color: orange;"></i> Schedule</h5>
@@ -257,7 +290,8 @@
                 </div>
             </div>
             <div class="col-md mt-2">
-                <div class="card shadow-sm" style="background-color: #f8f9fa; transition: transform 0.2s; height: 200px;">
+                <div class="card shadow-sm" style="background-color: rgb(111, 167, 185); transition: transform 0.2s; height: 200px;"
+                data-bs-toggle="modal" data-bs-target="#reminderModal">
                     <div class="card-body">
                         <h5 class="card-title"><i class="bi bi-bell-fill" style="font-size: 30px; color: red;"></i> Reminders</h5>
                         <p>Click here to view your reminders</p>
@@ -267,7 +301,7 @@
         </div>
         <div class="row mt-2">
             <div class="col-md-4">
-                <div class="card shadow-sm" style="background-color: #f8f9fa; transition: transform 0.2s; height: 200px;">
+                <div class="card shadow-sm" style="background-color: rgb(111, 167, 185); transition: transform 0.2s; height: 200px;">
                     <div class="card-body">
                         <h5 class="card-title"><i class="bi bi-egg-fill" style="font-size: 30px; color: green;"></i> Dietary</h5>
                         <p>Click here to view your dietary</p>
@@ -278,6 +312,7 @@
     </div>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+      
       <style>
         .card:hover {
             transform: scale(1.05);
