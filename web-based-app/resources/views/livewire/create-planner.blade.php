@@ -1,5 +1,5 @@
 <div>
-    <div class="modal fade" id="reportModal" wire:ignore.self tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
+    <div class="modal fade" id="plannerModal" wire:ignore.self tabindex="-1" aria-labelledby="reportModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -15,15 +15,15 @@
                     <div class="row">
                         <div class="col-md-12">
                             <label for="title" class="form-label">Title</label>
-                            <input type="text" class="form-control" id="title" wire:model="title" placeholder="Title">
+                            <input type="text" class="form-control" id="title" wire:model="title" placeholder="Title" required>
                         </div>
                         <div class="col-md-12">
                             <label for="description" class="form-label">Description</label>
-                            <textarea class="form-control" id="description" wire:model="description" placeholder="Description"></textarea>
+                            <textarea class="form-control" id="description" wire:model="description" placeholder="Description" required></textarea>
                         </div>
                         <div class="col-md-12">
                             <label for="date" class="form-label">Date</label>
-                            <input type="datetime-local" class="form-control" id="date" wire:model="planner_date" placeholder="Date">
+                            <input type="datetime-local" class="form-control" id="date" wire:model="planner_date" placeholder="Date" required>
                             @error('planner_date')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror

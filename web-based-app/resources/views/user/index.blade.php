@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
+ <!-- FullCalendar CSS -->
+ <link href='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.10/main.min.css' rel='stylesheet' />
     <title>Dashboard</title>
+    @livewireStyles
 </head>
 <body style="height: 100vh; background-image: url({{ asset('assets/bg.png') }}); background-size: cover;">
 
@@ -195,6 +197,7 @@
     @livewire('b-m-i-calculator')
     @livewire('schedule')   
     @livewire('display-reminder')
+    @livewire('view-story')
 
 
 
@@ -235,14 +238,16 @@
                     <a href="" data-bs-toggle="modal" data-bs-target="#bmiModal" class="text-decoration-none text-dark">BMI</a>
                 </li>
 
-                <li class="list-group-item border-0"><i class="bi bi-calendar-fill" style="font-size: 20px; color: orange;"></i> Schedule</li>
+                <li class="list-group-item border-0"><i class="bi bi-calendar-fill" style="font-size: 20px; color: orange;"></i> 
+                    <a href="" data-bs-toggle="modal" data-bs-target="#scheduleModal" class="text-decoration-none text-dark">Schedule</li>
 
               <li class="list-group-item border-0"><i class="bi bi-bell-fill" style="font-size: 20px; color: red;"></i>
                 <a href="" data-bs-toggle="modal" data-bs-target="#reminderModal" class="text-decoration-none text-dark">Reminders</a>
              </li>
 
                <li class="list-group-item border-0"><i class="bi bi-egg-fill" style="font-size: 20px; color: green;"></i> Dietary</li>
-
+                <li class="list-group-item border-0"><i class="bi bi-image-fill" style="font-size: 20px; color: green;"></i> 
+                <a href=""></a> View Story</li>
                 <li class="list-group-item border-0" data-bs-toggle="modal" data-bs-target="#childInfoModal"><i class="bi bi-info-circle-fill" style="font-size: 20px; color: blue;"></i> Child's Information</li>
 
             </ul>
@@ -308,6 +313,17 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm" style="background-color: rgb(111, 167, 185); transition: transform 0.2s; height: 200px;"
+                data-bs-toggle="modal" data-bs-target="#viewStoryModal">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="bi bi-image-fill" style="font-size: 30px; color: green;"></i> View Story
+                        </h5>
+                        <p>Click here to view story</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
@@ -338,5 +354,11 @@
         transition: color 0.3s ease; /* Smooth transition for icon color */
     }
     </style>
+     <!-- FullCalendar JS -->
+     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.10/main.min.js'></script>
+     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.10/main.min.js'></script>
+     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@6.1.10/main.min.js'></script>
+     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/timegrid@6.1.10/main.min.js'></script>
+     @livewireScripts
 </body>
 </html>

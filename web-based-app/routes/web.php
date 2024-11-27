@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\AdminLogin;
 use App\Http\Controllers\BMI;
+use App\Http\Controllers\Planner;
 use App\Http\Controllers\Student;
 use App\Http\Controllers\SocialAuthController;
 use Illuminate\Support\Facades\Route;
@@ -44,4 +45,7 @@ Route::middleware(['auth:user'])->group(function () {
 });
 Route::middleware(['auth:admin'])->group(function () {
     Route::get('/admin', [Admin::class, 'index'])->name('admin.index');
+    Route::get('/admin/planner', [Planner::class, 'index'])->name('planner.table');
+    Route::delete('/admin/planner/{id}', [Planner::class, 'delete'])->name('planner.destroy');
+    Route::put('/admin/planner/{id}', [Planner::class, 'update'])->name('planner.update');
 });

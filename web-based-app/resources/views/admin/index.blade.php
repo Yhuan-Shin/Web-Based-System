@@ -29,8 +29,12 @@
    @livewire('display-users')
    {{-- reminder modal --}}
    @livewire('create-reminder')
-    {{-- report modal --}}
-    @livewire('create-planner')
+    {{-- planner modal --}}
+   @livewire('create-planner')
+   {{-- post story modal --}}
+   @livewire('post-story')
+
+
 
     <!-- Logout Confirmation Modal -->
     <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
@@ -89,10 +93,11 @@
                 <li class="list-group-item border-0"><i class="bi bi-calendar-check-fill" style="font-size: 20px; color: orange;"></i> Planner</li>
 
               <li class="list-group-item border-0"><i class="bi bi-bell-fill" style="font-size: 20px; color: red;"></i> 
-                <a href="" data-bs-toggle="modal" data-bs-target="#reminderModal" class="text-decoration-none text-dark"> Reminders</a>
+                <a href="" data-bs-toggle="modal" data-bs-target="#plannerModal" class="text-decoration-none text-dark"> Reminders</a>
             </li>
 
-               <li class="list-group-item border-0"><i class="bi bi-egg-fill" style="font-size: 20px; color: green;"></i> Nutrition Support</li>
+               <li class="list-group-item border-0"><i class="bi bi-image-fill" style="font-size: 20px; color: green;"></i> 
+                <a href="" data-bs-toggle="modal" data-bs-target="#postStoryModal" class="text-decoration-none text-dark">Post Story</a></li>
                 <li class="list-group-item border-0"><i class="bi bi-pie-chart-fill" style="font-size: 20px; color: blue;"></i> Weekly Report</li>
                 <li class="list-group-item border-0" data-bs-toggle="modal" data-bs-target="#childInfoModal"><i class="bi bi-info-circle-fill" style="font-size: 20px; color: black;"></i> User Information</li>
 
@@ -135,12 +140,13 @@
             </div>
             
             <div class="col-md mt-2">
-                <div class="card shadow-sm" style="background-color: rgb(111, 167, 185); transition: transform 0.2s; height: 200px;" data-bs-toggle="modal" data-bs-target="#reportModal" 
-                data-bs-toggle="modal">
+                <div class="card shadow-sm" style="background-color: rgb(111, 167, 185); transition: transform 0.2s; height: 200px;" 
+                >
                     <div class="card-body">
                         <h5 class="card-title"><i class="bi bi-calendar-fill" style="font-size: 30px;
                         color: orange;"></i> Planner</h5>
-                        <p>Click here to create planner</p>
+                        <p data-bs-toggle="modal" data-bs-target="#plannerModal" >Click here to create planner</p>
+                        <span class="badge bg-primary rounded-pill float-end"><a href="{{ route('planner.table') }}" class="text-decoration-none text-white">View Table </a></span>
                     </div>
                 </div>
             </div>
@@ -155,10 +161,11 @@
         </div>
         <div class="row mt-2">
             <div class="col-md-4">
-                <div class="card shadow-sm" style="background-color: rgb(111, 167, 185); transition: transform 0.2s; height: 200px;">
+                <div class="card shadow-sm" style="background-color: rgb(111, 167, 185); transition: transform 0.2s; height: 200px;"
+                data-bs-toggle="modal" data-bs-target="#postStoryModal">
                     <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-egg-fill" style="font-size: 30px; color: green;"></i> Nutrition Support</h5>
-                        <p>Click here to create nutrition support</p>
+                        <h5 class="card-title"><i class="bi bi-image-fill" style="font-size: 30px; color: green;"></i> Post Story</h5>
+                        <p>Click here to post story</p>
                     </div>
                 </div>
             </div>
