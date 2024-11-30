@@ -22,19 +22,28 @@ class Student extends Controller
             'name' => 'required|string|max:255',
             'age' => 'required|integer',
             'gender' => 'required|string|max:255',
+            'birthday' => 'required|date',
+            'student_no' => 'required|string',
         ]);
 
         $name = $request->name;
         $age = $request->age;
         $gender = $request->gender;
+        $birthday = $request->birthday;
+        $student_no = $request->student_no;
         $user_id = Auth::user()->id;
 
+        if($birthday >= date('Y-m-d') || $birthday == date('Y-m-d') && $age <= 0) {
+            return redirect('/dashboard')->with(['error' => 'Birthdate cannot be greater than or equal today']);
+        }
         // Save the data to the database
         $student = new StudentModel();
         $student->name = $name;
         $student->age = $age;
         $student->gender = $gender;
         $student->user_id = $user_id;
+        $student->birthday = $birthday;
+        $student->student_no = $student_no;
         $student->save();
 
         return redirect('/dashboard')->with(['students' => $student, 'success' => 'Information has been saved']);

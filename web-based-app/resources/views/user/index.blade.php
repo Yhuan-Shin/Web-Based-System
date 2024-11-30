@@ -66,8 +66,17 @@
                             @csrf
                             @method('PUT')
                             <div class="mb-3">
+                                <label for="student_no" class="form-label">Student No.</label>
+                                <input type="text" class="form-control" id="student_no" name="student_no" value="" required>
+                            </div>
+                            <div class="mb-3">
+
                                 <label for="name" class="form-label">Name</label>
                                 <input type="text" class="form-control" id="name" name="name" value="{{ $child->name }}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="date" class="form-label">Date of Birth</label>
+                                <input type="date" class="form-control" id="date" name="date" value="" required>
                             </div>
                             <div class="mb-3">
                                 <label for="age" class="form-label">Age</label>
@@ -89,42 +98,7 @@
             </div>
         </div>
         @endforeach
-    <!-- Child's Add Modal -->
-    <div class="modal fade" id="childAddModal" tabindex="-1" aria-labelledby="childAddModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="childAddModalLabel">Add Child's Information</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- Child's Information content goes here -->
-                    <form action="{{ route('student.submit') }}" method="POST">
-                        @csrf
-                        @method('POST')
-                        <div class="mb-3">
-                            <label for="childName" class="form-label">Child's Name</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="childAge" class="form-label">Child's Age</label>
-                            <input type="number" class="form-control" id="age" name="age" min="1" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="childGender" class="form-label">Child's Gender</label>
-                            <select class="form-select" id="childGender" name="gender" required>
-                                <option value="" disabled selected>Select Gender</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary float-end">Save</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
     <!-- Child Info Modal -->
     <div class="modal fade" id="childInfoModal" tabindex="-1" aria-labelledby="childInfoModalLabel" aria-hidden="true">
@@ -198,7 +172,7 @@
     @livewire('schedule')   
     @livewire('display-reminder')
     @livewire('view-story')
-
+    @livewire('add-child')
 
 
      <div class="p-3">

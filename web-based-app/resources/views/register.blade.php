@@ -87,17 +87,33 @@
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
+
                                         <div class="form-group">
                                             <label for="password">Password</label>
-                                            <input type="password"  maxlength="16" class="form-control" id="password" value="{{ old('password') }}" name="password" required oninput="checkPasswordMatch()">
+                                            <div class="input-group mb-3">
+                                                <input type="password" class="form-control" id="password" name="password" value="{{ old('password') }}" aria-describedby="basic-addon1" required>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text" id="toggle-password" style="cursor: pointer;"><i class="bi bi-eye-slash-fill"></i></span>
+                                                </div>
+                                            </div>
                                             @error('password')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
                                         <div class="form-group">
                                             <label for="password_confirmation">Confirm Password</label>
-                                            <input type="password" class="form-control" id="password_confirmation" value="{{ old('password_confirmation') }}" name="password_confirmation" required oninput="checkPasswordMatch()">
+                                            <div class="input-group mb-3">
+                                                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" value="{{ old('password_confirmation') }}" aria-describedby="basic-addon1" required>
+
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text" id="toggle-password-confirm" style="cursor: pointer;"><i class="bi bi-eye-slash-fill"></i></span>
+                                                </div>
+                                            </div>
+                                            @error('password_confirmation')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                             <div id="password_error" style="color: red; display: none;">Passwords do not match!</div>
+
                                         </div>
                                         <br>
                                     </div>
@@ -111,6 +127,34 @@
             </div>
         </div>
     </div>
+    <script>
+        document.getElementById('toggle-password').addEventListener('click', function () {
+            var passwordInput = document.getElementById('password');
+            var icon = this.querySelector('i');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('bi-eye-slash-fill');
+                icon.classList.add('bi-eye-fill');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('bi-eye-fill');
+                icon.classList.add('bi-eye-slash-fill');
+            }
+        });
+        document.getElementById('toggle-password-confirm').addEventListener('click', function () {
+            var passwordInput = document.getElementById('password_confirmation');
+            var icon = this.querySelector('i');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('bi-eye-slash-fill');
+                icon.classList.add('bi-eye-fill');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('bi-eye-fill');
+                icon.classList.add('bi-eye-slash-fill');
+            }
+        });
+    </script>
     <script>
         function checkPasswordMatch() {
             const password = document.getElementById("password").value;
