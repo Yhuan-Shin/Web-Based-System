@@ -20,7 +20,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($planners as $planner)
+            @forelse ($planners as $planner)
             <div class="modal fade"  id="deleteModal{{ $planner->id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -86,7 +86,11 @@
                             " class="btn btn-danger">Delete</button>
                     </td>
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="4">No planner found.</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 </div>

@@ -10,9 +10,9 @@
     <title>Dashboard</title>
     @livewireStyles
 </head>
-<body style="height: 100vh; background-image: url({{ asset('assets/bg.png') }}); background-size: cover;">
+<body class="bg-light">
 
-       <div class="container justify-content-center">
+    <div class="container justify-content-center">
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible fade show mt-2 col-md-12 " role="alert"  >
                     {{ session('success') }}
@@ -29,7 +29,7 @@
        {{-- child's delete modal --}}
          @foreach ($students as $child)
          <!-- Child's Delete Modal -->
-         <div class="modal fade" id="childDeleteModal{{ $child->id }}" tabindex="-1" aria-labelledby="childDeleteModalLabel{{ $child->id }}" aria-hidden="true">
+         <div class="modal fade" id="childDeleteModal{{ $child->id }}" tabindex="-1" aria-labelledby="childDeleteModalLabel{{ $child->id }}"    aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -131,10 +131,7 @@
                                 </p>
                        
                         </div>
-                            
-
-                           
-
+                                            
                         @empty
                             <p>No child's information found.</p>
                         @endforelse
@@ -169,165 +166,61 @@
         </div>
     </div>
     @livewire('b-m-i-calculator')
-    @livewire('schedule')   
-    @livewire('display-reminder')
-    @livewire('view-story')
+   
     @livewire('add-child')
 
-
-     <div class="p-3">
-        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-            <i class="bi bi-list"> </i>
-          </button>
-     </div>
-       
-      <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    
+ 
+    @include('components.navbar')
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
-            @if(Auth::check())
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-9">
-                        <h6 class="offcanvas-title m-auto" id="offcanvasExampleLabel">Welcome, {{ Auth::user()->name }}</h6> 
-                        <p class="m-auto">
-                            @if(Auth::user()->role == 'user') 
-                                Parent
-                            @endif
-                        </p>
-                    </div>
-                    <div class="col">
-                        <i class="bi bi-person-circle" style="font-size: 30px;"></i>
-
-                    </div>
-                </div>
-            </div>
-            @endif
-          <button type="button" class="btn-close"  style="float: left;" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          <h5 class="offcanvas-title" id="offcanvasExampleLabel">Notifications</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <hr>
-          <div>
+          <div class="list-group">
             
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item border-0"><i class="bi bi-calculator-fill" style="font-size: 20px; color: gray;"></i>
-                    <a href="" data-bs-toggle="modal" data-bs-target="#bmiModal" class="text-decoration-none text-dark">BMI</a>
-                </li>
+            @livewire('display-reminder')
 
-                <li class="list-group-item border-0"><i class="bi bi-calendar-fill" style="font-size: 20px; color: orange;"></i> 
-                    <a href="" data-bs-toggle="modal" data-bs-target="#scheduleModal" class="text-decoration-none text-dark">Schedule</li>
-
-              <li class="list-group-item border-0"><i class="bi bi-bell-fill" style="font-size: 20px; color: red;"></i>
-                <a href="" data-bs-toggle="modal" data-bs-target="#reminderModal" class="text-decoration-none text-dark">Reminders</a>
-             </li>
-
-               <li class="list-group-item border-0"><i class="bi bi-egg-fill" style="font-size: 20px; color: green;"></i> Dietary</li>
-                <li class="list-group-item border-0"><i class="bi bi-image-fill" style="font-size: 20px; color: green;"></i> 
-                <a href=""></a> View Story</li>
-                <li class="list-group-item border-0" data-bs-toggle="modal" data-bs-target="#childInfoModal"><i class="bi bi-info-circle-fill" style="font-size: 20px; color: blue;"></i> Child's Information</li>
-
-            </ul>
           </div>
-          {{-- <div class="dropdown mt-3">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-              Dropdown button
-            </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </div> --}}
-        <!-- Logout Button -->
-        <a href="#" class="btn btn-danger float-end mt-2" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</a>
-
-        
         </div>
-      </div>
-
-    <div class="container">
-        <div class="d-flex justify-content-center">
-            <img src="{{ asset('assets/schoollogo.png') }}" alt="" style="width: 200px;">
-        </div>
-        <div class="row">
-            <div class="col-md mt-2">
-                <div class="card shadow-sm" style="background-color: rgb(111, 167, 185); transition: transform 0.2s;  height: 200px;" data-bs-toggle="modal" data-bs-target="#bmiModal">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-calculator-fill" style="font-size: 30px; color: gray;"></i> BMI</h5>
-                        <p>Click here to calculate your BMI</p>
-                    </div>
-                </div>
-
+    </div>
+    @livewire('view-story')
+    <div class="container mt-5">
+        <div class="row mt-3">
+            <div class="col-md-6 mb-3">
+                <p class="text-center">Welcome, {{ Auth::user()->name }}</p>
                 
-            </div>
-            
-            <div class="col-md mt-2">
-                <div class="card shadow-sm" style="background-color: rgb(111, 167, 185); transition: transform 0.2s; height: 200px;" data-bs-toggle="modal" data-bs-target="#scheduleModal" 
-                data-bs-toggle="modal">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-calendar-fill" style="font-size: 30px; color: orange;"></i> Schedule</h5>
-                        <p>Click here to view your schedule</p>
-                    </div>
+                <p class="text-center text-muted mt-3">To calculate Body Mass Index (BMI), follow the procedure recommended by the World Health Organization (WHO):</p>
+                <ol class="text-muted">
+                    <li>Measure your weight in kilograms (kg).</li>
+                    <li>Measure your height in meters (m).</li>
+                    <li>Calculate your BMI using the formula: <strong>BMI = weight (kg) / (height (m) * height (m))</strong>.</li>
+                    <li>Interpret your BMI using the following categories:
+                        <ul>
+                            <li>Underweight: BMI < 18.5</li>
+                            <li>Normal weight: BMI 18.5 - 24.9</li>
+                            <li>Overweight: BMI 25 - 29.9</li>
+                            <li>Obesity: BMI ≥ 30</li>
+                        </ul>
+                    </li>
+                </ol>
+                <div class="d-flex justify-content-center">
+                    <button type="button" class="btn btn-outline-success me-2" data-bs-toggle="modal" data-bs-target="#bmiModal">BMI Calculator</button>
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#childAddModal">Add Child Information</button>
                 </div>
             </div>
-            <div class="col-md mt-2">
-                <div class="card shadow-sm" style="background-color: rgb(111, 167, 185); transition: transform 0.2s; height: 200px;"
-                data-bs-toggle="modal" data-bs-target="#reminderModal">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-bell-fill" style="font-size: 30px; color: red;"></i> Reminders</h5>
-                        <p>Click here to view your reminders</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-2">
-            <div class="col-md-4">
-                <div class="card shadow-sm" style="background-color: rgb(111, 167, 185); transition: transform 0.2s; height: 200px;">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-egg-fill" style="font-size: 30px; color: green;"></i> Dietary</h5>
-                        <p>Click here to view your dietary</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card shadow-sm" style="background-color: rgb(111, 167, 185); transition: transform 0.2s; height: 200px;"
-                data-bs-toggle="modal" data-bs-target="#viewStoryModal">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <i class="bi bi-image-fill" style="font-size: 30px; color: green;"></i> View Story
-                        </h5>
-                        <p>Click here to view story</p>
-                    </div>
-                </div>
+            <div class="col-md-6">
+                <img src="{{ asset('assets/bmi.jpg') }}" alt="" class="m-auto " style="width: 80%; ">
             </div>
         </div>
     </div>
+
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
       
-      <style>
-        .card:hover {
-            transform: scale(1.05);
-            cursor: pointer;
-        }
-        .list-group-item {
-        transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for effects */
-    }
-
-    .list-group-item:hover {
-        background-color: #f8f9fa; /* Change background on hover */
-        color: #007bff; /* Change text color on hover */
-        cursor: pointer; /* Change cursor to pointer */
-        transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for effects */
-    }
-
-    .list-group-item i {
-        transition: color 0.3s ease; /* Smooth transition for icon color */
-    }
-
-    .list-group-item:hover i {
-        color: #007bff; /* Change icon color on hover */
-        transition: color 0.3s ease; /* Smooth transition for icon color */
-    }
-    </style>
+      @include('components.footer')
+      
      <!-- FullCalendar JS -->
      <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.10/main.min.js'></script>
      <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.10/main.min.js'></script>

@@ -151,10 +151,11 @@
                 </div>
             </div>
             <div class="col-md mt-2">
-                <div class="card shadow-sm" style="background-color: rgb(111, 167, 185); transition: transform 0.2s; height: 200px;" data-bs-target="#reminderModal" data-bs-toggle="modal">
+                <div class="card shadow-sm" style="background-color: rgb(111, 167, 185); transition: transform 0.2s; height: 200px;" >
                     <div class="card-body">
                         <h5 class="card-title"><i class="bi bi-bell-fill" style="font-size: 30px; color: red;"></i> Reminder</h5>
-                        <p>Click here to create reminder</p>
+                        <p data-bs-target="#reminderModal" data-bs-toggle="modal">Click here to create reminder</p>
+                        <span class="badge bg-primary rounded-pill float-end"><a href="{{ route('reminder.table') }}" class="text-decoration-none text-white">View Table </a></span>
                     </div>
                 </div>
             </div>
