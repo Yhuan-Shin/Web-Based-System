@@ -19,14 +19,12 @@ class CreateReminder extends Component
         $this->validate([
             'title' => 'required',
             'description' => 'required',
-            'reminder_date' => 'required|date|after:today',
             'send_to' => 'required',
         ]);
 
         $reminder = new Reminder();
         $reminder->title = $this->title;
         $reminder->description = $this->description;
-        $reminder->reminder_date = $this->reminder_date;
         
         if ($this->send_to === 'all') {
             $reminder->user_id = null; // Use null or another field to indicate "all"
@@ -39,7 +37,6 @@ class CreateReminder extends Component
 
         $this->title = '';
         $this->description = '';
-        $this->reminder_date = '';
         $this->send_to = '';
 
         session()->flash('message', 'Reminder created successfully.');

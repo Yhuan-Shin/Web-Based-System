@@ -1,7 +1,7 @@
 <div wire:poll.3000ms>
     @if($users->count() > 0)
-        {{ $users->count() }}
+    <p class="badge bg-light rounded-pill text-dark">{{ $users->count() }}</p>
     @else
-        No Users
+       <p class="badge bg-danger rounded-pill">No Students Registered</p>
     @endif
 </div>

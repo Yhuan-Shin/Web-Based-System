@@ -27,7 +27,7 @@ class SocialAuthController extends Controller
             if(is_null($existingUser->address && $existingUser->phone_number)){
                 return view('auth/add_address_phone');
             }
-            return redirect()->to('/dashboard');
+            return redirect()->to('/home');
         }
 
         // If the user doesn't exist, create a new user
@@ -55,7 +55,7 @@ class SocialAuthController extends Controller
         $user->address = $request->input('address');
         $user->phone_number = $request->input('phone_number');
         User::where('id', $user->id)->update(['address' => $user->address, 'phone_number' => $user->phone_number]);
-        return redirect()->to('/dashboard');
+        return redirect()->to('/home');
     }
 
     // public function redirectToFacebook()

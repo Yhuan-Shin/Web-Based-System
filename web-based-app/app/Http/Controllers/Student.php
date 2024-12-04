@@ -13,7 +13,7 @@ class Student extends Controller
     public function index()
     {
         $students = StudentModel::where('user_id', Auth::user()->id)->get();
-        return view('user/index', ['students' => $students]);
+        return view('user.index', ['students' => $students]);
     }
     
     public function submit(Request $request)

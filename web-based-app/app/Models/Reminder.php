@@ -12,6 +12,5 @@ class Reminder extends Model
         'user_id',
         'title',
         'description',
-        'reminder_date',
     ];
 }

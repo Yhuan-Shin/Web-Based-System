@@ -9,7 +9,7 @@
     <title>Dashboard Admin</title>
     @livewireStyles
 </head>
-<body style="height: 100vh; background-image: url({{ asset('assets/bg.png') }}); background-size: cover;">
+<body>
 
        <div class="container justify-content-center">
             @if (session('success'))
@@ -27,13 +27,11 @@
        </div>
     {{-- Users Modal --}}
    @livewire('display-users')
-   {{-- reminder modal --}}
-   @livewire('create-reminder')
-    {{-- planner modal --}}
-   @livewire('create-planner')
+  
    {{-- post story modal --}}
    @livewire('post-story')
-
+   
+   @livewire('display-account-registered') 
 
 
     <!-- Logout Confirmation Modal -->
@@ -55,131 +53,65 @@
         </div>
     </div>
 
-     <div class="p-3">
-        <button class="btn btn-primary " style="float: left;" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-            <i class="bi bi-list"> </i>
-          </button>
-     </div>
-       
-      <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-        <div class="offcanvas-header">
-            @if(Auth::check())
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-9">
-                        <h6 class="offcanvas-title m-auto" id="offcanvasExampleLabel">Welcome, {{ Auth::user()->name }}</h6> 
-                        <p class="m-auto">
-                           Admin
-                        </p>
-                    </div>
-                    <div class="col">
-                        <i class="bi bi-person-circle" style="font-size: 30px;"></i>
+     @include('components.admin.navbar')
+    
+    {{-- @livewire('view-story') --}}
 
-                    </div>
-                </div>
-            </div>
-            @endif
-          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <hr>
-          <div>
-            
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item border-0"><i class="bi bi-person-fill" style="font-size: 20px; color: gray;"></i>
-                <a href="" data-bs-toggle="modal" data-bs-target="#usersModal" class="text-decoration-none text-dark">Students</a>
-                </li>
-
-                <li class="list-group-item border-0"><i class="bi bi-calendar-check-fill" style="font-size: 20px; color: orange;"></i> Planner</li>
-
-              <li class="list-group-item border-0"><i class="bi bi-bell-fill" style="font-size: 20px; color: red;"></i> 
-                <a href="" data-bs-toggle="modal" data-bs-target="#plannerModal" class="text-decoration-none text-dark"> Reminders</a>
-            </li>
-
-               <li class="list-group-item border-0"><i class="bi bi-image-fill" style="font-size: 20px; color: green;"></i> 
-                <a href="" data-bs-toggle="modal" data-bs-target="#postStoryModal" class="text-decoration-none text-dark">Post Story</a></li>
-                <li class="list-group-item border-0"><i class="bi bi-pie-chart-fill" style="font-size: 20px; color: blue;"></i> Weekly Report</li>
-                <li class="list-group-item border-0" data-bs-toggle="modal" data-bs-target="#childInfoModal"><i class="bi bi-info-circle-fill" style="font-size: 20px; color: black;"></i> User Information</li>
-
-            </ul>
-          </div>
-          {{-- <div class="dropdown mt-3">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-              Dropdown button
-            </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </div> --}}
-        <!-- Logout Button -->
-        <a href="#" class="btn btn-danger float-end mt-2" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</a>
-
-        
-        </div>
-      </div>
-
-    <div class="container">
+    <div class="container mt-5">
         <div class="d-flex justify-content-center">
-            <img src="{{ asset('assets/schoollogo.png') }}" alt="" style="width: 200px;">
+            <img src="{{ asset('assets/schoollogo.png') }}" alt="" style="width: 150px; margin: auto; padding: 10px;">
         </div>
-        <div class="row">
+        <div class="row mt-3">
             <div class="col-md mt-2">
-                <div class="card shadow-sm" style="background-color: rgb(111, 167, 185); transition: transform 0.2s;  height: 200px;" data-bs-toggle="modal" data-bs-target="#usersModal">
+                <div class="card shadow-sm bg-success m-auto" style=" transition: transform 0.2s;  height: 200px; width: 300px" data-bs-toggle="modal" data-bs-target="#usersModal">
                     <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-person-fill" style="font-size: 30px;
-                        color: gray;"></i> Students</h5>
-                        <p>Click here to view Students</p>
+                        <h5 class="card-title text-light"><i class="bi bi-person-fill" style="font-size: 30px;
+                        color: white;"></i> Students</h5>
+                        <p class="text-light">Click here to view Students</p>
                         @livewire('count-users')
 
                     </div>
                 </div>
-
-                
             </div>
             
-            <div class="col-md mt-2">
-                <div class="card shadow-sm" style="background-color: rgb(111, 167, 185); transition: transform 0.2s; height: 200px;" 
-                >
+            <div class="col-md mt-2 ">
+                <div class="card shadow-sm bg-success m-auto" style=" transition: transform 0.2s; height: 200px; width: 300px" 
+                data-bs-toggle="modal" data-bs-target="#accountRegisteredModal">
                     <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-calendar-fill" style="font-size: 30px;
-                        color: orange;"></i> Planner</h5>
-                        <p data-bs-toggle="modal" data-bs-target="#plannerModal" >Click here to create planner</p>
-                        <span class="badge bg-primary rounded-pill float-end"><a href="{{ route('planner.table') }}" class="text-decoration-none text-white">View Table </a></span>
+                        <h5 class="card-title text-light"><i class="bi bi-person-fill" style="font-size: 30px;
+                        color: white;"></i> Accounts</h5>
+                        <p class="text-light">Click here to view Accounts</p>
+                        @livewire('account-registered')
                     </div>
                 </div>
             </div>
-            <div class="col-md mt-2">
-                <div class="card shadow-sm" style="background-color: rgb(111, 167, 185); transition: transform 0.2s; height: 200px;" >
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-bell-fill" style="font-size: 30px; color: red;"></i> Reminder</h5>
-                        <p data-bs-target="#reminderModal" data-bs-toggle="modal">Click here to create reminder</p>
-                        <span class="badge bg-primary rounded-pill float-end"><a href="{{ route('reminder.table') }}" class="text-decoration-none text-white">View Table </a></span>
-                    </div>
+            <div class="col-md mt-2 ">
+                <div class="card shadow-sm bg-success m-auto" style=" transition: transform 0.2s; height: 200px;width: 300px">
+                    <a  href="{{ route('planner.table') }}" class="text-decoration-none">
+                        <div class="card-body">
+                            <h5 class="card-title text-light"><i class="bi bi-calendar-date-fill" style="font-size: 30px;
+                            color: white;"></i> Planner</h5>
+                            <p class="text-light">Click here to view Planner</p> 
+                        </div>
+                    </a>
+                    
                 </div>
             </div>
-        </div>
-        <div class="row mt-2">
-            <div class="col-md-4">
-                <div class="card shadow-sm" style="background-color: rgb(111, 167, 185); transition: transform 0.2s; height: 200px;"
-                data-bs-toggle="modal" data-bs-target="#postStoryModal">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-image-fill" style="font-size: 30px; color: green;"></i> Post Story</h5>
-                        <p>Click here to post story</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card shadow-sm" style="background-color: rgb(111, 167, 185); transition: transform 0.2s; height: 200px;" >
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-pie-chart-fill" style="font-size: 30px; color: blue;"></i> Weekly Report</h5>
-                        <p>Click here to view weekly report</p>
-                    </div>
+            <div class="col-md mt-2 ">
+                <div class="card shadow-sm bg-success m-auto" style=" transition: transform 0.2s;  height: 200px;width: 300px">
+                    <a href="{{ route('reminder.index') }}" class="text-decoration-none">
+                        <div class="card-body">
+                            <h5 class="card-title text-light"><i class="bi bi-bell-fill" style="font-size: 30px;
+                            color: white;"></i> Reminders</h5>
+                            <p class="text-light">Click here to view Reminders</p>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
+     
         
+     
     </div>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">

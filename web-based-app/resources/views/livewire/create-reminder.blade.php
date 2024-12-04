@@ -24,19 +24,13 @@
                         </div>
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <textarea class="form-control" wire:model="description" maxlength="100" placeholder="Enter description" required></textarea>
+                            <input type="text" class="form-control" wire:model="description" maxlength="100" placeholder="Enter description" required>
 
                             @error('description')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div class="form-group">
-                            <label for="date">Date</label>
-                            <input type="datetime-local" class="form-control" wire:model="reminder_date" placeholder="Enter date and time" required>
-                            @error('reminder_date')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
+                       
                         <div class="form-group">
                             <label for="send_to">Send to</label>
                             <select class="form-control" wire:model="send_to" required>

@@ -9,12 +9,11 @@
     @livewireStyles
 
 </head>
-<body  style="height: 100vh; background-image: url({{ asset('assets/bg.png') }}); background-size: cover;">
-
+<body>
+    @livewire('display-users')
+    @include('components.admin.navbar')
+    @livewire('create-reminder')
     <div class="container">
-        <a class="btn btn-primary mt-3" href="{{ route('admin.index') }}">
-            <i class="bi bi-house-door-fill"></i> Back to Home
-        </a>
         <div class="row">
             <div class="col">
                     @livewire('table-reminder')

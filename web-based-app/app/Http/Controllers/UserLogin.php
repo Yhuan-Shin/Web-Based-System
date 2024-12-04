@@ -19,7 +19,7 @@ class UserLogin extends Controller
         if (Auth::guard('user')->attempt(['email' => $request->email, 'password' => $request->password])) {
             $request->session()->regenerate(); // Prevents session fixation
     
-            return redirect('/dashboard');
+            return redirect('/home');
         }
     
         // If authentication fails, redirect back with an error message

@@ -11,53 +11,9 @@
     @livewireStyles
 </head>
 <body>
-<!-- Child Info Modal -->
-<div class="modal fade" id="childInfoModal" tabindex="-1" aria-labelledby="childInfoModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="childInfoModalLabel">Child's Information</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                
-                <!-- Child's Information content goes here -->
-                <div class="list-group">
-                    @forelse ($students as $child)
-                    <div class="list-group-item list-group-item-action border mb-2">
-                        <a href="#" class="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#childEditModal{{ $child->id }}">
-                            <div class="d-flex w-100 justify-content-between">
-                                <h6 class="mb-1">{{ $child->name }}</h6>  
-                                <small>{{ $child->age }} years old </small>                                  
-                            </div>
-                        </a>
-                            <p class="mb-1 text-muted">Gender: 
-                                @if($child->gender == 'male')
-                                    <span class="badge bg-primary rounded-pill">Male</span>
-                                @elseif($child->gender == 'female')
-                                    <span class="badge bg-danger rounded-pill">Female</span>
-                                @endif
-                                <i class="bi bi-trash-fill  float-end" style="color: red;" data-bs-toggle="modal" data-bs-target="#childDeleteModal{{ $child->id }}"></i>
-                            
-                            </p>
-                   
-                    </div>
-                                        
-                    @empty
-                        <p>No child's information found.</p>
-                    @endforelse
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
-                <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#childAddModal">
-                    <i class="bi bi-plus"></i>
-                    Add
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
+@include('components.confirm-delete')
+@include('components.update-child-info-modal')
+@include('components.view-child-info-modal')
 <!-- Logout Confirmation Modal -->
 <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -76,20 +32,7 @@
         </div>
     </div>
 </div>
-    <div class="container justify-content-center">
-            @if (session('success'))
-                <div class="alert alert-success alert-dismissible fade show mt-2 col-md-12 " role="alert"  >
-                    {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
-            @if (session('error'))
-                <div class="alert alert-danger  alert-dismissible fade show mt-2 col-md-12" role="alert"  >
-                    {{ session('error') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
-       </div>
+   
     
     
  
@@ -110,12 +53,26 @@
     </div>
 
     <div class="container mt-5">
+        <div class="container justify-content-center">
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show mt-2 col-md-12 " role="alert"  >
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+            @if (session('error'))
+                <div class="alert alert-danger  alert-dismissible fade show mt-2 col-md-12" role="alert"  >
+                    {{ session('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+       </div>
         @livewire('schedule')
     </div>
 
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-      
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
       @include('components.footer')
 
      <!-- FullCalendar JS -->
