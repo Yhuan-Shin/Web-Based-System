@@ -106,7 +106,7 @@
                                     <small class="text-muted">{{ $schedule->description }}</small>
                                     <hr>
                                     {{-- @foreach ($planners as $planner) --}}
-                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $schedule->id }}">Edit</button>
+                                    <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#editModal{{ $schedule->id }}">Edit</button>
                                     <button data-bs-toggle="modal" data-bs-target="#deleteModal{{ $schedule->id }}
                                         " class="btn btn-danger">Delete</button>
                                     {{-- @endforeach --}}

@@ -49,6 +49,8 @@ Route::middleware(['auth:user'])->group(function () {
     Route::put('account/{id}', [AccountUpdate::class, 'update'])->name('account.update');
     Route::get('account', [AccountUpdate::class, 'view'])->name('profile');
 });
+
+
 //protected admin page
 Route::middleware(['auth:admin'])->group(function () {
     Route::get('/admin', [Admin::class, 'index'])->name('admin.index');

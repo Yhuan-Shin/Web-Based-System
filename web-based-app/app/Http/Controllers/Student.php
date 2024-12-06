@@ -34,7 +34,7 @@ class Student extends Controller
         $user_id = Auth::user()->id;
 
         if($birthday >= date('Y-m-d') || $birthday == date('Y-m-d') && $age <= 0) {
-            return redirect('/dashboard')->with(['error' => 'Birthdate cannot be greater than or equal today']);
+            return redirect('/home')->with(['error' => 'Birthdate cannot be greater than or equal today']);
         }
         // Save the data to the database
         $student = new StudentModel();
@@ -46,7 +46,7 @@ class Student extends Controller
         $student->student_no = $student_no;
         $student->save();
 
-        return redirect('/dashboard')->with(['students' => $student, 'success' => 'Information has been saved']);
+        return redirect('/home')->with(['students' => $student, 'success' => 'Information has been saved']);
     }
     public function update(Request $request, $id)
     {
@@ -69,13 +69,13 @@ class Student extends Controller
         $student->user_id = $user_id;
         $student->save();
 
-        return redirect('/dashboard')->with(['students' => $student, 'success' => 'Information has been updated']);
+        return redirect('/home')->with(['students' => $student, 'success' => 'Information has been updated']);
     }
 
     public function destroy($id)
     {
         BMI::where('student_id', $id)->delete();
         StudentModel::destroy($id);
-        return redirect('/dashboard')->with(['success' => 'Information has been deleted']);
+        return redirect('/home')->with(['success' => 'Information has been deleted']);
     }
 }

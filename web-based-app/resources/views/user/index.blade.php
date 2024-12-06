@@ -10,7 +10,7 @@
     <title>Home</title>
     @livewireStyles
 </head>
-<bodys>
+<body>
 
   
         @include('components.confirm-delete')
