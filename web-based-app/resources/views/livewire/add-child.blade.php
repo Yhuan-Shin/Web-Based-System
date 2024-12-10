@@ -17,8 +17,16 @@
                             <input type="text" class="form-control" id="student_no" name="student_no" required>
                         </div>
                         <div class="mb-3">
-                            <label for="childName" class="form-label">Child's Name</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
+                            <label for="childSurname" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="surname" name="lname" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="childName" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="name" name="fname" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="childMiddleName" class="form-label">Middle Name</label>
+                            <input type="text" class="form-control" id="childMiddleName" name="mname" required>
                         </div>
                         <div class="mb-3">
                             <label for="childDOB" class="form-label">Child's Date of Birth</label>

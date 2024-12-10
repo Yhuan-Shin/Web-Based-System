@@ -13,6 +13,7 @@
     <div class="wrapper">
         @include('components.admin.navbar')
         <div class="main">
+            @include('components.admin.header')
             <div class="text-center">
                 <!-- Logout Confirmation Modal -->
                 <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
@@ -34,7 +35,7 @@
                 </div>
 
                    {{-- Main content --}}
-
+                  
                    {{-- Alert --}}
                    <div class="container justify-content-center">
                         @if (session('success'))
@@ -50,94 +51,8 @@
                             </div>
                         @endif
                     </div>
-                        {{-- Users Modal --}}
-                        @livewire('display-users')
-                        
-                        {{-- post story modal --}}
-                        @livewire('post-story')
-                        
-                        @livewire('display-account-registered') 
-
-
-                        <div class="container">
-                            <div class="d-flex justify-content-center">
-                                <img src="{{ asset('assets/schoollogo.png') }}" alt="" style="width: 150px; margin: auto; padding: 10px;">
-                            </div>
-                            <div class="row mt-3">
-                                <div class="col-md mt-2">
-                                    <div class="card shadow-sm bg-success m-auto" style=" transition: transform 0.2s;  height: 200px; width: 300px" data-bs-toggle="modal" data-bs-target="#usersModal">
-                                        <div class="card-body">
-                                            <i class="bi bi-person-fill" style="font-size: 30px;
-                                            color: white;"></i> <h5 class="card-title text-light"> Students</h5>
-                                            <p class="text-light" style="font-size: 12px">Click here to view Students</p>
-                                            @livewire('count-users')
-                        
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md mt-2 ">
-                                    <div class="card shadow-sm bg-success m-auto" style=" transition: transform 0.2s; height: 200px; width: 300px" 
-                                    data-bs-toggle="modal" data-bs-target="#accountRegisteredModal">
-                                        <div class="card-body">
-                                            <i class="bi bi-person-fill" style="font-size: 30px;
-                                            color: white;"></i><h5 class="card-title text-light"> Accounts</h5>
-                                            <p class="text-light" style="font-size: 12px">Click here to view Accounts</p>
-                                            @livewire('account-registered')
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md mt-2 ">
-                                    <div class="card shadow-sm bg-success m-auto" style=" transition: transform 0.2s; height: 200px;width: 300px">
-                                        <a  href="{{ route('planner.table') }}" class="text-decoration-none">
-                                            <div class="card-body">
-                                                <i class="bi bi-calendar-date-fill" style="font-size: 30px;
-                                                color: white;"></i> <h5 class="card-text text-light">Planner</h5>
-                                                <p class="text-light" style="font-size: 12px">Click here to view Planner</p> 
-                                            </div>
-                                        </a>
-                                        
-                                    </div>
-                                </div>
-                                <div class="col-md mt-2 ">
-                                    <div class="card shadow-sm bg-success m-auto" style=" transition: transform 0.2s;  height: 200px;width: 300px">
-                                        <a href="" data-bs-toggle="modal" data-bs-target="#postStoryModal" class="text-decoration-none">
-                                            <div class="card-body">
-                                                <i class="bi bi-newspaper" style="font-size: 30px;
-                                                color: white;"></i><h5 class="card-title text-light"> Stories</h5>
-                                                <p class="text-light" style="font-size: 12px">Click here to view Reminders</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-md mt-2 ">
-                                    <div class="card shadow-sm bg-success m-auto" style=" transition: transform 0.2s;  height: 200px;width: 300px">
-                                        <a href="{{ route('reminder.index') }}" class="text-decoration-none">
-                                            <div class="card-body">
-                                                <i class="bi bi-bell-fill" style="font-size: 30px;
-                                                color: white;"></i><h5 class="card-title text-light"> Reminders</h5>
-                                                <p class="text-light" style="font-size: 12px">Click here to view Reminders</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-md mt-2 ">
-                                    <div class="card shadow-sm bg-success m-auto" style=" transition: transform 0.2s;  height: 200px;width: 300px">
-                                        <a href="{{ route('reminder.index') }}" class="text-decoration-none">
-                                            <div class="card-body">
-                                                <i class="bi bi-bell-fill" style="font-size: 30px;
-                                                color: white;"></i><h5 class="card-title text-light"> Reminders</h5>
-                                                <p class="text-light" style="font-size: 12px">Click here to view Reminders</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                         
-                            
-                         
-                        </div>
-           
+                    @include('components.admin.cards')
+                    
             </div>
         </div>
     </div>

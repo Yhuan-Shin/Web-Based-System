@@ -47,8 +47,8 @@
                                     <div class="col">
                                         <input type="hidden" name="role" value="user">
                                         <div class="form-group">
-                                            <label for="name">Name</label>
-                                            <input type="text" maxlength="30" class="form-control" id="name" name="name" value="{{ old('name') }}" required>
+                                            <label for="name">Full Name</label>
+                                            <input type="text" maxlength="30" class="form-control" placeholder="Last Name, First Name, Middle Name" id="name" name="name" value="{{ old('name') }}" required>
                                             @error('name')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
@@ -62,7 +62,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="phone_number">Phone Number</label>
-                                            <input type="text" class="form-control" id="phone_number" value="{{ old('phone_number') }}" name="phone_number" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)" required>
+                                            <input type="text" class="form-control" id="phone_number" placeholder="09xxxxxxxxx" value="{{ old('phone_number') }}" name="phone_number" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11)" required>
                                             @error('phone_number')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
@@ -82,7 +82,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="email">Email address</label>
-                                            <input type="email"  class="form-control" maxlength="30" id="email" value="{{ old('email') }}" name="email" required>
+                                            <input type="email"  class="form-control" maxlength="30" placeholder="example@gmail.com" id="email" value="{{ old('email') }}" name="email" required>
                                             @error('email')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
@@ -120,6 +120,10 @@
                                 </div>
                             </div>
                             Already have an account? <a href="/login">Login</a> <br>
+                            <hr class="bg-light">
+                            <p>Add Child</p>
+                            @livewire('register-student')
+                               
                             <button type="submit" class="btn btn-primary float-right" id="submitBtn">Sign Up</button>
                         </form>
                     </div>

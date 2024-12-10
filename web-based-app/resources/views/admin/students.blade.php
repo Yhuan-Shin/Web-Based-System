@@ -5,50 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Planner</title>
     @livewireStyles
-
+    <title>Students</title>
 </head>
 <body>
     <div class="wrapper">
         @include('components.admin.navbar')
-
-        <div class="main" >
+        <div class="main">
             @include('components.admin.header')
 
-            <div class="text-center">
-                    {{-- Main content --}}
-                    {{-- Users Modal --}}
-                    @livewire('create-planner')
-                    <!-- Logout Confirmation Modal -->
-                    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    Are you sure you want to logout?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                    <a href="{{ route('admin.logout') }}" class="btn btn-danger">Logout</a>
-                                </div>
-                            </div>
-                        </div>
+            <div class="container mt-3">
+                <div class="row">
+                    <div class="col">
+                        @livewire('display-users')
                     </div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">
-                                @livewire('table-planner')
-                            </div>
-                        </div>
-                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <style>
+<style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
         ::after,
@@ -80,7 +55,6 @@
         }
 
         .main {
-            
             min-height: 100vh;
             width: 100%;
             overflow: hidden;
@@ -192,43 +166,43 @@
             transform: rotate(45deg);
             transition: all .2s ease-out;
         }
-    </style>
+            </style>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-        <style>
+            <style>
                 .card:hover {
-                        transform: scale(1.05);
-                        cursor: pointer;
-                    }
-                    .list-group-item {
-                    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for effects */
-                }
+                transform: scale(1.05);
+                cursor: pointer;
+            }
+            .list-group-item {
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for effects */
+        }
 
-                .list-group-item:hover {
-                    background-color: #f8f9fa; /* Change background on hover */
-                    color: #007bff; /* Change text color on hover */
-                    cursor: pointer; /* Change cursor to pointer */
-                    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for effects */
-                }
+        .list-group-item:hover {
+            background-color: #f8f9fa; /* Change background on hover */
+            color: #007bff; /* Change text color on hover */
+            cursor: pointer; /* Change cursor to pointer */
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for effects */
+        }
 
-                .list-group-item i {
-                    transition: color 0.3s ease; /* Smooth transition for icon color */
-                }
+        .list-group-item i {
+            transition: color 0.3s ease; /* Smooth transition for icon color */
+        }
 
-                .list-group-item:hover i {
-                    color: #007bff; /* Change icon color on hover */
-                    transition: color 0.3s ease; /* Smooth transition for icon color */
-                }
-        </style>
-        <script>
-            const hamBurger = document.querySelector(".toggle-btn");
+        .list-group-item:hover i {
+            color: #007bff; /* Change icon color on hover */
+            transition: color 0.3s ease; /* Smooth transition for icon color */
+        }
+</style>
+<script>
+    const hamBurger = document.querySelector(".toggle-btn");
 
-            hamBurger.addEventListener("click", function () {
-            document.querySelector("#sidebar").classList.toggle("expand");
-            });
-        </script>
-    
-  
-  @livewireScripts
+    hamBurger.addEventListener("click", function () {
+    document.querySelector("#sidebar").classList.toggle("expand");
+    });
+</script>
+@livewireScripts
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </body>
 </html>

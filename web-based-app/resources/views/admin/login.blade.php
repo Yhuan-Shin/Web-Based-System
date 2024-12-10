@@ -12,7 +12,7 @@
 
     <div class="container">
         <div class="d-flex justify-content-center">
-            <img src="{{ asset('assets/schoollogo.png') }}" alt="" style="width: 200px;">
+            <img src="{{ asset('assets/school_logo.png') }}" alt="" style="width: 200px;">
         </div>
         @if (session('error'))
             <div class="alert alert-danger  alert-dismissible fade show mt-2" role="alert"  >

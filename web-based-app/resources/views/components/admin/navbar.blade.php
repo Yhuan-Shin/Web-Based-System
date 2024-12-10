@@ -5,10 +5,10 @@
             <i class="bi bi-list"></i>
         </button>
         <div class="sidebar-logo">
-            <a href="#">Name of School</a>
+            <img src="{{ asset('assets/school_logo.png') }}" alt="" style="width: 150px; margin: auto; padding: 10px;">
         </div>
     </div>
-    <ul class="sidebar-nav">
+    <ul class="sidebar-nav ">
         <li class="sidebar-item">
             <a href="{{ route('admin.index') }}" class="sidebar-link">
                 <i class="bi bi-speedometer"></i>
@@ -16,10 +16,23 @@
             </a>
         </li>
         <li class="sidebar-item">
+            <a href="{{ route('student.index') }}" class="sidebar-link">
+                <i class="bi bi-person-fill"></i>        
+                <span>Students</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
             <a href="{{ route('planner.table') }}" class="sidebar-link">
                 <i class="bi bi-calendar-date-fill"></i>
                 <span>Planner</span>
             </a>
+        </li>
+        <li class="sidebar-item">
+            <a href="{{ route('stories.index') }}" class="sidebar-link" aria-controls="auth">
+                <i class="bi bi-newspaper"></i>
+                <span>Stories</span>
+            </a>
+           
         </li>
         <li class="sidebar-item">
             <a href="{{ route('reminder.index') }}" class="sidebar-link" aria-controls="auth">
@@ -30,7 +43,7 @@
         </li>
        
         <li class="sidebar-item">
-            <a href="#" class="sidebar-link">
+            <a href="{{ route('account.index') }}" class="sidebar-link">
                 <i class="bi bi-person-badge-fill"></i>
                 <span>Accounts</span>
             </a>

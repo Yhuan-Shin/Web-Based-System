@@ -23,6 +23,7 @@
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="{{route('profile')}}"><i class="bi bi-info-circle-fill"></i> Edit Your Information</a></li>
+              <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#childAddModal"><i class="bi bi-info-circle-fill"></i> Add Child Information</a></li>
               <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#childInfoModal"><i class="bi bi-info-circle-fill"></i> Edit Your Child's Information</a></li>
               <li><hr class="dropdown-divider"></li>
               <li>

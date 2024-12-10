@@ -12,7 +12,7 @@ class Reminder extends Controller
     }
     public function delete($id){
         Reminders::destroy($id);
-        return redirect()->route('reminder.table')->with('success', 'Reminder deleted successfully.');
+        return redirect()->route('reminder.index')->with('success', 'Reminder deleted successfully.');
     }
     public function update(Request $request, $id){
         $reminder = Reminders::find($id);
@@ -26,6 +26,6 @@ class Reminder extends Controller
         }
         
         $reminder->save();
-        return redirect()->route('reminder.table')->with('success', 'Reminder updated successfully.');
+        return redirect()->route('reminder.index')->with('success', 'Reminder updated successfully.');
     }
 }

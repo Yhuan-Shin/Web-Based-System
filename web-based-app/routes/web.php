@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\Accounts;
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\AdminLogin;
 use App\Http\Controllers\AccountUpdate;
+use App\Http\Controllers\AdminStudentUpdate;
+use App\Http\Controllers\DisplayStudent;
 use App\Http\Controllers\Planner;
 use App\Http\Controllers\Reminder;
 use App\Http\Controllers\Schedule;
@@ -61,5 +64,13 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/admin/reminder', [Reminder::class, 'index'])->name('reminder.index');
     Route::delete('/admin/reminder/{id}', [Reminder::class, 'delete'])->name('reminder.destroy');
     Route::put('/admin/reminder/{id}', [Reminder::class, 'update'])->name('reminder.update');
+
+    Route::get('/admin/student', [DisplayStudent::class, 'index'])->name('student.index');
+    Route::put('/admin/student/{id}', [AdminStudentUpdate::class, 'update'])->name('admin.student.update');
+
+    Route::get('/admin/account', [Accounts::class, 'index'])->name('account.index');
+
+    Route::get('/admin/stories', [Stories::class, 'index'])->name('stories.index');
+    
 
 });

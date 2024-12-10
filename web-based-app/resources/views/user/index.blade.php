@@ -94,7 +94,7 @@
                 </div>
                 <div class="d-flex justify-content-center mt-3">
                     <button type="button" class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#bmiModal">BMI Calculator</button>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#childAddModal">Add Child Information</button>
+                  
                 </div>
             </div>
             <div class="col-md-6">

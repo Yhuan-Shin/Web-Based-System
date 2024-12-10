@@ -21,7 +21,7 @@
             </div>
         </div>
     </div>
-    <table class="table table-striped mt-5 text-center caption-top">
+    <table class="table table-striped text-center caption-top">
         <caption class="text-white">Reminder Table</caption>
 
         <thead class="table-dark">

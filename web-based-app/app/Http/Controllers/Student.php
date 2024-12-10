@@ -19,18 +19,22 @@ class Student extends Controller
     public function submit(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'student_name' => 'required|string|max:255',
             'age' => 'required|integer',
             'gender' => 'required|string|max:255',
+            'grade' => 'required|string|max:255',
+            'section' => 'required|string|max:255',
             'birthday' => 'required|date',
             'student_no' => 'required|string',
         ]);
 
-        $name = $request->name;
+        $student_name = $request->student_name;
         $age = $request->age;
         $gender = $request->gender;
         $birthday = $request->birthday;
         $student_no = $request->student_no;
+        $grade = $request->grade;
+        $section = $request->section;
         $user_id = Auth::user()->id;
 
         if($birthday >= date('Y-m-d') || $birthday == date('Y-m-d') && $age <= 0) {
@@ -38,10 +42,12 @@ class Student extends Controller
         }
         // Save the data to the database
         $student = new StudentModel();
-        $student->name = $name;
+        $student->student_name = $student_name;
         $student->age = $age;
         $student->gender = $gender;
         $student->user_id = $user_id;
+        $student->grade = $grade;
+        $student->section = $section;
         $student->birthday = $birthday;
         $student->student_no = $student_no;
         $student->save();
@@ -51,20 +57,26 @@ class Student extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'student_name' => 'required|string|max:255',
+            'grade' => 'required|string|max:255',
+            'section' => 'required|string|max:255',
             'age' => 'required|integer',
             'gender' => 'required|string|max:255',
         ]);
 
-        $name = $request->name;
+        $student_name = $request->student_name;
         $age = $request->age;
         $gender = $request->gender;
         $user_id = Auth::user()->id;
-
+        $grade = $request->grade;
+        $section = $request->section;
+        
         // Save the data to the database
         $student = StudentModel::find($id);
-        $student->name = $name;
+        $student->student_name = $student_name;
         $student->age = $age;
+        $student->grade = $grade;
+        $student->section = $section;
         $student->gender = $gender;
         $student->user_id = $user_id;
         $student->save();
