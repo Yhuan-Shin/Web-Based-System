@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 class UserLogin extends Controller
 {   
     //
@@ -43,18 +44,26 @@ class UserLogin extends Controller
             'relation' => 'required|string|max:255',
             'password' => 'required|string|min:8|confirmed|regex:/[a-zA-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/',
 
-            'student_name' => 'required|string|max:255',
-            'gender' => 'required|string|max:255',
-            'age' => 'required|integer|between:5,12',
-            'grade' => 'required|string|max:255',
-            'section' => 'required|string|max:255',
-            'birthday' => 'required|date',
-            'student_no' => 'required|string|max:255|unique:student',
-        ], [
+           'student_name.*' => 'required|string|max:255',
+            'gender.*' => 'required|string|max:255',
+            'age.*' => 'required|integer|between:5,12',
+            'grade.*' => 'required|string|max:255',
+            'section.*' => 'required|string|max:255',
+            'birthday.*' => 'required|date',
+            'student_no.*' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('student', 'student_no'),
+            ],
+        ],
+        [
             'password.regex' => 'Password must contain at least one letter, one number, and one special character'
         ]);
-        if($request->age < 5 || $request->age > 12){
-            return redirect('/register')->with('error', 'Age must be between 5 and 12');
+        foreach ($request->age as $age) {
+            if ($age < 5 || $age > 12) {
+            return redirect('/register')->with('error', 'Age must be between 5 to 12');
+            }
         }
         $user = User::create([
             'name' => $request->name,
@@ -65,17 +74,19 @@ class UserLogin extends Controller
             'relation' => $request->relation,
             'password' => Hash::make($request->password),
         ]);
-        Student::create([
-            'student_name' => $request->student_name,
-            'age' => $request->age,
-            'gender' => $request->gender,
-            'birthday' => $request->birthday,
-            'section' => $request->section,
-            'student_no' => $request->student_no, 
-            'gender' => $request->gender,
-            'grade' => $request->grade,
+        $students = $request->only(['student_name', 'age', 'gender', 'birthday', 'section', 'student_no', 'grade']);
+        foreach ($students['student_name'] as $index => $student_name) {
+            Student::create([
+            'student_name' => $student_name,
+            'age' => $students['age'][$index],
+            'gender' => $students['gender'][$index],
+            'birthday' => $students['birthday'][$index],
+            'section' => $students['section'][$index],
+            'student_no' => $students['student_no'][$index],
+            'grade' => $students['grade'][$index],
             'user_id' => $user->id
-        ]);
+            ]);
+        }
 
        
 

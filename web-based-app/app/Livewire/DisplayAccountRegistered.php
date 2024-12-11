@@ -3,6 +3,8 @@
 namespace App\Livewire;
 use App\Models\User;
 use Livewire\Component;
+use App\Models\Student;
+use Illuminate\Support\Facades\Auth;
 
 class DisplayAccountRegistered extends Component
 {
@@ -14,10 +16,14 @@ class DisplayAccountRegistered extends Component
         ]);
         session()->flash('message', 'Account approved');
     }
-   
-    public function render()
+    public function decline($id)
     {
-        $account = User::all();
+        $account = User::find($id);
+        $account->delete();
+        session()->flash('message', 'Account deleted');
+    }
+    public function render(){
+        $account = User::with('students')->get();
         return view('livewire.display-account-registered', ['accounts' => $account]);
     }
 }

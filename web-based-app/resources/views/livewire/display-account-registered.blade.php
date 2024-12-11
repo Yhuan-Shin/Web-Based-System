@@ -15,6 +15,7 @@
             <thead>
                 <tr>
                     <th scope="col">Full Name</th>
+                    <th scope="col">Student/s</th>
                     <th scope="col">Email</th>
                     <th scope="col">Address</th>
                     <th scope="col">Contact</th>
@@ -27,6 +28,18 @@
              @foreach($accounts as $account)
                 <tr>
                         <td>{{$account->name}}</td>
+                        <td>
+                            @foreach($account->students as $student)
+                                @if($loop->first && $loop->count > 1)
+                                    <ul>
+                                @endif
+                                <li>{{$student->student_name}}</li>
+                                @if($loop->last && $loop->count > 1)
+                                    </ul>
+                                @endif
+                            @endforeach
+                        </td>
+  
                        <td>{{$account->email}}</td>
                        <td>{{$account->address}}</td>
                        <td>{{$account->phone_number}}</td>  
@@ -40,8 +53,28 @@
                         <td style="white-space: nowrap">
                             @if($account->confirmed ==1)
                             <button class="btn btn-success p-2" disabled>Approve</button>
+                            <button class="btn btn-danger p-2" disabled>Decline</button>
                             @else
                             <button class="btn btn-success p-2" data-bs-toggle="modal" data-bs-target="#approveModal{{$account->id}}">Approve</button>
+                            <button class="btn btn-danger p-2" data-bs-toggle="modal" data-bs-target="#declineModal{{$account->id}}">Decline</button>
+                            <!-- Decline Modal -->
+                            <div class="modal fade" wire:ignore.self id="declineModal{{$account->id}}" tabindex="-1" aria-labelledby="declineModalLabel{{$account->id}}" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="declineModalLabel{{$account->id}}">Decline Account</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to decline this account?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-danger" wire:click="decline({{$account->id}})" data-bs-dismiss="modal">Decline</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <!-- Approve Modal -->
                             <div class="modal fade" wire:ignore.self id="approveModal{{$account->id}}" tabindex="-1" aria-labelledby="approveModalLabel{{$account->id}}" aria-hidden="true">
                                 <div class="modal-dialog">

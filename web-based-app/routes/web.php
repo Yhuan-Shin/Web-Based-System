@@ -14,6 +14,9 @@ use App\Http\Controllers\SocialAuthController;
 use App\Http\Controllers\Stories;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserLogin;
+use App\Http\Controllers\ChatsController;
+use App\Http\Controllers\PusherController;
+use Pusher\Pusher;
 use Symfony\Component\HttpKernel\HttpCache\Store;
 
 Route::get('/login', function () {
@@ -71,6 +74,11 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/admin/account', [Accounts::class, 'index'])->name('account.index');
 
     Route::get('/admin/stories', [Stories::class, 'index'])->name('stories.index');
+    
+
+    Route::get('/admin/chat', [PusherController::class, 'index'])->name('chat.index');
+    Route::post('/admin/broadcast', [PusherController::class, 'broadcast'])->name('chat.broadcast');
+    Route::post('/admin/recieve', [PusherController::class, 'recieve'])->name('chat.recieve');
     
 
 });

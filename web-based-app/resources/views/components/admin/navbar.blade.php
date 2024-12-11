@@ -41,7 +41,12 @@
             </a>
            
         </li>
-       
+        <li class="sidebar-item">
+            <a href="{{ route('chat.index') }}" class="sidebar-link" aria-controls="auth">
+                <i class="bi bi-chat-left-text-fill"></i>
+                <span>Chat</span>
+            </a>
+        </li>
         <li class="sidebar-item">
             <a href="{{ route('account.index') }}" class="sidebar-link">
                 <i class="bi bi-person-badge-fill"></i>

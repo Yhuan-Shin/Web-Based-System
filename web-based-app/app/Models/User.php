@@ -12,7 +12,10 @@ class User extends Authenticatable
     protected $table = 'users';
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
-
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -50,5 +53,11 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+   
+    // User.php
+    public function students()
+    {
+        return $this->hasMany(Student::class);
     }
 }
