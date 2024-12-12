@@ -28,7 +28,7 @@
                                     @method('POST')
                                     <div class="mb-3">
                                         <label for="name" class="form-label">Name</label>
-                                        <input type="text" class="form-control" id="name" wire:model="name" name="name" placeholder="Enter your child's name" required>
+                                        <input type="text" class="form-control" id="name" wire:model="student_name" name="student_name" placeholder="Enter your child's name" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="height" class="form-label">Height (cm)</label>
@@ -45,12 +45,15 @@
                                 {{-- result --}}
                                 @if ($bmiRecord)
                                         <h4>Result</h4>
-                                        <p>Hi, {{ $name }}</p>
+                                        <p>Hi, {{ $student_name }}</p>
                                         <p>Your weight is: {{ $weight }} lbs</p>
                                         <p>Your height is: {{ $height }} cm</p>
+                                        <hr>
+                                
                                         <p>Your BMI is: {{ $bmi }}</p>
                                         <hr>
                                         <p class="mb-0">
+                                            Your BMI category is:
                                            @if($result == 'Underweight')
                                                 <span class="badge bg-primary rounded-pill">Underweight</span>
                                             @elseif($result == 'Normal')
@@ -59,7 +62,10 @@
                                                 <span class="badge bg-warning rounded-pill">Overweight</span>
                                             @elseif($result == 'Obese')
                                                 <span class="badge bg-danger rounded-pill">Obese</span>
+                                            @elseif($result == 'Severely Wasted')
+                                                <span class="badge bg-danger rounded-pill">Severely Wastedd</span>
                                             @endif
+
                                               
                                         </p>
                                 @else

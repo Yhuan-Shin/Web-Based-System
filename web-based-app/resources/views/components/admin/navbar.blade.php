@@ -42,9 +42,9 @@
            
         </li>
         <li class="sidebar-item">
-            <a href="{{ route('chat.index') }}" class="sidebar-link" aria-controls="auth">
-                <i class="bi bi-chat-left-text-fill"></i>
-                <span>Chat</span>
+            <a href="{{ route('dietary.index') }}" class="sidebar-link" aria-controls="auth">
+                <i class="bi bi-egg-fill"></i>
+                <span>Dietary & Activities</span>
             </a>
         </li>
         <li class="sidebar-item">

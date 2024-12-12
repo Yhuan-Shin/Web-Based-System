@@ -14,7 +14,6 @@ use App\Http\Controllers\SocialAuthController;
 use App\Http\Controllers\Stories;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserLogin;
-use App\Http\Controllers\Dietary;
 use App\Http\Controllers\ChatsController;
 use App\Http\Controllers\PusherController;
 use Pusher\Pusher;
@@ -55,8 +54,6 @@ Route::middleware(['auth:user, auth'])->group(function () {
 
     Route::put('account/{id}', [AccountUpdate::class, 'update'])->name('account.update');
     Route::get('account', [AccountUpdate::class, 'view'])->name('profile');
-
-
 });
 
 
@@ -78,10 +75,10 @@ Route::middleware(['auth:admin, auth'])->group(function () {
 
     Route::get('/admin/stories', [Stories::class, 'index'])->name('stories.index');
     
-    Route::get('admin/dietary', [Dietary::class, 'index'])->name('dietary.index');
-    // Route::get('/admin/chat', [PusherController::class, 'index'])->name('chat.index');
-    // Route::post('/admin/broadcast', [PusherController::class, 'broadcast'])->name('chat.broadcast');
-    // Route::post('/admin/recieve', [PusherController::class, 'recieve'])->name('chat.recieve');
+
+    Route::get('/admin/chat', [PusherController::class, 'index'])->name('chat.index');
+    Route::post('/admin/broadcast', [PusherController::class, 'broadcast'])->name('chat.broadcast');
+    Route::post('/admin/recieve', [PusherController::class, 'recieve'])->name('chat.recieve');
     
 
 });

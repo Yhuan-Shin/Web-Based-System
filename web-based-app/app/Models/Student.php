@@ -12,7 +12,7 @@ class Student extends Model
     protected $fillable = ['student_name', 'birthday', 'student_no', 'age', 'gender', 'user_id', 'grade', 'section',];
     public function bmi(): HasOne
     {
-        return $this->hasOne(Bmi::class, 'student_id'); // Assuming 'student_id' is the foreign key in the Bmi table
+        return $this->hasOne(BMI::class, 'student_id'); // Assuming 'student_id' is the foreign key in the Bmi table
     }
     public function user(): BelongsTo
     {

@@ -5,11 +5,12 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
+                <th scope="col">Gender</th>
                 <th scope="col">Age</th>
                 <th scope="col">BMI</th>
                 <th scope = "col">Category</th>
                 <th scope="col">Profile</th>
-                <th scope="col">Action</th>
+                {{-- <th scope="col">Action</th> --}}
             </tr>
         </thead>
         <tbody>
@@ -17,6 +18,7 @@
             <tr>
                 <th scope="row">{{$loop->iteration}}</th>
                 <td>{{$student->student_name}}</td>
+                <td>{{$student->gender}}</td>
                 <td>{{$student->age}}</td>
                 <td>{{ $student->bmi ? $student->bmi->bmi : 'N/A' }}</td>
                 <td>{{ $student->bmi ? $student->bmi->result : 'N/A' }}</td>
@@ -34,13 +36,11 @@
                         <i class="bi bi-eye"></i> See Profile
                     </button>
                 </td>
-                <td>
-                    <!-- Button trigger modal -->
+                {{-- <td>
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#updateModal{{$student->id}}">
                         <i class="bi bi-pencil"></i> Update
                     </button>
 
-                    <!-- Modal -->
                     <div class="modal fade" wire:ignore.self id="updateModal{{$student->id}}" tabindex="-1" aria-labelledby="updateModalLabel{{$student->id}}" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -53,7 +53,6 @@
                                         @csrf
                                         @method('PUT')
                                         <div class="mb-3">
-                                          {{-- input fields --}}
                                         </div>
                                         <button type="submit" class="btn btn-primary">Save changes</button>
                                     </form>
@@ -61,7 +60,7 @@
                             </div>
                         </div>
                     </div>
-                </td>
+                </td> --}}
             </tr>
             @endforeach
             {{$students->links()}}
