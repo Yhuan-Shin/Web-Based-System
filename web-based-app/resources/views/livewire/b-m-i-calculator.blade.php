@@ -54,7 +54,7 @@
                                         <hr>
                                         <p class="mb-0">
                                             Your BMI category is:
-                                           @if($result == 'Underweight')
+                                            @if($result == 'Underweight')
                                                 <span class="badge bg-primary rounded-pill">Underweight</span>
                                             @elseif($result == 'Normal')
                                                 <span class="badge bg-success rounded-pill">Normal</span>
@@ -63,7 +63,7 @@
                                             @elseif($result == 'Obese')
                                                 <span class="badge bg-danger rounded-pill">Obese</span>
                                             @elseif($result == 'Severely Wasted')
-                                                <span class="badge bg-danger rounded-pill">Severely Wastedd</span>
+                                                <span class="badge bg-danger rounded-pill">Severely Wasted</span>
                                             @endif
 
                                               

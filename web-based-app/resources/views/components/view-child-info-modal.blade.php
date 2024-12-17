@@ -14,14 +14,14 @@
                     <div class="list-group-item list-group-item-action border mb-2">
                         <a href="#" class="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#childEditModal{{ $child->id }}">
                             <div class="d-flex w-100 justify-content-between">
-                                <h6 class="mb-1">{{ $child->name }}</h6>  
+                                <h6 class="mb-1">{{ $child->student_name }}</h6>  
                                 <small>{{ $child->age }} years old </small>                                  
                             </div>
                         </a>
                             <p class="mb-1 text-muted">Gender: 
-                                @if($child->gender == 'male')
+                                @if($child->gender == 'Male')
                                     <span class="badge bg-primary rounded-pill">Male</span>
-                                @elseif($child->gender == 'female')
+                                @elseif($child->gender == 'Female')
                                     <span class="badge bg-danger rounded-pill">Female</span>
                                 @endif
                                 <i class="bi bi-trash-fill  float-end" style="color: red;" data-bs-toggle="modal" data-bs-target="#childDeleteModal{{ $child->id }}"></i>

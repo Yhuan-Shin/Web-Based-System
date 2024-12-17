@@ -19,7 +19,6 @@
                     <th scope="col">Email</th>
                     <th scope="col">Address</th>
                     <th scope="col">Contact</th>
-                    <th scope="col">Address</th>
                     <th scope="col">Status</th>
                     <th scope="col">Action</th>
                 </tr>
@@ -43,7 +42,6 @@
                        <td>{{$account->email}}</td>
                        <td>{{$account->address}}</td>
                        <td>{{$account->phone_number}}</td>  
-                       <td>{{$account->address}}</td>
                         <td style="white-space: nowrap">
                             @if($account->confirmed == 1) 
                             <i class="bi bi-check-circle-fill" style="color: green"></i> Approved

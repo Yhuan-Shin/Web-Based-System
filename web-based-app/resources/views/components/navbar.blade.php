@@ -14,7 +14,7 @@
             <a class="nav-link text-light" style="letter-spacing: 1px" href="{{route('schedule')}}"><i class="bi bi-calendar-date-fill"></i> Schedule</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-light" style="letter-spacing: 1px" href="#"><i class="bi bi-egg-fill"></i> Dietary</a>
+            <a class="nav-link text-light" style="letter-spacing: 1px" href="{{route('dietary')}}"><i class="bi bi-egg-fill"></i> Dietary</a>
           </li>
           
           <li class="nav-item dropdown">

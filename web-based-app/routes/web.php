@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserLogin;
 use App\Http\Controllers\Dietary;
 use App\Http\Controllers\ChatsController;
+use App\Http\Controllers\DietaryDisplay;
 use App\Http\Controllers\PusherController;
 use Pusher\Pusher;
 use Symfony\Component\HttpKernel\HttpCache\Store;
@@ -55,6 +56,7 @@ Route::middleware(['auth:user, auth'])->group(function () {
 
     Route::put('account/{id}', [AccountUpdate::class, 'update'])->name('account.update');
     Route::get('account', [AccountUpdate::class, 'view'])->name('profile');
+    Route::get('dietary', [DietaryDisplay::class, 'index'])->name('dietary');
 
 
 });

@@ -14,8 +14,8 @@
 
   
         @include('components.confirm-delete')
-        @include('components.update-child-info-modal')
         @include('components.view-child-info-modal')
+        @livewire('update-info')
     <!-- Logout Confirmation Modal -->
     <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -36,8 +36,6 @@
     </div>
     @livewire('b-m-i-calculator')
     @livewire('add-child')
-
-    
  
     @include('components.navbar')
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">

@@ -20,7 +20,7 @@ class DisplayUsers extends Component
             'user:id,name,phone_number'
         ])
        
-        ->select('id', 'student_name', 'age', 'gender', 'user_id')
+        ->select('id', 'student_name', 'age', 'gender', 'user_id','student_no','grade','section')
         ->paginate(10);
     
           

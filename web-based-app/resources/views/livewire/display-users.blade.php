@@ -4,7 +4,10 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
+                <th scope="col">Student No.</th>
                 <th scope="col">Name</th>
+                <th scope="col">Grade</th>
+                <th scope="col">Section</th>
                 <th scope="col">Gender</th>
                 <th scope="col">Age</th>
                 <th scope="col">BMI</th>
@@ -17,7 +20,10 @@
             @foreach($students as $student)
             <tr>
                 <th scope="row">{{$loop->iteration}}</th>
+                <td>{{$student->student_no}}</td>
                 <td>{{$student->student_name}}</td>
+                <td>{{$student->grade}}</td>
+                <td>{{$student->section}}</td>
                 <td>{{$student->gender}}</td>
                 <td>{{$student->age}}</td>
                 <td>{{ $student->bmi ? $student->bmi->bmi : 'N/A' }}</td>

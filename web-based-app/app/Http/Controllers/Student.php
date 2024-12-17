@@ -37,8 +37,8 @@ class Student extends Controller
         $section = $request->section;
         $user_id = Auth::user()->id;
 
-        if($birthday >= date('Y-m-d') || $birthday == date('Y-m-d') && $age <= 0) {
-            return redirect('/home')->with(['error' => 'Birthdate cannot be greater than or equal today']);
+        if($age > 12 || $age < 5){ 
+            return redirect('/home')->with(['error' => 'Age must be between 5 and 12']);
         }
         // Save the data to the database
         $student = new StudentModel();
@@ -62,19 +62,28 @@ class Student extends Controller
             'section' => 'required|string|max:255',
             'age' => 'required|integer',
             'gender' => 'required|string|max:255',
+            'birthday' => 'required|date',
+            'student_no' => 'required|string',
+
         ]);
 
         $student_name = $request->student_name;
+        $student_no = $request->student_no;
+        $birthday = $request->birthday;
         $age = $request->age;
         $gender = $request->gender;
         $user_id = Auth::user()->id;
         $grade = $request->grade;
         $section = $request->section;
-        
+        if($age > 12 || $age < 5){ 
+            return redirect('/home')->with(['error' => 'Age must be between 5 and 12']);
+        }
         // Save the data to the database
         $student = StudentModel::find($id);
         $student->student_name = $student_name;
         $student->age = $age;
+        $student->student_no = $student_no;
+        $student->birthday = $birthday;
         $student->grade = $grade;
         $student->section = $section;
         $student->gender = $gender;

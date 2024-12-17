@@ -11,9 +11,11 @@
 <body>
 
     
-        @include('components.confirm-delete')
-        @include('components.update-child-info-modal')
-        @include('components.view-child-info-modal')
+    @include('components.confirm-delete')
+    @include('components.view-child-info-modal')
+    @livewire('update-info')
+    @livewire('add-child')
+
     <!-- Logout Confirmation Modal -->
     <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
         <div class="modal-dialog">

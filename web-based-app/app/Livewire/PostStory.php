@@ -18,6 +18,8 @@ class PostStory extends Component
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         $image_path = $this->image->store('uploaded_images', 'public');
+        // $image_path = $this->image->store('uploaded_images', 'public_uploads');
+
        
 
         Story::create([

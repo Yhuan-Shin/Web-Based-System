@@ -5,6 +5,9 @@
                 <div class="col-md col-sm-8">
                     <div class="card" width="width: 15rem;">
                         <img src="{{ asset('storage/'.$story->image) }}" class="card-img-top" alt="..." style="height: 200px; object-fit: cover; width: 100%;">
+                        {{-- for deployment --}}
+                        {{-- <img src="{{ asset('/'.$story->image) }}" class="card-img-top" alt="..." style="height: 200px; object-fit: cover; width: 100%;"> --}}
+
                         <div class="card-body">
                             <p class="card-text " style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{ $story->description }}</p>
                         </div>

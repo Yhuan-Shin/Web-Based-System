@@ -9,6 +9,7 @@
     @livewireStyles
 </head>
 <body>
+    
     <div class="wrapper">
         @include('components.admin.navbar')
         <div class="main">

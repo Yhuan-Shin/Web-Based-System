@@ -17,16 +17,33 @@
                             <input type="text" class="form-control" id="student_no" name="student_no" required>
                         </div>
                         <div class="mb-3">
-                            <label for="childSurname" class="form-label">Last Name</label>
-                            <input type="text" class="form-control" id="surname" name="lname" required>
+                            <label for="fullName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" placeholder="Last Name, First Name, Middle Name" id="student_name" name="student_name" required>
                         </div>
                         <div class="mb-3">
-                            <label for="childName" class="form-label">First Name</label>
-                            <input type="text" class="form-control" id="name" name="fname" required>
+                            <label for="Grade" class="form-label">Grade</label>
+                            <select class="form-select" id="grade" name="grade" required>
+                                <option value="" disabled selected>Select Grade</option>
+                                <option value="kinder">Kinder</option>
+                                <option value="Grade1">Grade 1</option>
+                                <option value="Grade2">Grade 2</option> 
+                                <option value="Grade3">Grade 3</option>
+                                <option value="Grade4">Grade 4</option>
+                                <option value="Grade5">Grade 5</option>
+                                <option value="Grade6">Grade 6</option>
+                            </select>
                         </div>
                         <div class="mb-3">
-                            <label for="childMiddleName" class="form-label">Middle Name</label>
-                            <input type="text" class="form-control" id="childMiddleName" name="mname" required>
+                            <label for="section" class="form-label">Section</label>
+                            <select class="form-select" id="section" name="section" required>
+                                <option value="" disabled selected>Select Section</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="childDOB" class="form-label">Child's Date of Birth</label>
@@ -45,8 +62,8 @@
                             <label for="childGender" class="form-label">Child's Gender</label>
                             <select class="form-select" id="childGender" name="gender" required>
                                 <option value="" disabled selected>Select Gender</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
                             </select>
                         </div>
                         <input type="submit" id="submitBtn" class="btn btn-primary float-end" value="Submit">

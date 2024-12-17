@@ -16,7 +16,7 @@
         <div class="main" >
             @include('components.admin.header')
 
-            <div class="text-center">
+            <div>
                     {{-- Main content --}}
                     {{-- Users Modal --}}
                     @livewire('create-planner')
