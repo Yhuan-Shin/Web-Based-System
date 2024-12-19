@@ -32,7 +32,7 @@ class SocialAuthController extends Controller
 
         // If the user doesn't exist, create a new user
         $newUser = User::create([
-            'name' => $user->getName(),
+            'google_name' => $user->getName(),
             'email' => $user->getEmail(),
             'google_id' => $user->getId(),
             'avatar' => $user->getAvatar(),

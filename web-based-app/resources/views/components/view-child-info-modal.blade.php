@@ -14,7 +14,7 @@
                     <div class="list-group-item list-group-item-action border mb-2">
                         <a href="#" class="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#childEditModal{{ $child->id }}">
                             <div class="d-flex w-100 justify-content-between">
-                                <h6 class="mb-1">{{ $child->student_name }}</h6>  
+                                <h6 class="mb-1">{{ $child->st_last_name }}, {{ $child->st_first_name }}</h6>  
                                 <small>{{ $child->age }} years old </small>                                  
                             </div>
                         </a>

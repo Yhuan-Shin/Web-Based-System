@@ -11,7 +11,10 @@ class BMICalculator extends Component
 {
     public $weight;
     public $height;
-    public $student_name;
+    public $st_last_name;
+    public $st_first_name;
+    public $st_middle_name;
+
     public $bmi;
     public $result;
     public $id;
@@ -31,7 +34,9 @@ class BMICalculator extends Component
     }
 
     // Find the student
-    $student = StudentModel::where('student_name', $this->student_name)
+    $student = StudentModel::where('st_last_name', $this->st_last_name)
+        ->where('st_first_name', $this->st_first_name)
+        ->where('st_middle_name', $this->st_middle_name)
         ->where('user_id', Auth::user()->id)
         ->first();
 
@@ -59,7 +64,9 @@ class BMICalculator extends Component
         $this->bmiRecord->height = $this->height;
         $this->bmiRecord->bmi = $this->bmi;
         $this->bmiRecord->result = $this->result;
-        $this->bmiRecord->name = $student->student_name;
+        $this->bmiRecord->st_last_name = $student->st_last_name;
+        $this->bmiRecord->st_first_name = $student->st_first_name;
+        $this->bmiRecord->st_middle_name = $student->st_middle_name;
         
         $this->bmiRecord->save();
 

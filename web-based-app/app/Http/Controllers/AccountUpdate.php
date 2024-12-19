@@ -17,7 +17,9 @@ class AccountUpdate extends Controller
 
     // Dynamically validate only the fields that are provided
     $request->validate([
-        'name' => 'sometimes|string|max:255',
+        'last_name' => 'sometimes|string|max:255',
+        'first_name' => 'sometimes|string|max:255',
+        'middle_name' => 'sometimes|string|max:255',
         'email' => 'sometimes|string|email|max:255|unique:users,email,' . $user->id,
         'address' => 'sometimes|string|max:255',
         'phone_number' => 'sometimes|string|max:15|unique:users,phone_number,' . $user->id,
@@ -31,8 +33,14 @@ class AccountUpdate extends Controller
 
     try {
         // Update only the fields that are present in the request
-        if ($request->filled('name')) {
-            $user->name = $request->name;
+        if ($request->filled('last_name')) {
+            $user->last_name = $request->last_name;
+        }
+        if ($request->filled('first_name')) {
+            $user->first_name = $request->first_name;
+        }
+        if ($request->filled('middle_name')) {
+            $user->middle_name = $request->middle_name;
         }
         if ($request->filled('email')) {
             $user->email = $request->email;

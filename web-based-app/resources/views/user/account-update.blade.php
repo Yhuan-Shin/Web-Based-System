@@ -78,11 +78,25 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group">
-                                <label for="name" class="form-label text-muted">Name</label>
-                                <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->name }}" required>
-                                @error('name')
+                                <label for="last_name" class="form-label text-muted">Last Name</label>
+                                <input type="text" class="form-control" id="name" name="last_name" value="{{ Auth::user()->last_name }}" required>
+                                @error('last_name')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
+                            <div class="form-group">
+                                <label for="first_name" class="form-label text-muted">First Name</label>
+                                <input type="text" class="form-control" id="first_name" name="first_name" value="{{ Auth::user()->first_name }}" required>
+                                @error('first_name')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="middle_name" class="form-label text-muted">Middle Name</label>
+                                <input type="text" class="form-control" id="middle_name" name="middle_name" value="{{ Auth::user()->middle_name }}">
+                                @error('middle_name')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
                             </div>
                             <div class="form-group">
                                 <label for="email" class="form-label text-muted">Email</label>

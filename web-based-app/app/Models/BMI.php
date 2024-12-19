@@ -8,7 +8,7 @@ class BMI extends Model
 {
     //
     protected $table = 'bmi';
-    protected $fillable = ['name', 'height', 'weight', 'bmi', 'result', 'student_id'];
+    protected $fillable = ['st_last_name', 'st_first_name', 'st_middle_name', 'height', 'weight', 'bmi', 'result', 'student_id'];
     
     public function student()
     {

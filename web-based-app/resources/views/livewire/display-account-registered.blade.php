@@ -14,7 +14,7 @@
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">Full Name</th>
+                    <th scope="col">Name</th>
                     <th scope="col">Student/s</th>
                     <th scope="col">Email</th>
                     <th scope="col">Address</th>
@@ -26,13 +26,19 @@
             <tbody>
              @foreach($accounts as $account)
                 <tr>
-                        <td>{{$account->name}}</td>
+                        <td>
+                            @if($account->last_name == null  && $account->first_name == null && $account->middle_name == null)
+                                {{$account->google_name}}
+                            @else
+                                {{$account->last_name}}, {{$account->first_name}} {{$account->middle_name}}
+                            @endif
+                        </td>
                         <td>
                             @foreach($account->students as $student)
                                 @if($loop->first && $loop->count > 1)
                                     <ul>
                                 @endif
-                                <li>{{$student->student_name}}</li>
+                                <li>{{$student->st_first_name}}, {{$student->st_last_name}}</li>
                                 @if($loop->last && $loop->count > 1)
                                     </ul>
                                 @endif

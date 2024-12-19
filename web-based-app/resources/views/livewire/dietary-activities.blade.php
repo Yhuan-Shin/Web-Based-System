@@ -36,6 +36,34 @@
             </div>
         </div>
     </div>
+    <div class="container mb-4">
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" name="search" class="form-control" wire:model="search" id="search" placeholder="Search Student">
+            </div>
+            <div class="col-md-2">
+                <select name="filter" wire:model="filter" class="form-select">
+                    <option value="">Select Category</option>
+                    <option value="Severely Wasted">Severely Wasted</option>
+                    <option value="Underweight">Underweight</option>
+                    <option value="Normal">Normal</option>
+                    <option value="Overweight">Overweight</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <select class="form-select" id="grade" name="grade" wire:model="gradeFilter" required>
+                    <option value="">Select Grade</option>
+                    <option value="kinder">Kinder</option>
+                    <option value="Grade1">Grade 1</option>
+                    <option value="Grade2">Grade 2</option> 
+                    <option value="Grade3">Grade 3</option>
+                    <option value="Grade4">Grade 4</option>
+                    <option value="Grade5">Grade 5</option>
+                    <option value="Grade6">Grade 6</option>
+                </select>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div class="table responsive table-hover text-center table-responsive">
             <table class="table table-striped">
@@ -43,7 +71,8 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Student No.</th>
-                        <th scope="col">Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">First Name</th>
                         <th scope="col">Grade</th>
                         <th scope="col">Section</th>
                         <th scope="col">Gender</th>
@@ -58,7 +87,8 @@
                     <tr>
                         <th scope="row">{{$loop->iteration}}</th>
                         <td>{{$student->student_no}}</td>
-                        <td>{{$student->student_name}}</td>
+                        <td>{{$student->st_last_name}}</td>
+                        <td>{{$student->st_first_name}}</td>
                         <td>{{$student->grade}}</td>
                         <td>{{$student->section}}</td>
                         <td>{{$student->gender}}</td>

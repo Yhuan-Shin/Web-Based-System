@@ -51,7 +51,6 @@
           </div>
         </div>
     </div>
-    @livewire('view-story')
     <div class="container mt-5">
         <div class="container justify-content-center">
             @if (session('success'))
@@ -67,10 +66,12 @@
                 </div>
             @endif
        </div>
+    @livewire('view-story')
+    
         <div class="row mt-3">
             <div class="col-md-6 mb-3">
                 <div class="text-center">
-                    <h2 class="mb-3">Welcome, {{ Auth::user()->name }}</h2>
+                    <h2 class="mb-3">Welcome, {{ Auth::user()->first_name ?? Auth::user()->google_name }} </h2>
                     <p class="text-muted">To calculate Body Mass Index (BMI), follow the procedure recommended by the World Health Organization (WHO):</p>
                     <div class="card mt-3">
                         <div class="card-body">

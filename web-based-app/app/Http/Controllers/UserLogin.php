@@ -36,7 +36,9 @@ class UserLogin extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'first_name' => 'required|string|max:255',
+            'middle_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'role' => 'required|string|max:255',
             'address' => 'required|string|max:255',
@@ -44,7 +46,9 @@ class UserLogin extends Controller
             'relation' => 'required|string|max:255',
             'password' => 'required|string|min:8|confirmed|regex:/[a-zA-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/',
 
-           'student_name.*' => 'required|string|max:255',
+           'st_last_name.*' => 'required|string|max:255',
+           'st_first_name.*' => 'required|string|max:255',
+           'st_middle_name.*' => 'required|string|max:255',
             'gender.*' => 'required|string|max:255',
             'age.*' => 'required|integer|between:5,12',
             'grade.*' => 'required|string|max:255',
@@ -65,27 +69,35 @@ class UserLogin extends Controller
             return redirect('/register')->with('error', 'Age must be between 5 to 12');
             }
         }
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'role' => $request->role,
-            'address' => $request->address,
-            'phone_number' => $request->phone_number,
-            'relation' => $request->relation,
-            'password' => Hash::make($request->password),
-        ]);
-        $students = $request->only(['student_name', 'age', 'gender', 'birthday', 'section', 'student_no', 'grade']);
-        foreach ($students['student_name'] as $index => $student_name) {
-            Student::create([
-            'student_name' => $student_name,
-            'age' => $students['age'][$index],
-            'gender' => $students['gender'][$index],
-            'birthday' => $students['birthday'][$index],
-            'section' => $students['section'][$index],
-            'student_no' => $students['student_no'][$index],
-            'grade' => $students['grade'][$index],
-            'user_id' => $user->id
+        try {
+            $user = User::create([
+                'last_name' => $request->last_name,
+                'first_name' => $request->first_name,
+                'middle_name' => $request->middle_name,
+                'email' => $request->email,
+                'role' => $request->role,
+                'address' => $request->address,
+                'phone_number' => $request->phone_number,
+                'relation' => $request->relation,
+                'password' => Hash::make($request->password),
             ]);
+            $students = $request->only(['st_last_name', 'st_first_name', 'st_middle_name', 'age', 'gender', 'birthday', 'section', 'student_no', 'grade']);
+            foreach ($students['st_last_name'] as $index => $st_last_name) {
+                Student::create([
+                    'st_last_name' => $st_last_name,
+                    'st_first_name' => $students['st_first_name'][$index],
+                    'st_middle_name' => $students['st_middle_name'][$index],
+                    'age' => $students['age'][$index],
+                    'gender' => $students['gender'][$index],
+                    'birthday' => $students['birthday'][$index],
+                    'section' => $students['section'][$index],
+                    'student_no' => $students['student_no'][$index],
+                    'grade' => $students['grade'][$index],
+                    'user_id' => $user->id
+                ]);
+            }
+        } catch (\Exception $e) {
+            return redirect('/register')->with('error', 'Registration failed: ' . $e->getMessage());
         }
 
        

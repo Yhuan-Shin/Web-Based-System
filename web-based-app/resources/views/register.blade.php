@@ -47,9 +47,23 @@
                                     <div class="col">
                                         <input type="hidden" name="role" value="user">
                                         <div class="form-group">
-                                            <label for="name">Full Name</label>
-                                            <input type="text" maxlength="30" class="form-control" placeholder="Last Name, First Name, Middle Name" id="name" name="name" value="{{ old('name') }}" required>
-                                            @error('name')
+                                            <label for="first_name">First Name</label>
+                                            <input type="text" maxlength="30" class="form-control" placeholder="First Name" id="first_name" name="first_name" value="{{ old('first_name') }}" required>
+                                            @error('first_name')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="middle_name">Middle Name</label>
+                                            <input type="text" maxlength="30" class="form-control" placeholder="Middle Name" id="middle_name" name="middle_name" value="{{ old('middle_name') }}">
+                                            @error('middle_name')
+                                                <div class="text-danger">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="last_name">Last Name</label>
+                                            <input type="text" maxlength="30" class="form-control" placeholder="Last Name" id="last_name" name="last_name" value="{{ old('last_name') }}" required>
+                                            @error('last_name')
                                                 <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>

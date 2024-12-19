@@ -34,6 +34,12 @@ class PostStory extends Component
     }
     public function render()
     {
-        return view('livewire.post-story');
+        $story = Story::all();
+        return view('livewire.post-story', ['story' => $story]);
+    }
+    public function delete($id){
+        $story = Story::find($id);
+        $story->delete();
+        session()->flash('message', 'Story deleted successfully.');
     }
 }
