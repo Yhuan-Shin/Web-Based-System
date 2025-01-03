@@ -1,4 +1,4 @@
-<div>
+<div wire:poll.3000ms>
     <div class="container">
         @if (session()->has('message'))
             <div class="alert alert-success mt-2" role="alert" >
@@ -27,10 +27,38 @@
                     <td>{{ $story->description }}</td>
                     <td><img src="{{ asset('storage/' . $story->image) }}" alt="Story Image" width="100"></td>
                     <td>
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $story->id }}">Edit</button>
+
+                        <!-- Edit Modal -->
+                        <div class="modal fade" id="editModal{{ $story->id }}" wire:ignore.self tabindex="-1" aria-labelledby="editModalLabel{{ $story->id }}" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="editModalLabel{{ $story->id }}">Edit Story</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form wire:submit.prevent="update({{ $story->id }})">
+                                            @csrf
+                                            <div class="mb-3">
+                                                <label for="description{{ $story->id }}" class="form-label">Description</label>
+                                                <input type="text" class="form-control" id="description" wire:model="description" required>
+                                                @error('description') <span class="text-danger">{{ $message }}</span> @enderror
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="image{{ $story->id }}" class="form-label">Image</label>
+                                                <input type="file" class="form-control" id="image{{ $story->id }}" wire:model="image" accept="image/*">
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Update Story</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal{{ $story->id }}">Delete</button>
 
                         <!-- Confirm Delete Modal -->
-                        <div class="modal fade" id="confirmDeleteModal{{ $story->id }}" tabindex="-1" aria-labelledby="confirmDeleteModalLabel{{ $story->id }}" aria-hidden="true">
+                        <div class="modal fade" id="confirmDeleteModal{{ $story->id }}" wire:ignore.self tabindex="-1" aria-labelledby="confirmDeleteModalLabel{{ $story->id }}" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -56,7 +84,7 @@
     
 
     <!-- Modal -->
-    <div class="modal fade" id="postStoryModal" tabindex="-1" aria-labelledby="postStoryModalLabel" aria-hidden="true">
+    <div class="modal fade" id="postStoryModal" wire:ignore.self tabindex="-1" aria-labelledby="postStoryModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -69,7 +97,7 @@
                         <div class="mb-3">
                             <label for="description" class="form-label">Description</label>
                             <input type="text" class="form-control" id="description" wire:model="description" required> 
-                            @error('title') <span class="text-danger">{{ $message }}</span> @enderror
+                            @error('description') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                         <div class="mb-3">
                             <label for="image" class="form-label">Image</label>

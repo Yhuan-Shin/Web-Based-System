@@ -42,4 +42,34 @@ class PostStory extends Component
         $story->delete();
         session()->flash('message', 'Story deleted successfully.');
     }
+    public function update($id)
+{
+    try {
+        $story = Story::find($id);
+
+        // if (!$story || $story->user_id !== Auth::id()) {
+        //     session()->flash('error', 'You are not authorized to update this story.');
+        //     return;
+        // }
+
+        $this->validate([
+            'description' => 'required|max:255', // Add validation for the description
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Optional image update
+        ]);
+
+        // if ($this->image) {
+        //     // Upload the new image and delete the old one if necessary
+        //     $image_path = $this->image->store('uploaded_images', 'public');
+        //     $story->image = $image_path;
+        // }
+
+        $story->description = $this->description;
+        $story->save();
+
+        session()->flash('message', 'Story updated successfully.');
+    } catch (\Exception $e) {
+        session()->flash('error', 'An error occurred while updating the story.');
+    }
+}
+
 }

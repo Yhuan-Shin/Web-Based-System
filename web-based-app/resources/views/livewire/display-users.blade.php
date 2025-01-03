@@ -4,6 +4,30 @@
             {{ session('warning') }}
         </div>
     @endif
+    @foreach($students as $student)
+    <div class="modal fade" id="profileModal{{$student->id}}" wire:ignore.self tabindex="-1" aria-labelledby="profileModalLabel{{$student->id}}" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="profileModalLabel{{$student->id}}">Student Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Name: {{ $student->st_last_name }} {{ $student->st_first_name }} {{ $student->st_middle_name }}</p>
+                    <p>Age: {{ $student->age }}</p>
+                    <p>Gender: {{ $student->gender }}</p>
+                    <p>Guardian: {{ $student->user ? ($student->user->last_name && $student->user->first_name ? $student->user->last_name . ', ' . $student->user->first_name : $student->user->google_name) : 'N/A' }}</p>
+                    <p>Phone Number: {{ $student->user ? $student->user->phone_number : 'N/A' }}</p>
+                    <p>Height: {{ $student->bmi ? $student->bmi->height : 'N/A' }} cm</p>
+                    <p>Weight: {{ $student->bmi ? $student->bmi->weight : 'N/A' }} lbs</p>
+                    <p>BMI: {{ $student->bmi ? $student->bmi->bmi : 'N/A' }}</p>
+                    <p>Category: {{ $student->bmi ? $student->bmi->result : 'N/A' }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endforeach
+    
 <div class="container mb-4">
     <div class="row">
         <div class="col-md-4">
@@ -66,18 +90,11 @@
                 <td>{{ $student->bmi ? $student->bmi->bmi : 'N/A' }}</td>
                 <td>{{ $student->bmi ? $student->bmi->result : 'N/A' }}</td>
                 <td>
-                    <button type="button" class="btn btn-primary" data-bs-trigger="hover" data-bs-toggle="popover"  data-bs-html="true" title="User Profile"
-                            data-bs-content="<h6>Name:  {{ $student->st_last_name }} {{ $student->st_first_name }} {{ $student->st_middle_name }}</h6><br>
-                            Age: {{ $student->age }}<br>
-                            Gender: {{ $student->gender }}<br>
-                            Guardian: {{ $student->user ? ($student->user->last_name && $student->user->first_name ? $student->user->last_name . ', ' . $student->user->first_name : $student->user->google_name) : 'N/A' }}<br>
-                            Phone Number: {{ $student->user ? $student->user->phone_number : 'N/A' }}<br>
-                            Height: {{ $student->bmi ? $student->bmi->height : 'N/A' }} cm<br>
-                            Weight: {{ $student->bmi ? $student->bmi->weight : 'N/A' }} lbs<br>
-                            BMI: {{ $student->bmi ? $student->bmi->bmi : 'N/A' }}<br>
-                            Category: {{ $student->bmi ? $student->bmi->result : 'N/A' }}">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#profileModal{{$student->id}}">
                         <i class="bi bi-eye"></i> See Profile
                     </button>
+
+                   
                 </td>
                 {{-- <td>
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#updateModal{{$student->id}}">
@@ -111,13 +128,6 @@
     </table>
     {{$students->links()}}
 </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
-        popoverTriggerList.map(function (popoverTriggerEl) {
-            new bootstrap.Popover(popoverTriggerEl);
-        });
-    });
-</script>
+
 
 </div>
