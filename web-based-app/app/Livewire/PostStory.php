@@ -3,6 +3,8 @@
 namespace App\Livewire;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Story;
+use Illuminate\Support\Facades\Storage;
+
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -47,21 +49,22 @@ class PostStory extends Component
     try {
         $story = Story::find($id);
 
-        // if (!$story || $story->user_id !== Auth::id()) {
-        //     session()->flash('error', 'You are not authorized to update this story.');
-        //     return;
-        // }
-
         $this->validate([
             'description' => 'required|max:255', // Add validation for the description
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Optional image update
         ]);
 
-        // if ($this->image) {
-        //     // Upload the new image and delete the old one if necessary
-        //     $image_path = $this->image->store('uploaded_images', 'public');
-        //     $story->image = $image_path;
-        // }
+        if ($this->image) {
+            // Delete old image if it exists
+            if ($story->image && Storage::disk('public')->exists($story->image)) {
+                Storage::disk('public')->delete($story->image);
+            }
+
+            // Store new image
+            $image_path = $this->image->store('uploaded_images', 'public');
+            $story->image = $image_path;
+        }
+
 
         $story->description = $this->description;
         $story->save();
