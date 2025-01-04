@@ -26,4 +26,11 @@ class DisplayAccountRegistered extends Component
         $account = User::with('students')->get();
         return view('livewire.display-account-registered', ['accounts' => $account]);
     }
+    public function deactivate($id){
+        $account = User::find($id);
+        $account->update([
+            'confirmed' => 0
+        ]);
+        session()->flash('message', 'Account deactivated');
+    }
 }

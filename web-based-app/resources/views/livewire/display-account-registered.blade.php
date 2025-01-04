@@ -25,6 +25,24 @@
             </thead>
             <tbody>
              @foreach($accounts as $account)
+              <!-- Confirm Deactivate Modal -->
+              <div class="modal fade" wire:ignore.self id="confirmDeactivateModal{{$account->id}}" tabindex="-1" aria-labelledby="confirmDeactivateModalLabel{{$account->id}}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="confirmDeactivateModalLabel{{$account->id}}">Deactivate Account</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to deactivate this account?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger" wire:click="deactivate({{$account->id}})" data-bs-dismiss="modal">Deactivate</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
                 <tr>
                         <td>
                             @if($account->last_name == null  && $account->first_name == null && $account->middle_name == null)
@@ -56,9 +74,10 @@
                             @endif</td>
                         <td style="white-space: nowrap">
                             @if($account->confirmed ==1)
-                            <button class="btn btn-success p-2" disabled>Approve</button>
-                            <button class="btn btn-danger p-2" disabled>Decline</button>
+                            <button class="btn btn-danger p-2" data-bs-toggle="modal" data-bs-target="#confirmDeactivateModal{{$account->id}}">Deactivate</button>
                             @else
+
+                           
                             <button class="btn btn-success p-2" data-bs-toggle="modal" data-bs-target="#approveModal{{$account->id}}">Approve</button>
                             <button class="btn btn-danger p-2" data-bs-toggle="modal" data-bs-target="#declineModal{{$account->id}}">Decline</button>
                             <!-- Decline Modal -->
