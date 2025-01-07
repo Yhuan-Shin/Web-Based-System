@@ -6,7 +6,9 @@
                 @forelse($dietaries as $dietary)
                     <div class="card mt-3">
                         <div class="card-header">
-                            <h5 class="card-title">{{ $dietary->student->student_name }}</h5>
+                            <img src="{{ asset('storage/'.$dietary->image) }}" class="card-img-top" alt="..." style="height: 200px; width: 50%;">
+
+                            <h5 class="card-title">{{ $dietary->student->st_first_name }} {{ $dietary->student->st_last_name }}</h5>
                         </div>
                         <div class="card-body">
                             <p class="card-text">{{ $dietary->dietary }}</p>

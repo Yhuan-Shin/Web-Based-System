@@ -5,13 +5,16 @@ use Livewire\WithPagination;
 use App\Models\DietaryAndActivities;
 use Livewire\Component;
 use App\Models\Student;
+use Livewire\WithFileUploads;
+
 class DietaryActivities extends Component
 {
-    use WithPagination;
+    use WithFileUploads;
 
     protected $paginationTheme = 'bootstrap';
     public $dietary;
     public $activities;
+    public $image;
     public $selectedStudentId;
 
     use WithPagination;
@@ -108,6 +111,7 @@ class DietaryActivities extends Component
     protected $rules = [
         'dietary' => 'required|string|max:500',
         'activities' => 'required|string|max:500',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
     ];
 
     public function selectStudent($id)
@@ -117,18 +121,24 @@ class DietaryActivities extends Component
 
     public function save()
     {
-        $this->validate();
+        try {
+            $this->validate();
 
-        $student = Student::findOrFail($this->selectedStudentId);
+            $student = Student::findOrFail($this->selectedStudentId);
+            $image_path = $this->image ? $this->image->store('uploaded_images', 'public') : null;
 
-        $student->dietaryAndActivities()->create([
+            $student->dietaryAndActivities()->create([
             'dietary' => $this->dietary,
             'activities' => $this->activities,
-        ]);
+            'image' => $image_path,
+            ]);
 
-        session()->flash('message', 'Diet plan and activities saved successfully!');
+            session()->flash('message', 'Diet plan and activities saved successfully!');
 
-        // Reset inputs and modal state
-        $this->reset(['dietary', 'activities', 'selectedStudentId']);
+            // Reset inputs and modal state
+            $this->reset(['dietary', 'activities', 'selectedStudentId']);
+        } catch (\Exception $e) {
+            session()->flash('error', 'An error occurred while saving the data: ' . $e->getMessage());
+        }
     }
 }

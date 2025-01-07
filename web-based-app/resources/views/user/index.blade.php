@@ -69,36 +69,213 @@
     @livewire('view-story')
     
         <div class="row mt-3">
-            <div class="col-md-6 mb-3">
+            <div class="col-md-12 mb-3">
                 <div class="text-center">
                     <h2 class="mb-3">Welcome, {{ Auth::user()->first_name ?? Auth::user()->google_name }} </h2>
                     <p class="text-muted">To calculate Body Mass Index (BMI), follow the procedure recommended by the World Health Organization (WHO):</p>
-                    <div class="card mt-3">
-                        <div class="card-body">
-                            <ol class="text-start text-muted">
-                                <li>Measure your weight in kilograms (kg).</li>
-                                <li>Measure your height in meters (m).</li>
-                                <li>Calculate your BMI using the formula: <strong>BMI = weight (kg) / (height (m) * height (m))</strong>.</li>
-                                <li>Interpret your BMI using the following categories:
-                                    <ul>
-                                        <li>Underweight: BMI < 18.5</li>
-                                        <li>Normal weight: BMI 18.5 - 24.9</li>
-                                        <li>Overweight: BMI 25 - 29.9</li>
-                                        <li>Obesity: BMI ≥ 30</li>
-                                    </ul>
-                                </li>
-                            </ol>
+                    
+                           
+
+                            
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md">
+                                <table class="table table-bordered table-responsive caption-top">
+                                    <caption>BMI Categories for Male</caption>
+                                    <thead>
+                                        <tr style="white-space: nowrap;">
+                                            <th scope="col">Age (Years)</th>
+                                            <th scope="col">Severely Wasted</th>
+                                            <th scope="col">Underweight</th>
+                                            <th scope="col">Normal</th>
+                                            <th scope="col">Overweight</th>
+                                            <th scope="col">Obese</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="white-space: nowrap;">
+                                        <tr>
+                                            <td>5</td>
+                                            <td>&lt;13.0</td>
+                                            <td>&lt;13.5</td>
+                                            <td>13.8-17.0</td>
+                                            <td>17.1-18.8</td>
+                                            <td>&ge;18.9</td>
+                                        </tr>
+                                        <tr>
+                                            <td>6</td>
+                                            <td>&lt;13.5</td>
+                                            <td>13.8</td>
+                                            <td>14.0-17.5</td>
+                                            <td>17.6-19.6</td>
+                                            <td>&ge;19.7</td>
+                                        </tr>
+                                        <tr>
+                                            <td>7</td>
+                                            <td>&lt;13.8</td>
+                                            <td>14.3</td>
+                                            <td>14.6-18.2</td>
+                                            <td>18.3-20.4</td>
+                                            <td>&ge;20.5</td>
+                                        </tr>
+                                        <tr>
+                                            <td>8</td>
+                                            <td>&lt;14.0</td>
+                                            <td>14.5</td>
+                                            <td>14.6-19.0</td>
+                                            <td>19.1-21.5</td>
+                                            <td>&ge;21.6</td>
+                                        </tr>
+                                        <tr>
+                                            <td>9</td>
+                                            <td>&lt;14.5</td>
+                                            <td>14.9</td>
+                                            <td>15.4-19.8</td>
+                                            <td>19.9-22.6</td>
+                                            <td>&ge;22.7</td>
+                                        </tr>
+                                        <tr>
+                                            <td>10</td>
+                                            <td>&lt;14.8</td>
+                                            <td>15.3</td>
+                                            <td>15.4-20.7</td>
+                                            <td>20.8-23.8</td>
+                                            <td>&ge;23.9</td>
+                                        </tr>
+                                        <tr>
+                                            <td>11</td>
+                                            <td>&lt;15.3</td>
+                                            <td>15.7</td>
+                                            <td>15.8-21.7</td>
+                                            <td>21.8-25.0</td>
+                                            <td>&ge;25.1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>12</td>
+                                            <td>&lt;15.7</td>
+                                            <td>16.2</td>
+                                            <td>16.3-22.7</td>
+                                            <td>22.8-26.5</td>
+                                            <td>&ge;26.6</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md">
+                                <div class="card mt-5">
+                                    <div class="card-body">
+                                        <ol class="text-start text-muted">
+                                            <li>Measure your weight in kilograms (kg).</li>
+                                            <li>Measure your height in meters (m).</li>
+                                            <li>Calculate your BMI using the formula: <strong>BMI = weight (kg) / (height (m) * height (m))</strong>.</li>
+                                            <li>Interpret your BMI using the following categories:
+                                                <ul>
+                                                    <li>Underweight: BMI < 18.5</li>
+                                                    <li>Normal weight: BMI 18.5 - 24.9</li>
+                                                    <li>Overweight: BMI 25 - 29.9</li>
+                                                    <li>Obesity: BMI ≥ 30</li>
+                                                </ul>
+                                            </li>
+                                        </ol>
+                                        <div class="d-flex justify-content-center mt-3">
+                                            <button type="button" class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#bmiModal">BMI Calculator</button>
+                                          
+                                        </div>
+                                            
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <table class="table table-bordered table-responsive caption-top">
+                                    <caption>BMI Categories for Female</caption>
+                                    <thead>
+    
+                                        <tr style="white-space: nowrap;">
+                                            <th scope="col">Age (Years)</th>
+                                            <th scope="col">Severely Wasted</th>
+                                            <th scope="col">Underweight</th>
+                                            <th scope="col">Normal</th>
+                                            <th scope="col">Overweight</th>
+                                            <th scope="col">Obese</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="white-space: nowrap;">
+                                        <tr>
+                                            <td>5</td>
+                                            <td>&lt;13.0</td>
+                                            <td>13.4</td>
+                                            <td>13.6-17.0</td>
+                                            <td>17.1-18.8</td>
+                                            <td>&ge;18.9</td>
+                                        </tr>
+                                        <tr>
+                                            <td>6</td>
+                                            <td>&lt;13.4</td>
+                                            <td>13.6</td>
+                                            <td>13.9-17.4</td>
+                                            <td>17.5-19.6</td>
+                                            <td>&ge;19.7</td>
+                                        </tr>
+                                        <tr>
+                                            <td>7</td>
+                                            <td>&lt;13.6</td>
+                                            <td>14.0</td>
+                                            <td>14.3-18.1</td>
+                                            <td>18.2-20.4</td>
+                                            <td>&ge;20.5</td>
+                                        </tr>
+                                        <tr>
+                                            <td>8</td>
+                                            <td>&lt;14.0</td>
+                                            <td>14.5</td>
+                                            <td>14.7-19.0</td>
+                                            <td>19.1-21.4</td>
+                                            <td>&ge;21.5</td>
+                                        </tr>
+                                        <tr>
+                                            <td>9</td>
+                                            <td>&lt;14.4</td>
+                                            <td>15.0</td>
+                                            <td>15.2-20.0</td>
+                                            <td>20.1-22.6</td>
+                                            <td>&ge;22.7</td>
+                                        </tr>
+                                        <tr>
+                                            <td>10</td>
+                                            <td>&lt;14.7</td>
+                                            <td>15.2</td>
+                                            <td>15.7-21.1</td>
+                                            <td>21.2-24.0</td>
+                                            <td>&ge;24.1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>11</td>
+                                            <td>&lt;15.3</td>
+                                            <td>15.7</td>
+                                            <td>16.2-22.3</td>
+                                            <td>22.4-25.5</td>
+                                            <td>&ge;25.6</td>
+                                        </tr>
+                                        <tr>
+                                            <td>12</td>
+                                            <td>&lt;15.7</td>
+                                            <td>16.2</td>
+                                            <td>16.8-23.5</td>
+                                            <td>23.6-27.0</td>
+                                            <td>&ge;27.1</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
+                   
+                    
                 </div>
-                <div class="d-flex justify-content-center mt-3">
-                    <button type="button" class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#bmiModal">BMI Calculator</button>
-                  
-                </div>
+               
             </div>
-            <div class="col-md-6">
-                <img src="{{ asset('assets/bmi.jpg') }}" alt="" class="m-auto " style="width: 80%; ">
-            </div>
+            
         </div>
     </div>
     @include('components.footer')

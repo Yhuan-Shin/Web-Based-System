@@ -18,6 +18,10 @@
                 </div>
                 <div class="modal-body">
                     <form wire:submit.prevent="save">
+                        <label for="image">Image</label>
+                        <div class="input-group mb-3">
+                            <input type="file" class="form-control" wire:model="image" id="image">
+                        </div>
                         <div class="form-group mb-3">
                             <label for="diet-plan">Diet Plan</label>
                             <textarea class="form-control" wire:model="dietary" id="diet-plan" rows="3"></textarea>
