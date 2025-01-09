@@ -1,15 +1,17 @@
 <div>
     {{-- A good traveler has no fixed plans and is not intent upon arriving. --}}
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
                 @forelse($dietaries as $dietary)
                     <div class="card mt-3">
-                        <div class="card-header">
-                            <img src="{{ asset('storage/'.$dietary->image) }}" class="card-img-top" alt="..." style="height: 200px; width: 50%;">
+                            @if($dietary->image)
+                                <img src="{{ asset('storage/'.$dietary->image) }}" class="card-img-top m-auto" alt="..." style="height: 150px; width: 50%;  padding: 10px">
+                            @else
+                                <p class="badge bg-danger col-md-4 m-auto mt-2">No Image</p>
+                            @endif
 
-                            <h5 class="card-title">{{ $dietary->student->st_first_name }} {{ $dietary->student->st_last_name }}</h5>
-                        </div>
+                            <p class="card-title">{{ $dietary->student->st_first_name }} {{ $dietary->student->st_last_name }}</p>
                         <div class="card-body">
                             <p class="card-text">{{ $dietary->dietary }}</p>
                             <p class="card-text">{{ $dietary->activities }}</p>
