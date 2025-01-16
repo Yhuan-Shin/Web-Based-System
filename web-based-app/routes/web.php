@@ -1,3 +1,5 @@
+
+
 <?php
 
 use App\Http\Controllers\Accounts;
@@ -21,7 +23,7 @@ use App\Http\Controllers\PusherController;
 use Pusher\Pusher;
 use Symfony\Component\HttpKernel\HttpCache\Store;
 
-Route::get('/login', function () {
+Route::get('/', function () {
     return view('login');
 });
 Route::get('/login/admin', function () {
@@ -47,7 +49,7 @@ Route::get('/logout/admin', [AdminLogin::class, 'logout'])->name('admin.logout')
 Route::post('/login/admin', [AdminLogin::class, 'login'])->name('admin.login');
 
 //protected user page
-Route::middleware(['auth:user, auth'])->group(function () {
+Route::middleware(['auth:user', 'verified'])->group(function () {
     Route::get('/home', [Student::class, 'index'])->name('index');
     Route::post('/home/student', [Student::class, 'submit'])->name('student.submit');
     Route::put('/home/student/{id}', [Student::class, 'update'])->name('student.update');
@@ -63,7 +65,7 @@ Route::middleware(['auth:user, auth'])->group(function () {
 
 
 //protected admin page
-Route::middleware(['auth:admin, auth'])->group(function () {
+Route::middleware(['auth:admin, auth','verified'])->group(function () {
     Route::get('/admin', [Admin::class, 'index'])->name('admin.index');
     Route::get('/admin/planner', [Planner::class, 'index'])->name('planner.table');
     Route::delete('/admin/planner/{id}', [Planner::class, 'delete'])->name('planner.destroy');

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
+
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\Student;
@@ -14,25 +16,26 @@ class UserLogin extends Controller
     {
         $request->validate([
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
         ]);
     
         // Attempt to log the user in
         if (Auth::guard('user')->attempt(['email' => $request->email, 'password' => $request->password])) {
-            if (User::where('confirmed', 1)->first()) {
-                $request->session()->regenerate(); // Prevents session fixation
+            // Check if the authenticated user's account is confirmed
+            if (Auth::guard('user')->user()->confirmed == 1) {
+                Session::regenerate(); 
                 return redirect('/home');
             } else {
-                return redirect('/login')->with('error', 'Please wait for the admin to confirm your account');
+                // Logout the user and show an error message
+                Auth::guard('user')->logout();
+                return redirect('/login')->with('error', 'Please wait for the admin to confirm your account.');
             }
-        } else {
-            return redirect('/login')->with('error', 'Invalid credentials');
         }
-        
     
         // If authentication fails, redirect back with an error message
-        return redirect('/login')->with('error', 'Invalid credentials');
+        return redirect('/login')->with('error', 'Invalid credentials.');
     }
+    
     public function register(Request $request)
     {
         $request->validate([
