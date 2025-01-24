@@ -16,6 +16,9 @@
           <li class="nav-item">
             <a class="nav-link text-light" style="letter-spacing: 1px" href="{{route('dietary')}}"><i class="bi bi-egg-fill"></i> Dietary</a>
           </li>
+          <li class="nav-item">
+            <a href="/chat" class="nav-link text-light" style="letter-spacing: 1px"><i class="bi bi-chat-fill"></i> Chat</a>
+          </li>
           
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-light " style="letter-spacing: 1px" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

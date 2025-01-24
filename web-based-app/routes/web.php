@@ -65,7 +65,7 @@ Route::middleware(['auth:user', 'verified'])->group(function () {
 
 
 //protected admin page
-Route::middleware(['auth:admin, auth','verified'])->group(function () {
+Route::middleware(['auth:admin','verified'])->group(function () {
     Route::get('/admin', [Admin::class, 'index'])->name('admin.index');
     Route::get('/admin/planner', [Planner::class, 'index'])->name('planner.table');
     Route::delete('/admin/planner/{id}', [Planner::class, 'delete'])->name('planner.destroy');
