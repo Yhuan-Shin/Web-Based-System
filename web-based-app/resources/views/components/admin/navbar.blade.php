@@ -54,9 +54,14 @@
             </a>
         </li>
         <li class="sidebar-item">
+            <a href="/chat" class="sidebar-link"><i class="bi bi-chat-fill"></i>
+                <span>Chat</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
             <a href="#" class="sidebar-link">
                 <i class="bi bi-gear-fill"></i>
-                <span>Setting</span>
+                <span>Settings</span>
             </a>
         </li>
     </ul>

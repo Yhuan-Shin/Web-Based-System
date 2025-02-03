@@ -83,9 +83,4 @@ Route::middleware(['auth:admin','verified'])->group(function () {
     Route::get('/admin/stories', [Stories::class, 'index'])->name('stories.index');
     
     Route::get('admin/dietary', [Dietary::class, 'index'])->name('dietary.index');
-    // Route::get('/admin/chat', [PusherController::class, 'index'])->name('chat.index');
-    // Route::post('/admin/broadcast', [PusherController::class, 'broadcast'])->name('chat.broadcast');
-    // Route::post('/admin/recieve', [PusherController::class, 'recieve'])->name('chat.recieve');
-    
-
 });
