@@ -28,12 +28,12 @@ class UserLogin extends Controller
             } else {
                 // Logout the user and show an error message
                 Auth::guard('user')->logout();
-                return redirect('/login')->with('error', 'Please wait for the admin to confirm your account.');
+                return redirect('/')->with('error', 'Please wait for the admin to confirm your account.');
             }
         }
     
         // If authentication fails, redirect back with an error message
-        return redirect('/login')->with('error', 'Invalid credentials.');
+        return redirect('/')->with('error', 'Invalid credentials.');
     }
     
     public function register(Request $request)
@@ -105,7 +105,7 @@ class UserLogin extends Controller
 
        
 
-        return redirect('/login')->with('success', 'Registered successfully');
+        return redirect('/')->with('success', 'Registered successfully');
     }
     public function logout(Request $request)
     {

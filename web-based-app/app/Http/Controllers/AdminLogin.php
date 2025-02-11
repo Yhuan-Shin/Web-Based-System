@@ -12,10 +12,10 @@ class AdminLogin extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::guard('admin')->attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect('/admin')->with('success', 'Logged in successfully');
+            return redirect('/admin/dashboard')->with('success', 'Logged in successfully');
 
         }else{
-            return redirect('/login/admin')->with('error', 'Invalid credentials');
+            return redirect('/admin')->with('error', 'Invalid credentials');
         }
     }
 
@@ -24,6 +24,6 @@ class AdminLogin extends Controller
         Auth::guard('admin')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/login/admin');
+        return redirect('/admin');
     }
 }
