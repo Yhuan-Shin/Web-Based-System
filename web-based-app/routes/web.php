@@ -20,13 +20,14 @@ use App\Http\Controllers\Dietary;
 use App\Http\Controllers\ChatsController;
 use App\Http\Controllers\DietaryDisplay;
 use App\Http\Controllers\PusherController;
+use App\Http\Controllers\vendor\Chatify\MessagesController;
 use Pusher\Pusher;
 use Symfony\Component\HttpKernel\HttpCache\Store;
 
 Route::get('/', function () {
     return view('login');
 });
-Route::get('/login/admin', function () {
+Route::get('/admin', function () {
     return view('admin.login');
 });
 
@@ -63,10 +64,13 @@ Route::middleware(['auth:user', 'verified'])->group(function () {
 
 });
 
+Route::get('/chat', [MessagesController::class, 'index'])
+    ->middleware(['auth:admin,user'])
+    ->name('chat.index');
 
 //protected admin page
 Route::middleware(['auth:admin','verified'])->group(function () {
-    Route::get('/admin', [Admin::class, 'index'])->name('admin.index');
+    Route::get('/admin/dashboard', [Admin::class, 'index'])->name('admin.index');
     Route::get('/admin/planner', [Planner::class, 'index'])->name('planner.table');
     Route::delete('/admin/planner/{id}', [Planner::class, 'delete'])->name('planner.destroy');
     Route::put('/admin/planner/{id}', [Planner::class, 'update'])->name('planner.update');

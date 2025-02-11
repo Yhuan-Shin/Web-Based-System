@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">  
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>Login</title>
 </head>
@@ -34,8 +34,9 @@
         @endif
         <div class="row justify-content-center align-items-center">
             <div class="col-md-6">
-                <div class="card " style="background-color: rgb(62,87,95); transition: transform 0.2s;">
+                <div class="card " style="background-color: rgb(70, 157, 185); transition: transform 0.2s;">
                     <div class="card-header text-center text-white">
+                        
                         <h4>Feeding Program Portal</h4>
                         <h6>Login</h6>
                     </div>
@@ -65,10 +66,7 @@
                 </div>
                 <div class="social-media-icons text-center mt-3 px-3">
                     <p class="text-white">Click the icons below to login using:</p>
-                    <a href="" target="_blank" class="button btn btn-light mb-2 text-white" style="background-color: transparent; border: none;">
-                        <img src="{{ asset('assets/facebook_logo.png') }}" alt="">
-                        Sign in with Facebook
-                    </a>
+                    
                     <a href="{{ route('google.login') }}" target="_blank" class="button btn btn-light mb-2 text-white" style="background-color: transparent; border: none;">
                         <img src="{{ asset('assets/google_logo.png') }}" alt="">
                         Sign in with Google
