@@ -338,6 +338,7 @@ class MessagesController extends Controller
                               ->orWhere('email', 'LIKE', "%{$input}%");
                               
                     })
+                    ->orWhere('email', 'LIKE', "%{$input}%")
                     ->paginate($request->per_page ?? $this->perPage);
         foreach ($records->items() as $record) {
             $getRecords .= view('Chatify::layouts.listItem', [
