@@ -7,15 +7,28 @@ use Illuminate\Http\Request;
 class AdminLogin extends Controller
 {
     //
+    
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
-        if (Auth::guard('admin')->attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect('/admin/dashboard')->with('success', 'Logged in successfully');
-
-        }else{
-            return redirect('/admin')->with('error', 'Invalid credentials');
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->remember)){
+            $user = Auth::user();
+            if ($user->role == 'admin') {
+                return redirect('/admin/dashboard')->with('success', 'Logged in successfully');
+            } elseif ($user->role == 'user') {
+                return redirect('/home')->with('success', 'Logged in successfully');
+            } 
+        } else {
+            $user = Auth::user();
+            if($user->role == 'admin'){
+                return redirect('/admin')->with('error', 'Invalid credentials');
+            }
+            elseif($user->role == 'user'){
+                return redirect('/')->with('error', 'Invalid credentials');
+        }
         }
     }
 
