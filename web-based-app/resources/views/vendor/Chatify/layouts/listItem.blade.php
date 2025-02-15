@@ -36,9 +36,18 @@ $lastMessageBody = strlen($lastMessageBody) > 30 ? mb_substr($lastMessageBody, 0
         </td>
         {{-- center side --}}
         <td>
+        @if(auth('user')->check())
         <p data-id="{{ $user->id }}" data-type="user">
             {{ strlen($user->first_name . ' ' . $user->last_name) > 12 ? trim(substr($user->first_name . ' ' . $user->last_name, 0, 12)).'..' : $user->first_name . ' ' . $user->last_name }}
             <span class="contact-item-time" data-time="{{$lastMessage->created_at}}">{{ $lastMessage->timeAgo }}</span></p>
+            <p data-id="{{ $user->id }}" data-type="user">{{ $user->name }}</p>
+        @elseif(auth('admin')->check())
+        <p data-id="{{ $user->id }}" data-type="user">
+            {{ strlen($user->first_name . ' ' . $user->last_name) > 12 ? trim(substr($user->first_name . ' ' . $user->last_name, 0, 12)).'..' : $user->first_name . ' ' . $user->last_name }}
+            <span class="contact-item-time" data-time="{{$lastMessage->created_at}}">{{ $lastMessage->timeAgo }}</span></p>
+        @endif
+            
+            
         <span>
             {{-- Last Message user indicator --}}
             {!!
@@ -74,9 +83,14 @@ $lastMessageBody = strlen($lastMessageBody) > 30 ? mb_substr($lastMessageBody, 0
         </td>
         {{-- center side --}}
         <td>
+            @if(auth('user')->check())
             <p data-id="{{ $user->id }}" data-type="user">
             {{ strlen($user->first_name . ' ' . $user->last_name) > 12 ? trim(substr($user->first_name . ' ' . $user->last_name, 0, 12)).'..' : $user->first_name . ' ' . $user->last_name }}
-            <br>
+            <p data-id="{{ $user->id }}" data-type="user">{{ $user->name }}</p>
+            @elseif(auth('admin')->check())
+            <p data-id="{{ $user->id }}" data-type="user">
+            {{ strlen($user->first_name . ' ' . $user->last_name) > 12 ? trim(substr($user->first_name . ' ' . $user->last_name, 0, 12)).'..' : $user->first_name . ' ' . $user->last_name }}
+            @endif
         </td>
 
     </tr>
