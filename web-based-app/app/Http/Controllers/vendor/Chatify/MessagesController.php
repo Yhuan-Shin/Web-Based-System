@@ -331,53 +331,25 @@ class MessagesController extends Controller
      */
     public function search(Request $request)
     {
-                $getRecords = '';
-        $input = trim(filter_var($request['input'], FILTER_SANITIZE_STRING));
-        $perPage = $request->per_page ?? $this->perPage;
-
-        // Get Users matching the search query
-        $userRecords = User::where('id', '!=', Auth::user()->id)
-            ->where(function ($query) use ($input) {
-                $query->where('first_name', 'LIKE', "%{$input}%")
-                    ->orWhere('last_name', 'LIKE', "%{$input}%")
-                    ->orWhere('email', 'LIKE', "%{$input}%");
-            })
-            ->get(); // Fetch all first, then manually paginate later
-
-        // Get Admins matching the search query
-        $adminRecords = Admin::where(function ($query) use ($input) {
-                $query->where('name', 'LIKE', "%{$input}%")
-                    ->orWhere('email', 'LIKE', "%{$input}%");
-            })
-            ->get(); // Fetch all first, then manually paginate later
-
-        // Merge Users & Admins
-        $mergedRecords = $userRecords->merge($adminRecords);
-
-        // Manually paginate the merged collection
-        $total = $mergedRecords->count();
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $slicedRecords = $mergedRecords->slice(($currentPage - 1) * $perPage, $perPage)->values();
-        $records = new LengthAwarePaginator($slicedRecords, $total, $perPage, $currentPage, [
-            'path' => LengthAwarePaginator::resolveCurrentPath(),
-        ]);
-
-        $listItems = [];
-
-        foreach ($records as $record) {
-            $listItems[] = view('Chatify::layouts.listItem', [
+        $getRecords = null;
+        $input = trim(filter_var($request['input']));
+        $records = User::where('id','!=',Auth::user()->id)
+                    ->where(function($query) use ($input) {
+                        $query->where('first_name', 'LIKE', "%{$input}%")
+                              ->orWhere('last_name', 'LIKE', "%{$input}%")
+                              ->orWhere('email', 'LIKE', "%{$input}%");
+                    })
+                    ->paginate($request->per_page ?? $this->perPage);
+        foreach ($records->items() as $record) {
+            $getRecords .= view('Chatify::layouts.listItem', [
                 'get' => 'search_item',
-                'user' => $record, // Ensure this works with both User & Admin
+                'user' => Chatify::getUserWithAvatar($record),
             ])->render();
         }
-
-        if ($records->total() < 1) {
+        if($records->total() < 1){
             $getRecords = '<p class="message-hint center-el"><span>Nothing to show.</span></p>';
-        } else {
-            $getRecords = implode('', $listItems);
         }
-
-        // Send the response
+        // send the response
         return Response::json([
             'records' => $getRecords,
             'total' => $records->total(),

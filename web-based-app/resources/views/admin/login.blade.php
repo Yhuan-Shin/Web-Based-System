@@ -30,7 +30,7 @@
                         <h6>Login Admin</h6>
                     </div>
                     <div class="card-body text-white">
-                        <form method="POST" action="{{ route('admin.login') }}">
+                        <form method="POST" action="{{ route('admin.login.submit') }}">
                             @csrf
                             @method('POST')
                             <label for="email">Email address</label>

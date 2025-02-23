@@ -65,5 +65,16 @@
                     </a>
                 </div>
             </div>
+            <div class="col-md mt-2 ">
+                <div class="card shadow-sm bg-success m-auto" style="transition: transform 0.2s; height: 200px; width: 300px">
+                    <a href="/chat" class="text-decoration-none">
+                        <div class="card-body">
+                            <i class="bi bi-chat-fill" style="font-size: 30px; color: white;"></i>
+                            <h5 class="card-title text-light">Chat</h5>
+                            <p class="text-light" style="font-size: 12px">Click here to view Chat</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
