@@ -24,15 +24,18 @@ class PostStory extends Component
 
        
 
-        Story::create([
-            'user_id' => Auth::id(),
-            'description' => $this->description,
-            'image' => $image_path,
-        ]);
+        try {
+            Story::create([
+                'description' => $this->description,
+                'image' => $image_path,
+            ]);
 
-        $this->description = '';
-        $this->image = '';
-        session()->flash('message', 'Story posted successfully.');
+            $this->description = '';
+            $this->image = '';
+            session()->flash('message', 'Story posted successfully.');
+        } catch (\Exception $e) {
+            session()->flash('error', 'An error occurred while posting the story.' . $e->getMessage());
+        }
     }
     public function render()
     {
@@ -62,6 +65,8 @@ class PostStory extends Component
 
             // Store new image
             $image_path = $this->image->store('uploaded_images', 'public');
+            // $image_path = $this->image->store('uploaded_images', 'public_uploads');
+
             $story->image = $image_path;
         }
 

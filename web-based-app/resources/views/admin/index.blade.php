@@ -257,7 +257,7 @@
         document.querySelector("#sidebar").classList.toggle("expand");
         });
     </script>
- <style>
+<style>
     .card:hover {
             transform: scale(1.05);
             cursor: pointer;

@@ -23,7 +23,7 @@ class DisplayAccountRegistered extends Component
         session()->flash('message', 'Account deleted');
     }
     public function render(){
-        $account = User::with('students')->get();
+        $account = User::with('students')->where('id', '!=', Auth::id())->get();
         return view('livewire.display-account-registered', ['accounts' => $account]);
     }
     public function deactivate($id){

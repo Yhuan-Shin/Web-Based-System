@@ -34,7 +34,9 @@
                                 <option value=""selected>Send to</option>
                                 <option value="all">Send to all</option>
                                 @foreach ($users_ as $user)
-                                    <option value="{{ $user->id }}">{{ $user->first_name ?? $user->google_name }}</option>
+                                    @if ($user->id != auth()->id())
+                                        <option value="{{ $user->id }}">{{ $user->first_name ?? $user->google_name }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                             @error('send_to')
