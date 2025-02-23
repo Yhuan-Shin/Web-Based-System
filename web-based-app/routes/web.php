@@ -28,8 +28,9 @@ Route::get('/', function () {
     return view('login');
 });
 Route::get('/admin', function () {
-    return view('admin.login');
-});
+    return view('admin.login'); // Your login form view
+})->name('admin.login');
+
 
 Route::get('/register', function () {
     return view('register');
@@ -47,7 +48,7 @@ Route::post('/register', [UserLogin::class, 'register'])->name('register') ;
 Route::get('/logout', [UserLogin::class, 'logout'])->name('logout');
 Route::get('/logout/admin', [AdminLogin::class, 'logout'])->name('admin.logout');
 //admin
-Route::post('/login/admin', [AdminLogin::class, 'login'])->name('admin.login');
+Route::post('/admin/login', [AdminLogin::class, 'login'])->name('admin.login.submit');
 
 //protected user page
 Route::middleware(['auth:user', 'verified'])->group(function () {
