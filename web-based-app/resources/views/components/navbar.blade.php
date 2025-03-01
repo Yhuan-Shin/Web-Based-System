@@ -19,6 +19,11 @@
           <li class="nav-item">
             <a href="/chat" class="nav-link text-light" style="letter-spacing: 1px"><i class="bi bi-chat-fill"></i> Chat</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" style="letter-spacing: 1px" data-bs-toggle="modal" data-bs-target="#childInfoModal">
+            <i class="bi bi-info-circle-fill">
+              </i> Child's Information</a>
+          </li>
           
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-light " style="letter-spacing: 1px" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -26,8 +31,8 @@
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="{{route('profile')}}"><i class="bi bi-info-circle-fill"></i> Edit Your Information</a></li>
-              {{-- <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#childAddModal"><i class="bi bi-info-circle-fill"></i> Add Child Information</a></li> --}}
-              <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#childInfoModal"><i class="bi bi-info-circle-fill"></i> Edit Your Child's Information</a></li>
+             
+             
               <li><hr class="dropdown-divider"></li>
               <li>
                 <button class="dropdown-item text-danger float-end mt-2" data-bs-toggle="modal" data-bs-target="#logoutModal">

@@ -8,22 +8,33 @@ use Illuminate\Support\Facades\DB;
 
 class Admin extends Controller
 {
-    //
+  
 
-    public function index()
+    //chart
+    public function index(Request $request)
     {
-        $data = DB::table('bmi')
-        ->select(
-            DB::raw('result'),
-            DB::raw('count(*) as total'))
-            ->groupBy('result')
-            ->get();
-        
-        $array[] = ['Result', 'Total'];
-        foreach($data as $key => $value)
-        {
-            $array[++$key] = [$value->result, $value->total];
+        $month = $request->input('month', date('Y-m'));
+    
+        // Get BMI records for the selected month
+        $records = BMI::where('created_at', 'like', $month . '%')->get();
+    
+        // Define BMI categories
+        $categories = ['Severely Wasted', 'Underweight', 'Normal', 'Overweight', 'Obese'];
+    
+        // Count occurrences for each category
+        $counts = [];
+        foreach ($categories as $category) {
+            $counts[] = $records->where('result', $category)->count();
         }
-        return view('admin.index',['result'=>json_encode($array)]);
+    
+        // Prepare data for Chart.js
+        $data = [
+            'labels' => $categories, // X-axis labels
+            'counts' => $counts // Y-axis values
+        ];
+    
+        return view('admin.index', compact('data', 'month'));
     }
+    
+    
 }

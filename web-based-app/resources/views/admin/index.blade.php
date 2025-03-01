@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-    <script type="text/javascript">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    {{-- <script type="text/javascript">
         var analytics = <?php echo $result; ?>
 
         google.charts.load("current", { packages: ["corechart"] });
@@ -24,7 +24,7 @@
             var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
             chart.draw(data, options);
         }
-    </script>
+    </script> --}}
     <title>Dashboard Admin</title>
     @livewireStyles
 </head>
@@ -69,10 +69,30 @@
                             </div>
                         @endif
                     </div>
-                    <div class="container d-flex justify-content-center">
+                    {{-- <div class="container d-flex justify-content-center">
                         <div id="piechart_3d" style="width: 500px; height: 300px;"></div>
-                    </div>
+                    </div> --}}
 
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <form action="{{ route('admin.index') }}" method="GET" class="form-control">
+                                    <label for="month" class="form-label">Select a month:</label>
+                                    <select name="month" id="month" class="form-select" onchange="this.form.submit()">
+                                        @for ($i = 1; $i <= 12; $i++)
+                                            <option value="{{ $i }}" {{ (int) request('month', date('n')) == $i ? 'selected' : '' }}>
+                                                {{ date('F', mktime(0, 0, 0, $i, 1)) }}
+                                            </option>
+                                        @endfor
+                                    </select>
+                                </form>
+                    
+                                <div class="mt-4">
+                                    <canvas id="healthChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     @include('components.admin.cards')
                     
             </div>
@@ -251,6 +271,34 @@
             }
     </style>
     <script>
+            document.addEventListener("DOMContentLoaded", function () {
+            var ctx = document.getElementById('healthChart').getContext('2d');
+
+            var healthChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: {!! json_encode($data['labels'] ?? []) !!}, // X-axis labels
+                    datasets: [{
+                        label: 'BMI Category Count',
+                        data: {!! json_encode($data['counts'] ?? []) !!}, // Y-axis values
+                        backgroundColor: ['blue', 'red', 'lightgreen', 'purple', 'cyan'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+
+    </script>
+    
+    <script>
         const hamBurger = document.querySelector(".toggle-btn");
 
         hamBurger.addEventListener("click", function () {
@@ -283,6 +331,7 @@
     }
 </style>
 @livewireScripts
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 

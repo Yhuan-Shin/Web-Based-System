@@ -11,6 +11,7 @@ class BMICalculator extends Component
 {
     public $weight;
     public $height;
+    public $student_no;
     public $st_last_name;
     public $st_first_name;
     public $st_middle_name;
@@ -37,6 +38,7 @@ class BMICalculator extends Component
     $student = StudentModel::where('st_last_name', $this->st_last_name)
         ->where('st_first_name', $this->st_first_name)
         ->where('st_middle_name', $this->st_middle_name)
+        ->where('student_no', $this->student_no)
         ->where('user_id', Auth::user()->id)
         ->first();
 

@@ -23,6 +23,7 @@ use App\Http\Controllers\PusherController;
 use App\Http\Controllers\vendor\Chatify\MessagesController;
 use Pusher\Pusher;
 use Symfony\Component\HttpKernel\HttpCache\Store;
+use App\Http\Controllers\ChartController;
 
 Route::get('/', function () {
     return view('login');
@@ -88,4 +89,7 @@ Route::middleware(['auth:admin','verified'])->group(function () {
     Route::get('/admin/stories', [Stories::class, 'index'])->name('stories.index');
     
     Route::get('admin/dietary', [Dietary::class, 'index'])->name('dietary.index');
+
+    // Route::get('/admin/charts', [ChartController::class, 'index'])->name('chart.index');
+
 });

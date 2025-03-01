@@ -26,7 +26,11 @@
                                 <form wire:submit.prevent="calculate">
                                     @csrf
                                     @method('POST')
-                                
+                                    
+                                    <div class="mb-3">
+                                        <label for="student_no" class="form-label">Student No.</label>
+                                        <input type="text" class="form-control" id="student_no" wire:model="student_no" name="student_no" placeholder="Enter your child's Student No." required>
+                                    </div>
                                     <div class="mb-3">
                                         <label for="st_last_name" class="form-label">Last Name</label>
                                         <input type="text" class="form-control" id="st_last_name" wire:model="st_last_name" name="st_last_name" placeholder="Enter your child's Last Name" required>
