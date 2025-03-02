@@ -13,10 +13,13 @@ class Admin extends Controller
     //chart
     public function index(Request $request)
     {
-        $month = $request->input('month', date('Y-m'));
+        $year = $request->input('year', date('Y'));
+        $month = $request->input('month', date('m')); // Use 'm' for two-digit format
     
-        // Get BMI records for the selected month
-        $records = BMI::where('created_at', 'like', $month . '%')->get();
+        // Get BMI records for the selected month and year
+        $records = BMI::whereYear('created_at', $year)
+                      ->whereMonth('created_at', $month)
+                      ->get();
     
         // Define BMI categories
         $categories = ['Severely Wasted', 'Underweight', 'Normal', 'Overweight', 'Obese'];
@@ -29,12 +32,13 @@ class Admin extends Controller
     
         // Prepare data for Chart.js
         $data = [
-            'labels' => $categories, // X-axis labels
-            'counts' => $counts // Y-axis values
+            'labels' => $categories,
+            'counts' => $counts
         ];
     
-        return view('admin.index', compact('data', 'month'));
+        return view('admin.index', compact('data', 'year', 'month'));
     }
+    
     
     
 }

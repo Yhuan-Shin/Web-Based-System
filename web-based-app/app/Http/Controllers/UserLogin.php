@@ -18,27 +18,24 @@ class UserLogin extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
-    
+
         // Attempt to log the user in
         if (Auth::guard('user')->attempt($credentials)) {
             $user = Auth::guard('user')->user();
             if ($user->role == 'user' && $user->confirmed == 1) {
                 $request->session()->regenerate(); // Prevents session fixation
                 return redirect('/home');
-            } else if($user->role == 'admin') {
-                return redirect('/login')->with('error', 'Unable to login'); 
+            } else if ($user->role == 'admin') {
+                return redirect()->back()->with('error', 'Unable to login'); 
+            } else {
+                return redirect()->back()->with('error', 'Please wait for the admin to confirm your account');
             }
-            else {
-                return redirect('/login')->with('error', 'Please wait for the admin to confirm your account');
-            }
-        } else {
-            return redirect('/login')->with('error', 'Invalid credentials');
         }
-        
-    
+
         // If authentication fails, redirect back with an error message
-        return redirect('/login')->with('error', 'Invalid credentials');
-    }   
+        return redirect()->back()->with('error', 'Invalid credentials');
+    }
+
     
     public function register(Request $request)
     {

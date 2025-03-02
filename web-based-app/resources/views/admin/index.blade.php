@@ -73,26 +73,45 @@
                         <div id="piechart_3d" style="width: 500px; height: 300px;"></div>
                     </div> --}}
 
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-md-6">
-                                <form action="{{ route('admin.index') }}" method="GET" class="form-control">
-                                    <label for="month" class="form-label">Select a month:</label>
-                                    <select name="month" id="month" class="form-select" onchange="this.form.submit()">
-                                        @for ($i = 1; $i <= 12; $i++)
-                                            <option value="{{ $i }}" {{ (int) request('month', date('n')) == $i ? 'selected' : '' }}>
-                                                {{ date('F', mktime(0, 0, 0, $i, 1)) }}
-                                            </option>
-                                        @endfor
-                                    </select>
-                                </form>
-                    
-                                <div class="mt-4">
-                                    <canvas id="healthChart"></canvas>
+                   <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <div class="container">
+                            <form action="{{ route('admin.index') }}" method="GET" class="form-control">
+
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="year" class="form-label">Select a year:</label>
+                                        <select name="year" id="year" class="form-select" onchange="this.form.submit()">
+                                            @for ($y = date('Y') - 12; $y <= date('Y'); $y++) <!-- Shows last 5 years -->
+                                                <option value="{{ $y }}" {{ (int) request('year', date('Y')) == $y ? 'selected' : '' }}>
+                                                    {{ $y }}
+                                                </option>
+                                            @endfor
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <label for="month" class="form-label ">Select a month:</label>
+                                        <select name="month" id="month" class="form-select" onchange="this.form.submit()">
+                                            @for ($i = 1; $i <= 12; $i++)
+                                                <option value="{{ $i }}" {{ (int) request('month', date('n')) == $i ? 'selected' : '' }}>
+                                                    {{ date('F', mktime(0, 0, 0, $i, 1)) }}
+                                                </option>
+                                            @endfor
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
+
+                        </div>
+                           
+
+                        <div class="mt-4">
+                            <canvas id="healthChart"></canvas>
                         </div>
                     </div>
+                </div>
+            </div>
                     @include('components.admin.cards')
                     
             </div>
@@ -305,31 +324,31 @@
         document.querySelector("#sidebar").classList.toggle("expand");
         });
     </script>
-<style>
-    .card:hover {
-            transform: scale(1.05);
-            cursor: pointer;
+    <style>
+        .card:hover {
+                transform: scale(1.05);
+                cursor: pointer;
+            }
+            .list-group-item {
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for effects */
         }
-        .list-group-item {
-        transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for effects */
-    }
 
-    .list-group-item:hover {
-        background-color: #f8f9fa; /* Change background on hover */
-        color: #007bff; /* Change text color on hover */
-        cursor: pointer; /* Change cursor to pointer */
-        transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for effects */
-    }
+        .list-group-item:hover {
+            background-color: #f8f9fa; /* Change background on hover */
+            color: #007bff; /* Change text color on hover */
+            cursor: pointer; /* Change cursor to pointer */
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for effects */
+        }
 
-    .list-group-item i {
-        transition: color 0.3s ease; /* Smooth transition for icon color */
-    }
+        .list-group-item i {
+            transition: color 0.3s ease; /* Smooth transition for icon color */
+        }
 
-    .list-group-item:hover i {
-        color: #007bff; /* Change icon color on hover */
-        transition: color 0.3s ease; /* Smooth transition for icon color */
-    }
-</style>
+        .list-group-item:hover i {
+            color: #007bff; /* Change icon color on hover */
+            transition: color 0.3s ease; /* Smooth transition for icon color */
+        }
+    </style>
 @livewireScripts
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
