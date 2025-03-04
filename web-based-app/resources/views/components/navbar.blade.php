@@ -45,7 +45,7 @@
         </ul>
         <div class="nav-item float-end d-flex align-items-center">
             <p class="me-2 text-light" style="letter-spacing: 1px">
-              {{ Auth::user()->first_name ?? Auth::user()->google_name }} 
+              Welcome, {{ Auth::user()->first_name ?? Auth::user()->google_name }} 
               <a href="" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
                 <i class="bi bi-bell-fill" style="font-size: 20px; color: rgb(255, 255, 255);"></i>
               </a>

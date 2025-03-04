@@ -24,6 +24,7 @@ use App\Http\Controllers\vendor\Chatify\MessagesController;
 use Pusher\Pusher;
 use Symfony\Component\HttpKernel\HttpCache\Store;
 use App\Http\Controllers\ChartController;
+use App\Http\Controllers\UpdateStudent;
 
 Route::get('/', function () {
     return view('login');
@@ -82,7 +83,7 @@ Route::middleware(['auth:admin','verified'])->group(function () {
     Route::put('/admin/reminder/{id}', [Reminder::class, 'update'])->name('reminder.update');
 
     Route::get('/admin/student', [DisplayStudent::class, 'index'])->name('student.index');
-    Route::put('/admin/student/{id}', [AdminStudentUpdate::class, 'update'])->name('admin.student.update');
+    Route::put('/admin/student/{id}', [UpdateStudent::class, 'update'])->name('admin.student.update');
 
     Route::get('/admin/account', [Accounts::class, 'index'])->name('account.index');
 

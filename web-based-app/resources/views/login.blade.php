@@ -34,7 +34,7 @@
         @endif
         <div class="row justify-content-center align-items-center">
             <div class="col-md-6">
-                <div class="card " style="background-color: rgb(70, 157, 185); transition: transform 0.2s;">
+                <div class="card " style="background-color: rgb(62,87,95); transition: transform 0.2s;">
                     <div class="card-header text-center text-white">
                         
                         <h4>Feeding Program Portal</h4>

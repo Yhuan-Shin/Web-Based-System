@@ -4,7 +4,30 @@
     
     <div class="modal fade" id="childAddModal" wire:ignore.self tabindex="-1" aria-labelledby="childAddModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content" 
+                x-data="{
+                    birthday: '',
+                    age: '',
+                    ageError: '',
+                    calculateAge() {
+                        if (!this.birthday) return;
+                        const birthDate = new Date(this.birthday);
+                        const today = new Date();
+                        let calculatedAge = today.getFullYear() - birthDate.getFullYear();
+                        const monthDifference = today.getMonth() - birthDate.getMonth();
+                        if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+                            calculatedAge--;
+                        }
+                        this.age = calculatedAge;
+
+                        // Validate age
+                        if (this.age < 5 || this.age > 12) {
+                            this.ageError = 'Age must be between 5 and 12 years.';
+                        } else {
+                            this.ageError = ''; // Clear error if age is valid
+                        }
+                    }
+                }">
                 <div class="modal-header">
                     <h5 class="modal-title" id="childAddModalLabel">Add Child's Information</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -23,7 +46,7 @@
                         <div class="mb-3">
                             <label for="studentNo" class="form-label">Student No.</label>
 
-                            <input type="text" wire:model="student_no" class="form-control" id="student_no" name="student_no" required>
+                            <input type="text" wire:model="student_no" class="form-control" id="student_no" name="student_no" pattern="\d{12}" title="Student No. should be 12 digits" required>
                             @error('student_no') 
                                 <span class="text-danger">{{ $message }}</span> 
                             @enderror
@@ -88,7 +111,8 @@
                         <div class="mb-3">
                             <label for="childDOB" class="form-label">Child's Date of Birth</label>
 
-                            <input type="date" class="form-control" id="date" wire:model="birthday" name="birthday" required>
+                            <input type="date" class="form-control" id="date" wire:model="birthday" name="birthday" 
+                            x-model="birthday" @change="calculateAge()" required>
                             @error('birthday') 
                                 <span class="text-danger">{{ $message }}</span> 
                             @enderror
@@ -97,7 +121,7 @@
                         <div class="mb-3">
                             <label for="childAge" class="form-label">Child's Age</label>
 
-                            <input type="number" class="form-control" id="age" name="age" wire:model="age" min="1" required  readonly >
+                            <input type="number" x-model="age" class="form-control" id="age" name="age" wire:model="age" min="1" required  readonly >
                             @error('age') 
                                 <span class="text-danger">{{ $message }}</span> 
                             @enderror

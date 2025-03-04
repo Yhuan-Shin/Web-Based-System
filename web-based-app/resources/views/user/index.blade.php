@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.10/main.min.css' rel='stylesheet' />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Home</title>
    
     @livewireStyles
@@ -69,15 +70,14 @@
     @livewire('view-story')
     
         <div class="row mt-3">
-            <div class="col-md-12 mb-3">
+            <div class="col-md-6 mb-3">
                 <div class="text-center">
-                    <h2 class="mb-3">Welcome, {{ Auth::user()->first_name ?? Auth::user()->google_name }} </h2>
-                    {{-- <p class="text-muted">To calculate Body Mass Index (BMI), follow the procedure recommended by the World Health Organization (WHO):</p> --}}
-                    <p class="text-muted">Make sure to add your information of your <span class="fw-bold text-decoration-underline text-primary"><a href="#" data-bs-toggle="modal" data-bs-target="#childAddModal">child</a></span> first.</p>
                     <div class="col-md">
                         <div class="card mt-5">
                             <div class="card-body">
                                 <ol class="text-start text-muted">
+                                    <p class="text-muted">Make sure to add your information of your <span class="fw-bold text-decoration-underline text-primary"><a href="#" data-bs-toggle="modal" data-bs-target="#childAddModal">child</a></span> first.</p>
+
                                     <li>Measure your weight in kilograms (kg).</li>
                                     <li>Measure your height in meters (m).</li>
                                     <li>Calculate your BMI using the formula: <strong>BMI = weight (kg) / (height (m) * height (m))</strong>.</li>
@@ -104,8 +104,50 @@
                 </div>
                
             </div>
-            
+            <div class="col-md-6">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-12">
+                            <div class="container">
+                                <form action="{{ route('index') }}" method="GET" class="form-control">
+        
+                                    <div class="row">
+                                        <div class="col">
+                                            <label for="year" class="form-label">Select a year:</label>
+                                            <select name="year" id="year" class="form-select" onchange="this.form.submit()">
+                                                @for ($y = date('Y') - 12; $y <= date('Y'); $y++) <!-- Shows last 5 years -->
+                                                    <option value="{{ $y }}" {{ (int) request('year', date('Y')) == $y ? 'selected' : '' }}>
+                                                        {{ $y }}
+                                                    </option>
+                                                @endfor
+                                            </select>
+                                        </div>
+                                        <div class="col">
+                                            <label for="month" class="form-label ">Select a month:</label>
+                                            <select name="month" id="month" class="form-select" onchange="this.form.submit()">
+                                                @for ($i = 1; $i <= 12; $i++)
+                                                    <option value="{{ $i }}" {{ (int) request('month', date('n')) == $i ? 'selected' : '' }}>
+                                                        {{ date('F', mktime(0, 0, 0, $i, 1)) }}
+                                                    </option>
+                                                @endfor
+                                            </select>
+                                        </div>
+                                    </div>
+                                </form>
+        
+                            </div>
+                               
+        
+                            <div class="mt-4">
+                                <canvas id="healthChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        
     </div>
     @include('components.footer')
 
@@ -113,5 +155,32 @@
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
       
      @livewireScripts
+     <script>
+            document.addEventListener("DOMContentLoaded", function () {
+            var ctx = document.getElementById('healthChart').getContext('2d');
+
+            var healthChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: {!! json_encode($data['labels'] ?? []) !!}, // X-axis labels
+                    datasets: [{
+                        label: 'BMI Category Count',
+                        data: {!! json_encode($data['counts'] ?? []) !!}, // Y-axis values
+                        backgroundColor: ['blue', 'red', 'lightgreen', 'purple', 'cyan'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+
+    </script>
 </body>
 </html>
