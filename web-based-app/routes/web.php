@@ -24,6 +24,8 @@ use App\Http\Controllers\vendor\Chatify\MessagesController;
 use Pusher\Pusher;
 use Symfony\Component\HttpKernel\HttpCache\Store;
 use App\Http\Controllers\ChartController;
+use App\Http\Controllers\CreateAccount;
+use App\Http\Controllers\Settings;
 use App\Http\Controllers\UpdateStudent;
 
 Route::get('/', function () {
@@ -86,10 +88,13 @@ Route::middleware(['auth:admin','verified'])->group(function () {
     Route::put('/admin/student/{id}', [UpdateStudent::class, 'update'])->name('admin.student.update');
 
     Route::get('/admin/account', [Accounts::class, 'index'])->name('account.index');
+    Route::post('/admin/account/store', [Accounts::class, 'register'])->name('create.account');
 
+    
     Route::get('/admin/stories', [Stories::class, 'index'])->name('stories.index');
     
     Route::get('admin/dietary', [Dietary::class, 'index'])->name('dietary.index');
+    Route::get('admin/settings',[Settings::class, 'index'])->name('create.account.index');
 
     // Route::get('/admin/charts', [ChartController::class, 'index'])->name('chart.index');
 

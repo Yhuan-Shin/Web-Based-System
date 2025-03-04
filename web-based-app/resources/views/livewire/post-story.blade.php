@@ -10,11 +10,11 @@
 
 <div class="container">
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary mb-2 float-end" data-bs-toggle="modal" data-bs-target="#postStoryModal">
+    <button type="button" class="btn btn-success mb-2 float-end" data-bs-toggle="modal" data-bs-target="#postStoryModal">
         Post Story
     </button>
     <table class="table table-striped text-center">
-        <thead class="table-dark">
+        <thead class="table">
             <tr class="text-center">
                 <th scope="col">Description</th>
                 <th scope="col">Image</th>

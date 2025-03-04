@@ -24,7 +24,7 @@
     <table class="table table-striped text-center caption-top">
         <caption class="text-white">Reminder Table</caption>
 
-        <thead class="table-dark">
+        <thead class="table">
             <tr>
                 <th scope="col">Title</th>
                 <th scope="col">Description</th>

@@ -97,12 +97,12 @@
 
                             <select class="form-select" wire:model="section" id="section" name="section" required>
                                 <option value=""  selected>Select Section</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
+                                <option value="Section 1">1</option>
+                                <option value="Section 2">2</option>
+                                <option value="Section 3">3</option>
+                                <option value="Section 4">4</option>
+                                <option value="Section 5">5</option>
+                                <option value="Section 6">6</option>
                             </select>
                             @error('section') 
                                 <span class="text-danger">{{ $message }}</span> 
