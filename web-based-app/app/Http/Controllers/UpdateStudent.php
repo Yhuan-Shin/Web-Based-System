@@ -21,7 +21,7 @@ class UpdateStudent extends Controller
             'age' => 'integer',
             'gender' => 'string|max:255',
             'birthday' => 'required|date',
-            'student_no' => 'required|string',
+            'student_no' => 'required|string|unique:students,student_no,' . $id,
             'profile_pic' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
     

@@ -6,12 +6,13 @@ use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class DisplayUsers extends Component
+class DisplayStudents extends Component
 {
     use WithPagination;
     public $filter;
     public $gradeFilter;
     public $search;
+    public $birthday;
     protected $paginationTheme = 'bootstrap';
 
     public function render()
@@ -41,22 +42,22 @@ class DisplayUsers extends Component
                 $query->where('grade', 'Kinder');
                 break;
             case 'Grade1':
-                $query->where('grade', 'Grade1');
+                $query->where('grade', 'Grade 1');
                 break;
             case 'Grade2':
-                $query->where('grade', 'Grade2');
+                $query->where('grade', 'Grade 2');
                 break;
             case 'Grade3':
-                $query->where('grade', 'Grade3');
+                $query->where('grade', 'Grade 3');
                 break;
             case 'Grade4':
-                $query->where('grade', 'Grade4');
+                $query->where('grade', 'Grade 4');
                 break;
             case 'Grade5':
-                $query->where('grade', 'Grade5');
+                $query->where('grade', 'Grade 5');
                 break;
             case 'Grade6':
-                $query->where('grade', 'Grade6');
+                $query->where('grade', 'Grade 6');
                 break;
             default:
                 break;
@@ -100,6 +101,6 @@ class DisplayUsers extends Component
         $students = $query->paginate(10);
 
         
-        return view('livewire.display-users', ['students' => $students]);
+        return view('livewire.display-students', ['students' => $students]);
     }
 }

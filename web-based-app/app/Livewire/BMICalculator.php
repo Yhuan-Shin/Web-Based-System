@@ -60,26 +60,23 @@ class BMICalculator extends Component
 
     // Save or update BMI record
     try {
-        $this->bmiRecord = BMI::firstOrNew(['student_id' => $student->id]);
-        
-        $this->bmiRecord->weight = $this->weight;
-        $this->bmiRecord->height = $this->height;
-        $this->bmiRecord->bmi = $this->bmi;
-        $this->bmiRecord->result = $this->result;
-        $this->bmiRecord->st_last_name = $student->st_last_name;
-        $this->bmiRecord->st_first_name = $student->st_first_name;
-        $this->bmiRecord->st_middle_name = $student->st_middle_name;
-        
-        $this->bmiRecord->save();
-
-        $message = $this->bmiRecord->wasRecentlyCreated 
-            ? 'BMI has been calculated successfully!' 
-            : 'BMI has been updated successfully!';
-        
-        session()->flash('message', $message);
+        // Ensure that this creates a completely new record
+        $this->bmiRecord = BMI::create([
+            'student_id' => $student->id,
+            'weight' => $this->weight,
+            'height' => $this->height,
+            'bmi' => $this->bmi,
+            'result' => $this->result,
+            'st_last_name' => $student->st_last_name,
+            'st_first_name' => $student->st_first_name,
+            'st_middle_name' => $student->st_middle_name,
+        ]);
+    
+        session()->flash('message', 'BMI has been calculated and saved successfully!');
     } catch (\Exception $e) {
         session()->flash('error', 'Failed to save BMI record: ' . $e->getMessage());
     }
+    
 }
 
 private function determineBMICategory($bmi, $gender, $age)

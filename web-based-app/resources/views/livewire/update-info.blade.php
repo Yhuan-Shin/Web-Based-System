@@ -81,12 +81,12 @@
                             <select class="form-select" id="grade" name="grade" required>
                                 <option value="{{ $child->grade }}" selected>{{ $child->grade }}</option>
                                 <option value="Kinder">Kinder</option>
-                                <option value="Grade1">Grade 1</option>
-                                <option value="Grade2">Grade 2</option>
-                                <option value="Grade3">Grade 3</option>
-                                <option value="Grade4">Grade 4</option>
-                                <option value="Grade5">Grade 5</option>
-                                <option value="Grade6">Grade 6</option>
+                                <option value="Grade 1">Grade 1</option>
+                                <option value="Grade 2">Grade 2</option>
+                                <option value="Grade 3">Grade 3</option>
+                                <option value="Grade 4">Grade 4</option>
+                                <option value="Grade 5">Grade 5</option>
+                                <option value="Grade 6">Grade 6</option>
                             </select>
                         </div>
                         <div class="mb-3">
@@ -106,7 +106,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="childDOB" class="form-label">Child's Date of Birth</label>
-                            <input type="date" class="form-control" id="date" x-model="birthday" @change="calculateAge()" name="birthday" required>
+                            <input type="date" class="form-control" id="date" x-model="birthday" @change="calculateAge()"  name="birthday" required>
                             @error('birthday')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror

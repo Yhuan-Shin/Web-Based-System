@@ -1,4 +1,4 @@
-<hr>
+<hr class="w-75 m-auto mt-5">
 <footer class="footer">
     <div class="container">
         <img src="{{ asset('assets/logo_.jpg') }}" alt="Company Logo" class="footer-logo">

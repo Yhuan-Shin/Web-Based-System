@@ -47,7 +47,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>  
                         @endif
-                        @livewire('display-users')
+                        @livewire('display-students')
                     </div>
                 </div>
             </div>

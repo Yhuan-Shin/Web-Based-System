@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Livewire;
-use App\Models\Student;
+use App\Models\Student as StudentModel;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -34,7 +34,8 @@ class UpdateInfo extends Component
     }
     public function render()
     {   
-        $students = Student::where('user_id', Auth::user()->id)->get();
+        $students = StudentModel::where('user_id', Auth::user()->id)->get();
+
         return view('livewire.update-info',['students' => $students]);
     }
     

@@ -40,11 +40,12 @@ $lastMessageBody = strlen($lastMessageBody) > 30 ? mb_substr($lastMessageBody, 0
         <p data-id="{{ $user->id }}" data-type="user">
             {{ strlen($user->first_name . ' ' . $user->last_name) > 12 ? trim(substr($user->first_name . ' ' . $user->last_name, 0, 12)).'..' : $user->first_name . ' ' . $user->last_name }}
             <span class="contact-item-time" data-time="{{$lastMessage->created_at}}">{{ $lastMessage->timeAgo }}</span></p>
-            <p data-id="{{ $user->id }}" data-type="user">{{ $user->name }}</p>
+            <p data-id="{{ $user->id }}" data-type="user">{{ $user->google_name }}</p>
         @elseif(auth('admin')->check())
         <p data-id="{{ $user->id }}" data-type="user">
             {{ strlen($user->first_name . ' ' . $user->last_name) > 12 ? trim(substr($user->first_name . ' ' . $user->last_name, 0, 12)).'..' : $user->first_name . ' ' . $user->last_name }}
             <span class="contact-item-time" data-time="{{$lastMessage->created_at}}">{{ $lastMessage->timeAgo }}</span></p>
+            <p data-id="{{ $user->id }}" data-type="user">{{ $user->google_name }}</p>
         @endif
             
             
@@ -85,11 +86,13 @@ $lastMessageBody = strlen($lastMessageBody) > 30 ? mb_substr($lastMessageBody, 0
         <td>
             @if(auth('user')->check())
             <p data-id="{{ $user->id }}" data-type="user">
-            {{ strlen($user->first_name . ' ' . $user->last_name) > 12 ? trim(substr($user->first_name . ' ' . $user->last_name, 0, 12)).'..' : $user->first_name . ' ' . $user->last_name }}
+            {{ $user->first_name . ' ' . $user->last_name }}
             <p data-id="{{ $user->id }}" data-type="user">{{ $user->name }}</p>
+            <p data-id="{{ $user->id }}" data-type="user">{{ $user->google_name }}</p>
             @elseif(auth('admin')->check())
             <p data-id="{{ $user->id }}" data-type="user">
-            {{ strlen($user->first_name . ' ' . $user->last_name) > 12 ? trim(substr($user->first_name . ' ' . $user->last_name, 0, 12)).'..' : $user->first_name . ' ' . $user->last_name }}
+            {{ $user->first_name . ' ' . $user->last_name }}
+            <p data-id="{{ $user->id }}" data-type="user">{{ $user->google_name }}</p>
             @endif
         </td>
 

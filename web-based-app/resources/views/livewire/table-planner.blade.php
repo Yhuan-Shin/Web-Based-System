@@ -108,7 +108,7 @@
                                     {{-- @foreach ($planners as $planner) --}}
                                     <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#editModal{{ $schedule->id }}">Edit</button>
                                     <button data-bs-toggle="modal" data-bs-target="#deleteModal{{ $schedule->id }}
-                                        " class="btn btn-danger">Delete</button>
+                                        " class="btn btn-danger mb-2">Delete</button>
                                     {{-- @endforeach --}}
                                    
                                 @endif

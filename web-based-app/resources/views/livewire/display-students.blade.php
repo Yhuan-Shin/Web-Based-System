@@ -76,7 +76,7 @@
                 <th scope="col">Action</th>
             </tr>
         </thead>
-        <tbody >
+        <tbody style="white-space: nowrap;">
             @foreach($students as $student)
             <tr class="text-center">
                 <th scope="row">{{$loop->iteration}}</th>
@@ -90,7 +90,13 @@
                 <td>{{$student->section}}</td>
                 <td>{{$student->gender}}</td>
                 <td>{{$student->age}}</td>
-                <td>{{ $student->bmi ? $student->bmi->bmi : 'N/A' }}</td>
+                <td>
+                    @if ($student->bmi)
+                        {{ $student->bmi->bmi }}
+                    @else
+                        <span class="badge bg-danger">No Record</span>
+                    @endif
+                </td>
                 <td>{{ $student->bmi ? $student->bmi->result : 'N/A' }}</td>
                 <td>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#profileModal{{$student->id}}">
@@ -211,8 +217,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="childDOB" class="form-label">Child's Date of Birth</label>
-                                    <input type="date" class="form-control" id="date" x-model="birthday" @change="calculateAge()" name="birthday" 
-                                    value="{{ old('birthday', $student->birthday ? \Carbon\Carbon::parse($student->birthday)->format('Y-m-d') : '') }}">
+                                    <input type="date" class="form-control" id="date" x-model="birthday" @change="calculateAge()" name="birthday" value="{{$student->birthday}}"     required>
                                     
                                     @error('birthday')
                                         <span class="text-danger">{{ $message }}</span>

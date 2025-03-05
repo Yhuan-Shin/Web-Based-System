@@ -22,6 +22,7 @@ use App\Http\Controllers\DietaryDisplay;
 use App\Http\Controllers\PusherController;
 use App\Http\Controllers\vendor\Chatify\MessagesController;
 use Pusher\Pusher;
+use App\Http\Middleware\RedirectIfNotAuthenticated;
 use Symfony\Component\HttpKernel\HttpCache\Store;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\CreateAccount;
@@ -30,7 +31,7 @@ use App\Http\Controllers\UpdateStudent;
 
 Route::get('/', function () {
     return view('login');
-});
+})->name('user.login');
 Route::get('/admin', function () {
     return view('admin.login'); // Your login form view
 })->name('admin.login');
@@ -47,16 +48,17 @@ Route::post('/profile', [SocialAuthController::class, 'add_address_phone'])->nam
 Route::get('login/google', [SocialAuthController::class, 'redirectToGoogle'])->name('google.login');
 Route::get('login/google/callback', [SocialAuthController::class, 'handleGoogleCallback']);
 //user
-Route::post('/login', [UserLogin::class, 'login'])->name('login');
+Route::post('/', [UserLogin::class, 'login'])->name('login');
 Route::post('/register', [UserLogin::class, 'register'])->name('register') ;
 Route::get('/logout', [UserLogin::class, 'logout'])->name('logout');
-Route::get('/logout/admin', [AdminLogin::class, 'logout'])->name('admin.logout');
+
 //admin
-Route::post('/admin/login', [AdminLogin::class, 'login'])->name('admin.login.submit');
+Route::post('/login/admin', [AdminLogin::class, 'login'])->name('admin.login.submit');
+Route::get('/logout/admin', [AdminLogin::class, 'logout'])->name('admin.logout');
 
 //protected user page
 Route::middleware(['auth:user', 'verified'])->group(function () {
-    Route::get('/home', [Student::class, 'index'])->name('index');
+    Route::get('/home', [Student::class, 'index'])->name('index') ->middleware([RedirectIfNotAuthenticated::class]);
     Route::post('/home/student', [Student::class, 'submit'])->name('student.submit');
     Route::put('/home/student/{id}', [Student::class, 'update'])->name('student.update');
     Route::delete('/home/student/{id}', [Student::class, 'destroy'])->name('student.destroy');
@@ -68,6 +70,7 @@ Route::middleware(['auth:user', 'verified'])->group(function () {
 
 
 });
+
 
 Route::get('/chat', [MessagesController::class, 'index'])
     ->middleware(['auth:admin,user'])
