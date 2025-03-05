@@ -13,16 +13,16 @@ class AdminLogin extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::guard('admin')->attempt($credentials)) {
             $user = Auth::guard('admin')->user(); // Get the authenticated user
-            if ($user->role === 'admin') { // Check the role properly
+            if ($user->role === 'admin' || $user->role ==='teacher') { // Check the role properly
                 $request->session()->regenerate();
-                return redirect('/admin/dashboard')->with('success', 'Logged in successfully');
+                return redirect('/dashboard')->with('success', 'Logged in successfully');
             }
             else {
-                return redirect('/admin')->with('error', 'Admin only');
+                return redirect('/staff')->with('error', 'Admin only');
             }
         }
     else {
-            return redirect('/admin')->with('error', 'Invalid credentials');
+            return redirect('/staff')->with('error', 'Invalid credentials');
     }
 }
     
@@ -32,6 +32,6 @@ class AdminLogin extends Controller
         Auth::guard('admin')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/admin');
+        return redirect('/staff');
     }
 }

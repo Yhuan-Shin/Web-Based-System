@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <title>Login Admin</title>
+    <title>Login Admin/Teacher</title>
 </head>
 <body style="height: 100vh; background-image: url({{ asset('assets/bg.png') }}); background-size: cover;">
     <img src="{{ asset('assets/logo_.jpg') }}" alt="" style="width: 150px; float: left; padding: 10px;">
@@ -27,7 +27,7 @@
                 <div class="card " style="background-color: rgb(62,87,95); transition: transform 0.2s;">
                     <div class="card-header text-center text-white">
                         <h4>Feeding Program Portal</h4>
-                        <h6>Login Admin</h6>
+                        <h6>Login Admin/Teacher</h6>
                     </div>
                     <div class="card-body text-white">
                         <form method="POST" action="{{ route('admin.login.submit') }}">

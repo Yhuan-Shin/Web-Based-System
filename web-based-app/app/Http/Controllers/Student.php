@@ -19,6 +19,7 @@ class Student extends Controller
         // Get BMI records for the selected month and year
         $records = BMI::whereYear('created_at', $year)
                       ->whereMonth('created_at', $month)
+                      ->where('student_id', Auth::user()->id)
                       ->get();
     
         // Define BMI categories

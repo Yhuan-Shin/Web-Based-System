@@ -48,10 +48,36 @@
             </a>
         </li>
         <li class="sidebar-item">
+             <!-- Modal -->
+             <div class="modal fade" id="adminOnlyModal" tabindex="-1" aria-labelledby="adminOnlyModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="adminOnlyModalLabel">Admin Only</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            This section is for admin users only.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @if(Auth::user()->role == 'teacher')
+            <a href="#" class="sidebar-link" data-bs-toggle="modal" data-bs-target="#adminOnlyModal">
+                <i class="bi bi-person-badge-fill"></i>
+                <span>Accounts</span>
+            </a>
+
+           
+            @else
             <a href="{{ route('account.index') }}" class="sidebar-link">
                 <i class="bi bi-person-badge-fill"></i>
                 <span>Accounts</span>
             </a>
+            @endif
         </li>
         <li class="sidebar-item">
             <a href="/chat" class="sidebar-link"><i class="bi bi-chat-fill"></i>

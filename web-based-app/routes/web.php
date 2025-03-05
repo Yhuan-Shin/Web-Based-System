@@ -32,7 +32,7 @@ use App\Http\Controllers\UpdateStudent;
 Route::get('/', function () {
     return view('login');
 })->name('user.login');
-Route::get('/admin', function () {
+Route::get('/staff', function () {
     return view('admin.login'); // Your login form view
 })->name('admin.login');
 
@@ -78,26 +78,26 @@ Route::get('/chat', [MessagesController::class, 'index'])
 
 //protected admin page
 Route::middleware(['auth:admin','verified'])->group(function () {
-    Route::get('/admin/dashboard', [Admin::class, 'index'])->name('admin.index');
-    Route::get('/admin/planner', [Planner::class, 'index'])->name('planner.table');
-    Route::delete('/admin/planner/{id}', [Planner::class, 'delete'])->name('planner.destroy');
-    Route::put('/admin/planner/{id}', [Planner::class, 'update'])->name('planner.update');
+    Route::get('/dashboard', [Admin::class, 'index'])->name('admin.index');
+    Route::get('/planner', [Planner::class, 'index'])->name('planner.table');
+    Route::delete('/planner/{id}', [Planner::class, 'delete'])->name('planner.destroy');
+    Route::put('/planner/{id}', [Planner::class, 'update'])->name('planner.update');
 
-    Route::get('/admin/reminder', [Reminder::class, 'index'])->name('reminder.index');
-    Route::delete('/admin/reminder/{id}', [Reminder::class, 'delete'])->name('reminder.destroy');
-    Route::put('/admin/reminder/{id}', [Reminder::class, 'update'])->name('reminder.update');
+    Route::get('/reminder', [Reminder::class, 'index'])->name('reminder.index');
+    Route::delete('/reminder/{id}', [Reminder::class, 'delete'])->name('reminder.destroy');
+    Route::put('/reminder/{id}', [Reminder::class, 'update'])->name('reminder.update');
 
-    Route::get('/admin/student', [DisplayStudent::class, 'index'])->name('student.index');
-    Route::put('/admin/student/{id}', [UpdateStudent::class, 'update'])->name('admin.student.update');
+    Route::get('/student', [DisplayStudent::class, 'index'])->name('student.index');
+    Route::put('/student/{id}', [UpdateStudent::class, 'update'])->name('admin.student.update');
 
-    Route::get('/admin/account', [Accounts::class, 'index'])->name('account.index');
-    Route::post('/admin/account/store', [Accounts::class, 'register'])->name('create.account');
+    Route::get('/account', [Accounts::class, 'index'])->name('account.index');
+    Route::post('/account/store', [Accounts::class, 'register'])->name('create.account');
 
     
-    Route::get('/admin/stories', [Stories::class, 'index'])->name('stories.index');
+    Route::get('/stories', [Stories::class, 'index'])->name('stories.index');
     
-    Route::get('admin/dietary', [Dietary::class, 'index'])->name('dietary.index');
-    Route::get('admin/settings',[Settings::class, 'index'])->name('create.account.index');
+    Route::get('/dietary', [Dietary::class, 'index'])->name('dietary.index');
+    Route::get('/settings',[Settings::class, 'index'])->name('create.account.index');
 
     // Route::get('/admin/charts', [ChartController::class, 'index'])->name('chart.index');
 
