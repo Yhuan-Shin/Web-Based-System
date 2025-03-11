@@ -26,7 +26,7 @@
                     }
                 }">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="childInfoModalLabel">Update Information</h5>
+                    <h5 class="modal-title" id="childInfoModalLabel">Child Information</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -42,43 +42,43 @@
                                     <span class="badge bg-warning"> No Profile Picture</span>
                                 @endif
                             </div>
-                            <label for="profile_pic">Profile Picture</label>
-                            <input type="file" class="form-control" id="profile_pic" name="profile_pic" value="{{ $child->profile_pic }}" accept="image/*" required>
+                            {{-- <label for="profile_pic">Profile Picture</label>
+                            <input type="file" class="form-control" id="profile_pic" name="profile_pic" value="{{ $child->profile_pic }}" accept="image/*" required> --}}
                             @error('profile_pic')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="mb-3">
                             <label for="student_no" class="form-label">Student No.</label>
-                            <input type="text" class="form-control" id="student_no" name="student_no" value="{{ $child->student_no }}" required>
+                            <input type="text" class="form-control" id="student_no" name="student_no" value="{{ $child->student_no }}" readonly required>
                             @error('student_no')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="mb-3">
                             <label for="last_name" class="form-label">Last Name</label>
-                            <input type="text" class="form-control" id="last_name" name="st_last_name" value="{{ $child->st_last_name }}" required>
+                            <input type="text" class="form-control" id="last_name" name="st_last_name" value="{{ $child->st_last_name }}" readonly required>
                             @error('st_last_name')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="mb-3">
                             <label for="first_name" class="form-label">First Name</label>
-                            <input type="text" class="form-control" id="first_name" name="st_first_name" value="{{ $child->st_first_name }}" required>
+                            <input type="text" class="form-control" id="first_name" name="st_first_name" value="{{ $child->st_first_name }}" readonly required>
                             @error('st_first_name')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="mb-3">
                             <label for="middle_name" class="form-label">Middle Name</label>
-                            <input type="text" class="form-control" id="middle_name" name="st_middle_name" value="{{ $child->st_middle_name }}" required>
+                            <input type="text" class="form-control" id="middle_name" name="st_middle_name" value="{{ $child->st_middle_name }}" readonly required>
                             @error('st_middle_name')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="mb-3">
                             <label for="Grade" class="form-label">Grade</label>
-                            <select class="form-select" id="grade" name="grade" required>
+                            <select class="form-select" id="grade" readonly name="grade" required>
                                 <option value="{{ $child->grade }}" selected>{{ $child->grade }}</option>
                                 <option value="Kinder">Kinder</option>
                                 <option value="Grade 1">Grade 1</option>
@@ -91,7 +91,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="section" class="form-label">Section</label>
-                            <select class="form-select" id="section" name="section" required>
+                            <select class="form-select" id="section" readonly name="section" required>
                                 <option value="{{ $child->section }}" selected>{{ $child->section }}</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -106,7 +106,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="childDOB" class="form-label">Child's Date of Birth</label>
-                            <input type="date" class="form-control" id="date" x-model="birthday" @change="calculateAge()"  name="birthday" required>
+                            <input type="date" class="form-control" readonly id="date" x-model="birthday" @change="calculateAge()"  name="birthday" required>
                             @error('birthday')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -114,7 +114,7 @@
 
                         <div class="mb-3">
                             <label for="childAge" class="form-label">Child's Age</label>
-                            <input type="number" class="form-control" id="age" name="age" x-model="age" value="{{ $child->age }}" min="1" required readonly>
+                            <input type="number" class="form-control" readonly id="age" name="age" x-model="age" value="{{ $child->age }}" min="1" required readonly>
                             @error('age')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -123,7 +123,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="gender" class="form-label">Gender</label>
-                            <select class="form-select" id="gender" name="gender" required>
+                            <select class="form-select" id="gender" name="gender" readonly required>
                                 <option value="{{ $child->gender }}" selected>{{ $child->gender }}</option>
                                 <option value="Male" {{ $child->gender == 'male' ? 'selected' : '' }}>Male</option>
                                 <option value="Female" {{ $child->gender == 'female' ? 'selected' : '' }}>Female</option>
@@ -134,7 +134,7 @@
                         </div>
 
                         <!-- Disable button if age error exists -->
-                        <button type="submit" class="btn btn-primary float-end">Update</button>
+                        {{-- <button type="submit" class="btn btn-primary float-end">Update</button> --}}
                     </form>
                 </div>
             </div>

@@ -33,7 +33,7 @@
                         </div>
                     </div>
                 </div>
-
+               
                    {{-- Main content --}}
                   
                    <div class="container justify-content-center">

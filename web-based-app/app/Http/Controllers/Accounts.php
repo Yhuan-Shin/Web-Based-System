@@ -30,7 +30,7 @@ class Accounts extends Controller
                 'first_name' => $request->first_name,
                 'middle_name' => $request->middle_name,
                 'email' => $request->email,
-                'role' => $request->role,
+                'role' => $request->role === 'parent' ? 'user' : $request->role,
                 'address' => $request->address,
                 'phone_number' => $request->phone_number,
                 'relation' => $request->relation,

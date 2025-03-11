@@ -1,4 +1,20 @@
-
+<!-- Modal -->
+<div class="modal fade" id="adminOnlyModal" tabindex="-1" aria-labelledby="adminOnlyModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="adminOnlyModalLabel">Admin Only</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                This section is for admin users only.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <aside id="sidebar">
     <div class="d-flex">
         <button class="toggle-btn" type="button">
@@ -48,23 +64,7 @@
             </a>
         </li>
         <li class="sidebar-item">
-             <!-- Modal -->
-             <div class="modal fade" id="adminOnlyModal" tabindex="-1" aria-labelledby="adminOnlyModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="adminOnlyModalLabel">Admin Only</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            This section is for admin users only.
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+             
             @if(Auth::user()->role == 'teacher')
             <a href="#" class="sidebar-link" data-bs-toggle="modal" data-bs-target="#adminOnlyModal">
                 <i class="bi bi-person-badge-fill"></i>
@@ -84,12 +84,12 @@
                 <span>Chat</span>
             </a>
         </li>
-        <li class="sidebar-item">
+        {{-- <li class="sidebar-item">
             <a href="{{route('create.account.index')}}" class="sidebar-link">
                 <i class="bi bi-gear-fill"></i>
                 <span>Settings</span>
             </a>
-        </li>
+        </li> --}}
     </ul>
     <div class="sidebar-footer">
         <a href="#" data-bs-toggle="modal" data-bs-target="#logoutModal" class="sidebar-link">
