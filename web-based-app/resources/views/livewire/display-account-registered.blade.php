@@ -1,26 +1,41 @@
 <div wire:poll.3000ms>
-    @if (session()->has('success'))
-        <div class="alert alert-success">
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
-    @if (session()->has('error'))
-        <div class="alert alert-danger">
+    @if(session('error'))
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
             {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
-    {{-- If you look to others for fulfillment, you will never truly be fulfilled. --}}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" class="form-control" placeholder="Search" wire:model="search">
+            </div>
+            <div class="col-md-2">
+                <select class="form-select" wire:model="roleFilter">
+                    <option value="">All</option>
+                    <option value="teacher">Teacher</option>
+                    <option value="parent">Parent</option>
+                </select>
+            </div>
+        </div>
+    </div>
     <div class="table responsive table-hover text-center table-responsive">
         <table class="table table-striped">
             <thead>
                 <tr>
                     <th scope="col">Name</th>
-                    <th scope="col">Student/s</th>
+                    {{-- <th scope="col">Student/s</th> --}}
                     <th scope="col">Email</th>
                     <th scope="col">Address</th>
                     <th scope="col">Contact</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Action</th>
+                    <th scope="col">Role</th>
+                   
                 </tr>
             </thead>
             <tbody>
@@ -51,7 +66,7 @@
                                 {{$account->last_name}}, {{$account->first_name}} {{$account->middle_name}}
                             @endif
                         </td>
-                        <td>
+                        {{-- <td>
                             @foreach($account->students as $student)
                                 @if($loop->first && $loop->count > 1)
                                     <ul>
@@ -61,68 +76,23 @@
                                     </ul>
                                 @endif
                             @endforeach
-                        </td>
+                        </td> --}}
   
                        <td>{{$account->email}}</td>
                        <td>{{$account->address}}</td>
                        <td>{{$account->phone_number}}</td>  
-                        <td style="white-space: nowrap">
-                            @if($account->confirmed == 1) 
-                            <i class="bi bi-check-circle-fill" style="color: green"></i> Approved
-                            @else 
-                            <i class="bi bi-x-circle-fill" style="color: yellow"></i> Pending 
-                            @endif</td>
-                        <td style="white-space: nowrap">
-                            @if($account->confirmed ==1)
-                            <button class="btn btn-danger p-2" data-bs-toggle="modal" data-bs-target="#confirmDeactivateModal{{$account->id}}">Deactivate</button>
-                            @else
-
-                           
-                            <button class="btn btn-success p-2" data-bs-toggle="modal" data-bs-target="#approveModal{{$account->id}}">Approve</button>
-                            <button class="btn btn-danger p-2" data-bs-toggle="modal" data-bs-target="#declineModal{{$account->id}}">Decline</button>
-                            <!-- Decline Modal -->
-                            <div class="modal fade" wire:ignore.self id="declineModal{{$account->id}}" tabindex="-1" aria-labelledby="declineModalLabel{{$account->id}}" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="declineModalLabel{{$account->id}}">Decline Account</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Are you sure you want to decline this account?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-danger" wire:click="decline({{$account->id}})" data-bs-dismiss="modal">Decline</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Approve Modal -->
-                            <div class="modal fade" wire:ignore.self id="approveModal{{$account->id}}" tabindex="-1" aria-labelledby="approveModalLabel{{$account->id}}" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="approveModalLabel{{$account->id}}">Approve Account</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Are you sure you want to approve this account?
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-success" wire:click="approve({{$account->id}})" data-bs-dismiss="modal">Approve</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> 
-                            @endif
-                           
-
-                        </td>
+                       <td>
+                        @if($account->role == 'teacher')
+                            <span class="badge bg-primary">Teacher</span>
+                        @elseif($account->role == 'parent')
+                            <span class="badge bg-success">Parent</span>
+                        @endif
+                       </td>
+                
                 </tr>
              @endforeach
             </tbody>
         </table>
+            {{ $accounts->links() }}    
     </div>
 </div>

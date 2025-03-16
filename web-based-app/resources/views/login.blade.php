@@ -58,7 +58,6 @@
                                     <span class="input-group-text" id="toggle-password" style="cursor: pointer;"><i class="bi bi-eye-slash-fill"></i></span>
                                 </div>
                             </div>
-                            Don't have an account yet? <a href="{{ route('register') }}">Sign up</a>
                             <br>
                             <button type="submit" class="btn btn-primary float-right">Login</button>
                         </form>

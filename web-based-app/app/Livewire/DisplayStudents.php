@@ -13,6 +13,7 @@ class DisplayStudents extends Component
     public $gradeFilter;
     public $search;
     public $birthday;
+    public $sectionFilter;
     protected $paginationTheme = 'bootstrap';
 
     public function render()
@@ -41,22 +42,22 @@ class DisplayStudents extends Component
             case 'Kinder':
                 $query->where('grade', 'Kinder');
                 break;
-            case 'Grade1':
+            case 'Grade 1':
                 $query->where('grade', 'Grade 1');
                 break;
-            case 'Grade2':
+            case 'Grade 2':
                 $query->where('grade', 'Grade 2');
                 break;
-            case 'Grade3':
+            case 'Grade 3':
                 $query->where('grade', 'Grade 3');
                 break;
-            case 'Grade4':
+            case 'Grade 4':
                 $query->where('grade', 'Grade 4');
                 break;
-            case 'Grade5':
+            case 'Grade 5':
                 $query->where('grade', 'Grade 5');
                 break;
-            case 'Grade6':
+            case 'Grade 6':
                 $query->where('grade', 'Grade 6');
                 break;
             default:
@@ -92,6 +93,31 @@ class DisplayStudents extends Component
                 $query->whereHas('bmi', function ($q) {
                 $q->where('result', 'Obese');
                 });
+                break;
+            default:
+                break;
+            }
+        }
+
+        if($this->sectionFilter){
+            switch($this->sectionFilter){
+            case 'Section A':
+                $query->where('section', 'Section A');
+                break;
+            case 'Section B':
+                $query->where('section', 'Section B');
+                break;
+            case 'Section C':
+                $query->where('section', 'Section C');
+                break;
+            case 'Section D':
+                $query->where('section', 'Section D');
+                break;
+            case 'Section E':
+                $query->where('section', 'Section E');
+                break;
+            case 'Section F':
+                $query->where('section', 'Section F');
                 break;
             default:
                 break;

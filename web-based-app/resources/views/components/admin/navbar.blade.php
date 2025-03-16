@@ -73,7 +73,7 @@
 
            
             @else
-            <a href="{{ route('account.index') }}" class="sidebar-link">
+            <a href="{{ route('account-list.index') }}" class="sidebar-link">
                 <i class="bi bi-person-badge-fill"></i>
                 <span>Accounts</span>
             </a>
@@ -84,12 +84,16 @@
                 <span>Chat</span>
             </a>
         </li>
-        {{-- <li class="sidebar-item">
-            <a href="{{route('create.account.index')}}" class="sidebar-link">
+        <li class="sidebar-item dropdown">
+            <a href="#" class="sidebar-link dropdown-toggle" id="settingsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="bi bi-gear-fill"></i>
                 <span>Settings</span>
             </a>
-        </li> --}}
+            <ul class="dropdown-menu" aria-labelledby="settingsDropdown">
+                <li><a class="dropdown-item" href="{{route('account.index')}}">Account Creation</a></li>
+                <li><a class="dropdown-item" href="#">Update Account</a></li>
+            </ul>
+        </li>
     </ul>
     <div class="sidebar-footer">
         <a href="#" data-bs-toggle="modal" data-bs-target="#logoutModal" class="sidebar-link">

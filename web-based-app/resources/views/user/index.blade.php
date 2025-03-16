@@ -7,6 +7,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.10/main.min.css' rel='stylesheet' />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ asset('script.js') }}"></script>
+
     <title>Home</title>
    
     @livewireStyles
@@ -36,7 +38,6 @@
         </div>
     </div>
     @livewire('b-m-i-calculator')
-    @livewire('add-child')
  
     @include('components.navbar')
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
@@ -109,6 +110,10 @@
                     <div class="row justify-content-center">
                         <div class="col-md-12">
                             <div class="container">
+                                <div id="chartData" 
+                                data-labels='@json($data["labels"])' 
+                                data-counts='@json($data["counts"])'>
+                            </div>
                                 <form action="{{ route('index') }}" method="GET" class="form-control">
         
                                     <div class="row">
@@ -155,32 +160,6 @@
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
       
      @livewireScripts
-     <script>
-            document.addEventListener("DOMContentLoaded", function () {
-            var ctx = document.getElementById('healthChart').getContext('2d');
-
-            var healthChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: {!! json_encode($data['labels'] ?? []) !!}, // X-axis labels
-                    datasets: [{
-                        label: 'BMI Category Count',
-                        data: {!! json_encode($data['counts'] ?? []) !!}, // Y-axis values
-                        backgroundColor: ['blue', 'red', 'lightgreen', 'purple', 'cyan'],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        });
-
-    </script>
+     
 </body>
 </html>

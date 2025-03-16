@@ -2,6 +2,7 @@
 
 <?php
 
+use App\Http\Controllers\AccountList;
 use App\Http\Controllers\Accounts;
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\AdminLogin;
@@ -49,7 +50,6 @@ Route::get('login/google', [SocialAuthController::class, 'redirectToGoogle'])->n
 Route::get('login/google/callback', [SocialAuthController::class, 'handleGoogleCallback']);
 //user
 Route::post('/', [UserLogin::class, 'login'])->name('login');
-Route::post('/register', [UserLogin::class, 'register'])->name('register') ;
 Route::get('/logout', [UserLogin::class, 'logout'])->name('logout');
 
 //admin
@@ -89,7 +89,9 @@ Route::middleware(['auth:admin','verified'])->group(function () {
 
     Route::get('/student', [DisplayStudent::class, 'index'])->name('student.index');
     Route::put('/student/{id}', [UpdateStudent::class, 'update'])->name('admin.student.update');
+    Route::get('/account-list', [AccountList::class, 'index'])->name('account-list.index');
 
+    Route::post('/account/store', [Accounts::class, 'register'])->name('create.account');
     Route::get('/account', [Accounts::class, 'index'])->name('account.index');
     Route::post('/account/store', [Accounts::class, 'register'])->name('create.account');
 
@@ -97,7 +99,7 @@ Route::middleware(['auth:admin','verified'])->group(function () {
     Route::get('/stories', [Stories::class, 'index'])->name('stories.index');
     
     Route::get('/dietary', [Dietary::class, 'index'])->name('dietary.index');
-    Route::get('/settings',[Settings::class, 'index'])->name('create.account.index');
+    Route::get('/settings',[Settings::class, 'index'])->name('settings.index');
 
     // Route::get('/admin/charts', [ChartController::class, 'index'])->name('chart.index');
 

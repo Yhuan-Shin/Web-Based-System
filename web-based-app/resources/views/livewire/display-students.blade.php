@@ -39,20 +39,36 @@
                 <option value="Severely Wasted">Severely Wasted</option>
                 <option value="Underweight">Underweight</option>
                 <option value="Normal">Normal</option>
+                <option value="Obese">Obese</option>
                 <option value="Overweight">Overweight</option>
             </select>
         </div>
         <div class="col-md-2">
-            <select class="form-select" id="grade" name="grade" wire:model="gradeFilter" required>
+            <select class="form-select" id="grade" name="
+            rade" wire:model="gradeFilter" required>
                 <option value="">Select Grade</option>
-                <option value="kinder">Kinder</option>
-                <option value="Grade1">Grade 1</option>
-                <option value="Grade2">Grade 2</option> 
-                <option value="Grade3">Grade 3</option>
-                <option value="Grade4">Grade 4</option>
-                <option value="Grade5">Grade 5</option>
-                <option value="Grade6">Grade 6</option>
+                <option value="Kinder">Kinder</option>
+                <option value="Grade 1">Grade 1</option>
+                <option value="Grade 2">Grade 2</option> 
+                <option value="Grade 3">Grade 3</option>
+                <option value="Grade 4">Grade 4</option>
+                <option value="Grade 5">Grade 5</option>
+                <option value="Grade 6">Grade 6</option>
             </select>
+        </div>
+        <div class="col-md-2">
+            <select class="form-select" id="section" name="section" wire:model="sectionFilter" required>
+                <option value="">Select Section</option>
+                <option value="Section A">Section A</option>
+                <option value="Section B">Section B</option>
+                <option value="Section C">Section C</option>
+                <option value="Section D">Section D</option>
+                <option value="Section E">Section E</option>
+                <option value="Section F">Section F</option>
+            </select>
+        </div>
+        <div class="col">
+            <button class="btn btn-success"  data-bs-toggle="modal" data-bs-target="#childAddModal">Add Student</button>    
         </div>
     </div>
 </div>
