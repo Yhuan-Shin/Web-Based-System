@@ -46,7 +46,7 @@
                         <div class="mb-3">
                             <label for="studentNo" class="form-label">Student No.</label>
 
-                            <input type="text" wire:model="student_no" class="form-control" id="student_no" name="student_no" pattern="\d{12}" title="Student No. should be 12 digits" required>
+                            <input type="text" wire:model="student_no" class="form-control" id="student_no" name="student_no" pattern="\d{12}" maxlength="12" placeholder="Student No. should be 12 digits" required>
                             @error('student_no') 
                                 <span class="text-danger">{{ $message }}</span> 
                             @enderror
@@ -97,12 +97,12 @@
 
                             <select class="form-select" wire:model="section" id="section" name="section" required>
                                 <option value=""  selected>Select Section</option>
-                                <option value="Section 1">1</option>
-                                <option value="Section 2">2</option>
-                                <option value="Section 3">3</option>
-                                <option value="Section 4">4</option>
-                                <option value="Section 5">5</option>
-                                <option value="Section 6">6</option>
+                                <option value="Section A">Section A</option>
+                                <option value="Section B">Section B</option>
+                                <option value="Section C">Section C</option>
+                                <option value="Section D">Section D</option>
+                                <option value="Section E">Section E</option>
+                                <option value="Section F">Section F</option>
                             </select>
                             @error('section') 
                                 <span class="text-danger">{{ $message }}</span> 
@@ -137,6 +137,16 @@
                             @error('gender') 
                                 <span class="text-danger">{{ $message }}</span> 
                             @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="parent">Parent/Guardian</label>
+                            <select class="form-select" id="parent" wire:model="parent" name="parent" required>
+                                <option value=""  selected>Select Parent/Guardian</option>
+                                @foreach ($parents as $parent)
+                                    <option value="{{ $parent->id }}">{{ $parent->first_name }} {{ $parent->last_name }}</option>
+                                @endforeach
+
+                            </select>
                         </div>
                         <button type="submit" class="btn btn-primary float-end" >Submit</button>
                     </form>

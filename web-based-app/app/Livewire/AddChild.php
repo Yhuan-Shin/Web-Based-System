@@ -5,12 +5,13 @@ namespace App\Livewire;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\Student;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 class AddChild extends Component
 {
     use WithFileUploads;
 
-    public $st_last_name, $st_first_name, $st_middle_name, $age, $gender, $grade, $section, $birthday, $student_no, $profile_pic;
+    public $st_last_name, $st_first_name, $st_middle_name, $age, $gender, $grade, $section, $birthday, $student_no, $profile_pic, $parent;
 
     
     public function updatedBirthday($value)
@@ -32,7 +33,8 @@ class AddChild extends Component
     }
     public function render()
     {
-        return view('livewire.add-child');
+        $parents = User::where('role', 'parent')->get();
+        return view('livewire.add-child', compact('parents'));
     }
     public function store()
     {
@@ -40,20 +42,21 @@ class AddChild extends Component
             'birthday' => 'required|date',
             'age' => 'required|integer|between:5,12',
             'gender' => 'required',
-            'profile_pic' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'student_no' => 'required|unique:student,student_no',
+            'profile_pic' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'student_no' => 'required|unique:student,student_no|numeric',
             'st_first_name' => 'required',
             'st_last_name' => 'required',
             'st_middle_name' => 'required',
             'grade' => 'required',
             'section' => 'required',
+            'parent' => 'required',
             
         ]);
         $image_path = $this->profile_pic->store('uploaded_profile_pics', 'public');
 
         try {
             Student::create([   
-                'user_id' => Auth::user()->id,
+                'user_id' => $this->parent,
                 'birthday' => $this->birthday,
                 'age' => $this->age,
                 'gender' => $this->gender,
