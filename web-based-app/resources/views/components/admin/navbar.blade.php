@@ -65,14 +65,7 @@
         </li>
         <li class="sidebar-item">
              
-            @if(Auth::user()->role == 'teacher')
-            <a href="#" class="sidebar-link" data-bs-toggle="modal" data-bs-target="#adminOnlyModal">
-                <i class="bi bi-person-badge-fill"></i>
-                <span>Accounts</span>
-            </a>
-
-           
-            @else
+            @if(Auth::user()->role == 'admin')
             <a href="{{ route('account-list.index') }}" class="sidebar-link">
                 <i class="bi bi-person-badge-fill"></i>
                 <span>Accounts</span>
@@ -84,16 +77,14 @@
                 <span>Chat</span>
             </a>
         </li>
-        <li class="sidebar-item dropdown">
-            <a href="#" class="sidebar-link dropdown-toggle" id="settingsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        @if(Auth::user()->role == 'teacher')
+        <li class="sidebar-item">
+            <a href="{{route('teacher.account')}}" class="sidebar-link">
                 <i class="bi bi-gear-fill"></i>
                 <span>Settings</span>
             </a>
-            <ul class="dropdown-menu" aria-labelledby="settingsDropdown">
-                <li><a class="dropdown-item" href="{{route('account.index')}}">Account Creation</a></li>
-                <li><a class="dropdown-item" href="#">Update Account</a></li>
-            </ul>
         </li>
+        @endif
     </ul>
     <div class="sidebar-footer">
         <a href="#" data-bs-toggle="modal" data-bs-target="#logoutModal" class="sidebar-link">

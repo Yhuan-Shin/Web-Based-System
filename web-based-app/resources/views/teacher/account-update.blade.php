@@ -9,10 +9,8 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ asset('script.js') }}"></script>
-    @if(auth()->user()->role == 'admin'))
-        <title>Admin Dashboard</title>
-    @else
-        <title>Teacher Dashboard</title>
+    @if(auth()->user()->role == 'teacher')
+        <title>Account Update</title>
     @endif
     
 
@@ -59,52 +57,16 @@
                             </div>
                         @endif
                     </div>
-                
-                   <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-md-6">
-                        <div class="container">
-                            <div id="chartData" 
-                                data-labels='@json($data["labels"])' 
-                                data-counts='@json($data["counts"])'>
+
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                @include('components.teacher.account-update')
                             </div>
-
-                            <form action="{{ route('admin.index') }}" method="GET" class="form-control">
-
-                                <div class="row">
-                                    <div class="col">
-                                        <label for="year" class="form-label">Select a year:</label>
-                                        <select name="year" id="year" class="form-select" onchange="this.form.submit()">
-                                            @for ($y = date('Y') - 12; $y <= date('Y'); $y++) <!-- Shows last 5 years -->
-                                                <option value="{{ $y }}" {{ (int) request('year', date('Y')) == $y ? 'selected' : '' }}>
-                                                    {{ $y }}
-                                                </option>
-                                            @endfor
-                                        </select>
-                                    </div>
-                                    <div class="col">
-                                        <label for="month" class="form-label ">Select a month:</label>
-                                        <select name="month" id="month" class="form-select" onchange="this.form.submit()">
-                                            @for ($i = 1; $i <= 12; $i++)
-                                                <option value="{{ $i }}" {{ (int) request('month', date('n')) == $i ? 'selected' : '' }}>
-                                                    {{ date('F', mktime(0, 0, 0, $i, 1)) }}
-                                                </option>
-                                            @endfor
-                                        </select>
-                                    </div>
-                                </div>
-                            </form>
-
-                        </div>
-                           
-
-                        <div class="mt-4">
-                            <canvas id="healthChart"></canvas>
                         </div>
                     </div>
-                </div>
-            </div>
-                    
+                
+         
             </div>
         </div>
     </div>
@@ -112,7 +74,66 @@
    
    
     
-    
+    <script>
+        document.getElementById('toggle-password').addEventListener('click', function () {
+            var passwordInput = document.getElementById('password');
+            var icon = this.querySelector('i');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('bi-eye-slash-fill');
+                icon.classList.add('bi-eye-fill');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('bi-eye-fill');
+                icon.classList.add('bi-eye-slash-fill');
+            }
+        });
+        document.getElementById('toggle-password-confirm').addEventListener('click', function () {
+            var passwordInput = document.getElementById('password_confirmation');
+            var icon = this.querySelector('i');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('bi-eye-slash-fill');
+                icon.classList.add('bi-eye-fill');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('bi-eye-fill');
+                icon.classList.add('bi-eye-slash-fill');
+            }
+        });
+    </script>
+    <script>
+        function checkPasswordMatch() {
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("password_confirmation").value;
+            const errorDisplay = document.getElementById("password_error");
+            const submitBtn = document.getElementById("submitBtn");
+
+            if (password !== confirmPassword) {
+                errorDisplay.style.display = "block";
+                submitBtn.disabled = true; // Disable the submit button if passwords don't match
+            } else {
+                errorDisplay.style.display = "none";
+                submitBtn.disabled = false; // Enable the submit button if passwords match
+            }
+        }
+
+        function validateForm() {
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("password_confirmation").value;
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return false; // Prevent form submission if passwords do not match
+            }
+            return true; // Allow form submission if passwords match
+        }
+
+        // Attach the checkPasswordMatch function to input events for real-time feedback
+        document.getElementById("password").addEventListener("input", checkPasswordMatch);
+        document.getElementById("password_confirmation").addEventListener("input", checkPasswordMatch);
+
+    </script>   
 <script>
     const hamBurger = document.querySelector(".toggle-btn");
 

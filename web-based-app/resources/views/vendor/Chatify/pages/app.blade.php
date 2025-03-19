@@ -64,8 +64,8 @@
                 {{-- header buttons --}}
                 <nav class="m-header-right">
                     <a href="#" class="add-to-favorite"><i class="fas fa-star"></i></a>
-                    @if(auth('admin')->check())
-                    <a href="/admin/dashboard"><i class="fas fa-home"></i></a> 
+                    @if(auth('admin')->check() || auth()->user()->role == 'teacher')
+                    <a href="/dashboard"><i class="fas fa-home"></i></a> 
 
                     <!-- Admin-specific features here -->
                     @elseif(auth('user')->check())

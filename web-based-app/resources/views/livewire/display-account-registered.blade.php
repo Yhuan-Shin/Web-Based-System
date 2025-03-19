@@ -36,7 +36,7 @@
                             <select class="form-control" id="role" name="role" required>
                                 <option value="" disabled>Select Role</option>
                                 <option value="teacher" {{ old('role') == 'teacher' ? 'selected' : '' }}>Teacher</option>
-                                <option value="parent" {{ old('role') == 'parent' ? 'selected' : '' }}>Parent</option>
+                                <option value="parent" {{ old('role') == 'parent' ? 'selected' : '' }}>Parent/Guardian</option>
                             </select>
                             @error('role')
                                 <div class="text-danger">{{ $message }}</div>
@@ -187,7 +187,7 @@
                         @if($account->role == 'teacher')
                             <span class="badge bg-primary">Teacher</span>
                         @elseif($account->role == 'parent')
-                            <span class="badge bg-success">Parent</span>
+                            <span class="badge bg-success">Parent/Guardian</span>
                         @endif
                        </td>
                 

@@ -29,6 +29,7 @@ use App\Http\Controllers\ChartController;
 use App\Http\Controllers\CreateAccount;
 use App\Http\Controllers\Settings;
 use App\Http\Controllers\UpdateStudent;
+use App\Http\Controllers\TeacherAccountUpdate;
 
 Route::get('/', function () {
     return view('login');
@@ -92,8 +93,8 @@ Route::middleware(['auth:admin','verified'])->group(function () {
     Route::get('/account-list', [AccountList::class, 'index'])->name('account-list.index');
 
     Route::post('/account/store', [Accounts::class, 'register'])->name('create.account');
-    Route::get('/account', [Accounts::class, 'index'])->name('account.index');
-    Route::post('/account/store', [Accounts::class, 'register'])->name('create.account');
+    Route::get('/account-update', [TeacherAccountUpdate::class, 'index'])->name('teacher.account');
+    Route::put('/account-update', [TeacherAccountUpdate::class, 'update'])->name('teacher.account.update');
 
     
     Route::get('/stories', [Stories::class, 'index'])->name('stories.index');

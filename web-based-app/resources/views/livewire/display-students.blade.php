@@ -4,6 +4,16 @@
             {{ session('warning') }}
         </div>
     @endif
+    @if (session()->has('success'))
+    <div class="alert alert-sucess">
+        {{ session('success') }}
+    </div>
+    @endif
+    @if (session()->has('error'))
+    <div class="alert alert-danger">
+        {{ session('success') }}
+    </div>
+    @endif
     @foreach($students as $student)
     <div class="modal fade" id="profileModal{{$student->id}}" wire:ignore.self tabindex="-1" aria-labelledby="profileModalLabel{{$student->id}}" aria-hidden="true">
         <div class="modal-dialog">
@@ -16,7 +26,7 @@
                     <p>Name: {{ $student->st_last_name }} {{ $student->st_first_name }} {{ $student->st_middle_name }}</p>
                     <p>Age: {{ $student->age }}</p>
                     <p>Gender: {{ $student->gender }}</p>
-                    <p>Guardian: {{ $student->user ? ($student->user->last_name && $student->user->first_name ? $student->user->last_name . ', ' . $student->user->first_name : $student->user->google_name) : 'N/A' }}</p>
+                    <p>Parent/Guardian: {{ $student->user ? ($student->user->last_name && $student->user->first_name ? $student->user->last_name . ', ' . $student->user->first_name : $student->user->google_name) : 'N/A' }}</p>
                     <p>Phone Number: {{ $student->user ? $student->user->phone_number : 'N/A' }}</p>
                     <p>Height: {{ $student->bmi ? $student->bmi->height : 'N/A' }} cm</p>
                     <p>Weight: {{ $student->bmi ? $student->bmi->weight : 'N/A' }} lbs</p>
@@ -75,7 +85,7 @@
 <div class="table responsive table-hover ">
     <table class="table table-striped">
         <thead class="text-center">
-            <tr>
+            <tr style="white-space: nowrap;">
                 <th scope="col">#</th>
                 <th scope="col">Student No.</th>
                 <th scope="col">Profile Picture</th>
@@ -97,7 +107,7 @@
             <tr class="text-center">
                 <th scope="row">{{$loop->iteration}}</th>
                 <td>{{$student->student_no}}</td>
-                <td> <img src="{{ asset('storage/' . $student->profile_pic) }}" alt="Profile Picture" class="img-fluid" style="width: 100px; height: 100px;">
+                <td> <img src="{{ asset('storage/' . $student->profile_pic) }}" alt="Profile Picture" class="img-fluid" style="width: 50px; height: 50px;">
                 </td>
                 <td>{{$student->st_last_name}}</td>
                 <td>{{$student->st_first_name}}</td>

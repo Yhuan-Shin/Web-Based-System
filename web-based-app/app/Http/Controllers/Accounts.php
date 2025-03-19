@@ -7,10 +7,7 @@ use App\Models\User;
 class Accounts extends Controller
 {
     //
-    public function index()
-    {
-        return view('admin.account-create');
-    }
+    
     public function register(Request $request){
         $request->validate([
             'last_name' => 'required|string|max:255',

@@ -32,7 +32,6 @@ class AccountUpdate extends Controller
     ]);
 
     try {
-        // Update only the fields that are present in the request
         if ($request->filled('last_name')) {
             $user->last_name = $request->last_name;
         }
@@ -57,11 +56,11 @@ class AccountUpdate extends Controller
 
         $user->save();
 
-        return redirect('/account')->with('success', 'Account has been updated successfully.');
+        return redirect('/home/account')->with('success', 'Account has been updated successfully.');
     } catch (Exception $e) {
         // Log the error for debugging purposes
 
-        return redirect('/account')->with('error', 'Failed to update account. Please try again.');
+        return redirect('/home/account')->with('error', 'Failed to update account. Please try again.');
     }
 }
     
