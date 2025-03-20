@@ -9,7 +9,7 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ asset('script.js') }}"></script>
-    @if(auth()->user()->role == 'admin'))
+    @if(auth()->user()->role == 'admin')
         <title>Admin Dashboard</title>
     @else
         <title>Teacher Dashboard</title>

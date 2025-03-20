@@ -40,7 +40,7 @@
     
 <div class="container mb-4">
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <input type="text" name="search" class="form-control" wire:model="search" id="search" placeholder="Search Student">
         </div>
         <div class="col-md-2">
@@ -78,8 +78,18 @@
             </select>
         </div>
         <div class="col">
-            <button class="btn btn-success"  data-bs-toggle="modal" data-bs-target="#childAddModal">Add Student</button>    
-        </div>
+              
+            
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <button class="btn btn-success" style="white-space: nowrap;"  data-bs-toggle="modal" data-bs-target="#childAddModal" >Add Student</button>
+                    </div>
+                    <div class="col-md-6">
+                        {{-- <button type="button" class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="" style="white-space: nowrap;">BMI Calculator</button> --}}
+                    </div>
+                </div>
+            </div>
     </div>
 </div>
 <div class="table responsive table-hover ">

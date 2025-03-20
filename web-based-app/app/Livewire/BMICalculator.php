@@ -39,7 +39,6 @@ class BMICalculator extends Component
         ->where('st_first_name', $this->st_first_name)
         ->where('st_middle_name', $this->st_middle_name)
         ->where('student_no', $this->student_no)
-        ->where('user_id', Auth::user()->id)
         ->first();
 
     if (!$student) {
