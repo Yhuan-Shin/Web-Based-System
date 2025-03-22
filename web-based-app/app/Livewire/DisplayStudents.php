@@ -129,4 +129,5 @@ class DisplayStudents extends Component
         
         return view('livewire.display-students', ['students' => $students]);
     }
+    
 }

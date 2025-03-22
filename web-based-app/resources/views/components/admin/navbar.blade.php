@@ -27,7 +27,7 @@
     <ul class="sidebar-nav ">
         <li class="sidebar-item">
             <a href="{{ route('admin.index') }}" class="sidebar-link">
-                <i class="bi bi-speedometer"></i>
+                <i class="bi bi-house-door-fill"></i>
                 <span>Dashboard</span>
             </a>
         </li>

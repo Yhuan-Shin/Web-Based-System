@@ -80,4 +80,26 @@ class UpdateStudent extends Controller
     
         return redirect()->back()->with(['students' => $student, 'success' => 'Information has been updated']);
     }
+    public function destroy($id)
+    {
+        try {
+            $student = StudentModel::find($id);
+    
+            if (!$student) {
+                return redirect()->back()->with(['error' => 'Student not found']);
+            }
+    
+            // Delete the profile picture if exists
+            if ($student->profile_pic && Storage::exists('public/' . $student->profile_pic)) {
+                Storage::delete('public/' . $student->profile_pic);
+            }
+    
+            // Delete the student record
+            $student->delete();
+    
+            return redirect()->route('/student')->with(['success' => 'Student has been deleted']);
+        } catch (\Exception $e) {
+            return redirect()->route('/student')->with(['error' => 'Failed to delete student: ' . $e->getMessage()]);
+        }
+    }
 }

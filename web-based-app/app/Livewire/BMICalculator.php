@@ -221,7 +221,6 @@ private function determineBMICategory($bmi, $gender, $age)
     public function render()
     {
         
-        return view('livewire.b-m-i-calculator',[
-            'bmiRecord' => $this->bmiRecord,]);
+        return view('livewire.b-m-i-calculator');
     }
 }

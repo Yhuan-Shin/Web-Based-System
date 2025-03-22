@@ -14,20 +14,7 @@ class DisplayAccountRegistered extends Component
     protected $paginationTheme = 'bootstrap';
     public $search;
     public $roleFilter;
-    public function approve($id)
-    {
-        $account = User::find($id);
-        $account->update([
-            'confirmed' => 1
-        ]);
-        session()->flash('message', 'Account approved');
-    }
-    public function decline($id)
-    {
-        $account = User::find($id);
-        $account->delete();
-        session()->flash('message', 'Account deleted');
-    }
+  
     public function render(){
         $query = User::with('students')->where('id', '!=', Auth::id());
         if ($this->search) {
@@ -58,11 +45,10 @@ class DisplayAccountRegistered extends Component
 
         return view('livewire.display-account-registered', ['accounts' => $account]);
     }
-    public function deactivate($id){
-        $account = User::find($id);
-        $account->update([
-            'confirmed' => 0
-        ]);
-        session()->flash('message', 'Account deactivated');
+   public function delete($id){
+        $user = User::find($id);
+        $user->delete();
+        session()->flash('message', 'Account has been deleted successfully');
     }
+    
 }

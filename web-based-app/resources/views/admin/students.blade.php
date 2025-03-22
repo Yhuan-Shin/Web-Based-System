@@ -14,7 +14,8 @@
     <div class="wrapper">
         @include('components.admin.navbar') 
         
-        
+        @livewire('add-child')
+        @livewire('b-m-i-calculator')
 
         <div class="main">
             @include('components.admin.header')
@@ -51,7 +52,6 @@
                             </div>  
                         @endif
                         @livewire('display-students')
-                        @livewire('add-child')
                     </div>
                 </div>
             </div>

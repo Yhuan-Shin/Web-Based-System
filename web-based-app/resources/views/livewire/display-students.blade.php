@@ -86,7 +86,7 @@
                         <button class="btn btn-success" style="white-space: nowrap;"  data-bs-toggle="modal" data-bs-target="#childAddModal" >Add Student</button>
                     </div>
                     <div class="col-md-6">
-                        {{-- <button type="button" class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="" style="white-space: nowrap;">BMI Calculator</button> --}}
+                        <button type="button" class="btn btn-success " data-bs-toggle="modal" data-bs-target="#bmiModal" style="white-space: nowrap;">BMI Calculator</button>
                     </div>
                 </div>
             </div>
@@ -145,6 +145,32 @@
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#updateModal{{$student->id}}">
                         <i class="bi bi-pencil"></i> Update
                     </button>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{$student->id}}">
+                        <i class="bi bi-trash"></i> Delete
+                    </button>
+
+                    <!-- Delete Confirmation Modal -->
+                    <div class="modal fade" id="deleteModal{{$student->id}}" wire:ignore.self tabindex="-1" aria-labelledby="deleteModalLabel{{$student->id}}" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteModalLabel{{$student->id}}">Confirm Deletion</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to delete the student <strong>{{ $student->st_last_name }}, {{ $student->st_first_name }}</strong>?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    <form action="{{ route('student.destroy', $student->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </td>
             </tr>
             <div class="modal fade" wire:ignore.self id="updateModal{{$student->id}}" tabindex="-1" aria-labelledby="updateModalLabel{{$student->id}}" aria-hidden="true">
@@ -283,6 +309,7 @@
         
                                 <!-- Disable button if age error exists -->
                                 <button type="submit" class="btn btn-primary float-end">Update</button>
+                                
                             </form>
                         </div>
                     </div>

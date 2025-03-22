@@ -90,6 +90,7 @@ Route::middleware(['auth:admin','verified'])->group(function () {
 
     Route::get('/student', [DisplayStudent::class, 'index'])->name('student.index');
     Route::put('/student/{id}', [UpdateStudent::class, 'update'])->name('admin.student.update');
+    Route::delete('/student/{id}', [UpdateStudent::class, 'destroy'])->name('admin.student.destroy');
     Route::get('/account-list', [AccountList::class, 'index'])->name('account-list.index');
 
     Route::post('/account/store', [Accounts::class, 'register'])->name('create.account');
