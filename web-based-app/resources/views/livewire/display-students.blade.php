@@ -117,7 +117,7 @@
             <tr class="text-center">
                 <th scope="row">{{$loop->iteration}}</th>
                 <td>{{$student->student_no}}</td>
-                <td> <img src="{{ asset('storage/' . $student->profile_pic) }}" alt="Profile Picture" class="img-fluid" style="width: 50px; height: 50px;">
+                <td> <img src="{{ asset('/' . $student->profile_pic) }}" alt="Profile Picture" class="img-fluid" style="width: 50px; height: 50px;">
                 </td>
                 <td>{{$student->st_last_name}}</td>
                 <td>{{$student->st_first_name}}</td>

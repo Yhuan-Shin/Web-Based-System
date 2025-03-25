@@ -9,7 +9,6 @@
 </head>
 <body style="height: 100vh; background-image: url({{ asset('assets/bg.png') }}); background-size: cover;">
 
-    <img src="{{ asset('assets/logo_.jpg') }}" alt="" style="width: 150px; float: left; padding: 10px;">
 
     <div class="container">
         <div class="d-flex justify-content-center">
@@ -63,14 +62,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="social-media-icons text-center mt-3 px-3">
-                    <p class="text-white">Click the icons below to login using:</p>
-                    
-                    <a href="{{ route('google.login') }}" target="_blank" class="button btn btn-light mb-2 text-white" style="background-color: transparent; border: none;">
-                        <img src="{{ asset('assets/google_logo.png') }}" alt="">
-                        Sign in with Google
-                    </a>
-                </div>
+               
             </div>
         </div>
     </div>

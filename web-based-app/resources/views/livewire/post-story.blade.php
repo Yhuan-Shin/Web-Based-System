@@ -25,7 +25,7 @@
             @foreach($story as $story)
                 <tr>
                     <td>{{ $story->description }}</td>
-                    <td><img src="{{ asset('storage/' . $story->image) }}" alt="Story Image" width="100"></td>
+                    <td><img src="{{ asset('/' . $story->image) }}" alt="Story Image" width="100"></td>
                     <td>
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editModal{{ $story->id }}">Edit</button>
 

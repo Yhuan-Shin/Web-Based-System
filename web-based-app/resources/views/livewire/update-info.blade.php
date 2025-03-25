@@ -37,7 +37,7 @@
                         <div class="mb-3">
                             <div class="container">
                                 @if ($child->profile_pic)
-                                    <img src="{{ asset('storage/' . $child->profile_pic) }}" alt="Profile Picture" class="img-fluid" style="width: 100px; height: 100px;">
+                                    <img src="{{ asset('/' . $child->profile_pic) }}" alt="Profile Picture" class="img-fluid" style="width: 100px; height: 100px;">
                                 @else
                                     <span class="badge bg-warning"> No Profile Picture</span>
                                 @endif

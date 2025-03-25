@@ -46,9 +46,7 @@ Route::get('/register', function () {
 Route::get('/profile', function () {
     return view('auth/add_address_phone');
 });
-Route::post('/profile', [SocialAuthController::class, 'add_address_phone'])->name('add.address.phone');
-Route::get('login/google', [SocialAuthController::class, 'redirectToGoogle'])->name('google.login');
-Route::get('login/google/callback', [SocialAuthController::class, 'handleGoogleCallback']);
+
 //user
 Route::post('/', [UserLogin::class, 'login'])->name('login');
 Route::get('/logout', [UserLogin::class, 'logout'])->name('logout');
