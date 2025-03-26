@@ -8,7 +8,7 @@ class DietaryAndActivities extends Model
 {
     //
     protected $table = 'dietary_and_activities';
-    protected $fillable = ['student_id', 'dietary', 'activities', 'image'];
+    protected $fillable = ['student_id', 'dietary', 'activities', 'category'];
     public function student()
     {
         return $this->belongsTo(Student::class);

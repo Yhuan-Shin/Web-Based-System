@@ -19,10 +19,15 @@ class DisplayStudents extends Component
     public function render()
     {
         $query = Student::with([
-            'bmi:id,student_id,bmi,height,weight,result',
+            'bmi' => function ($q) {
+                $q->select('id', 'student_id', 'bmi', 'height', 'weight', 'result')
+                  ->latest('created_at')
+                  ->limit(1); // Get only the latest BMI record
+            },
             'user:id,last_name,first_name,phone_number'
         ])
-        ->select('id', 'st_last_name', 'st_first_name','st_middle_name', 'age', 'gender', 'user_id','student_no','grade','section','profile_pic');
+        ->select('id', 'st_last_name', 'st_first_name', 'st_middle_name', 'age', 'gender', 'user_id', 'student_no', 'grade', 'section', 'profile_pic');
+        
 
         if ($this->search) {
             $query->where(function ($q) {

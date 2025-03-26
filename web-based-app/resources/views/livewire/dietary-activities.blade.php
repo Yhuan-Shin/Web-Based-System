@@ -18,10 +18,7 @@
                 </div>
                 <div class="modal-body">
                     <form wire:submit.prevent="save">
-                        <label for="image">Image</label>
-                        <div class="input-group mb-3">
-                            <input type="file" class="form-control" wire:model="image" id="image">
-                        </div>
+                      
                         <div class="form-group mb-3">
                             <label for="diet-plan">Diet Plan</label>
                             <textarea class="form-control" wire:model="dietary" id="diet-plan" rows="3"></textarea>
@@ -29,6 +26,17 @@
                         <div class="form-group mb-3">
                             <label for="activities">Activities</label>
                             <textarea class="form-control" wire:model="activities" id="activities" rows="3"></textarea>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="category">Category</label>
+                            <select class="form-select" id="category" name="category" wire:model="category" required>
+                                <option value="">Select Category</option>
+                                <option value="Severely Wasted">Severely Wasted</option>
+                                <option value="Underweight">Underweight</option>
+                                <option value="Normal">Normal</option>
+                                <option value="Overweight">Overweight</option>
+                                <option value="Obese">Obese</option>
+                            </select>
                         </div>
                         <button type="submit" class="btn btn-primary float-end">Save changes</button>
 
@@ -66,6 +74,12 @@
                     <option value="Grade6">Grade 6</option>
                 </select>
             </div>
+            <div class="col-md">
+                 <!-- Button trigger modal -->
+                 <button type="button" class="btn btn-primary" wire:click="save" data-bs-toggle="modal" data-bs-target="#createDietPlanModal">
+                    Create Diet Plan and Activities
+                </button>
+            </div>
         </div>
     </div>
     <div class="container">
@@ -83,7 +97,7 @@
                         <th scope="col">Age</th>
                         <th scope="col">BMI</th>
                         <th scope = "col">Category</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Information</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -99,14 +113,7 @@
                         <td>{{$student->age}}</td>
                         <td>{{ $student->bmi ? $student->bmi->bmi : 'N/A' }}</td>
                         <td>{{ $student->bmi ? $student->bmi->result : 'N/A' }}</td>
-                        <td>
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" wire:click="selectStudent({{ $student->id }})" data-bs-toggle="modal" data-bs-target="#createDietPlanModal">
-                            Create Diet Plan and Activities
-                        </button>
-                        
-    
-                        </td> 
+                        <td>{{$student->dietary}}</td> 
                    
                     </tr>
                     @endforeach

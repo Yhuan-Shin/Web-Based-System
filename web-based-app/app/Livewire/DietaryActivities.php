@@ -6,6 +6,7 @@ use App\Models\DietaryAndActivities;
 use Livewire\Component;
 use App\Models\Student;
 use Livewire\WithFileUploads;
+use App\Models\BMI;
 
 class DietaryActivities extends Component
 {
@@ -14,8 +15,8 @@ class DietaryActivities extends Component
     protected $paginationTheme = 'bootstrap';
     public $dietary;
     public $activities;
-    public $image;
-    public $selectedStudentId;
+    public $category;
+    public $studentIds = [];
 
     use WithPagination;
     public $filter;
@@ -25,11 +26,14 @@ class DietaryActivities extends Component
     public function render()
     {
         $query = Student::with([
-            'bmi:id,student_id,bmi,height,weight,result',
+            'bmi' => function ($q) {
+                $q->select('id', 'student_id', 'bmi', 'height', 'weight', 'result')
+                  ->latest('created_at')
+                  ->limit(1); // Get only the latest BMI record
+            },
             'user:id,last_name,first_name,phone_number'
         ])
-       
-        ->select('id', 'st_last_name', 'st_first_name', 'age', 'gender', 'user_id','grade','section','student_no');
+        ->select('id', 'st_last_name', 'st_first_name', 'st_middle_name', 'age', 'gender', 'user_id', 'student_no', 'grade', 'section', 'profile_pic');
         if ($this->search) {
             $query->where(function ($q) {
             $q->where('st_last_name', 'like', '%' . $this->search . '%')
@@ -111,34 +115,42 @@ class DietaryActivities extends Component
     protected $rules = [
         'dietary' => 'required|string|max:500',
         'activities' => 'required|string|max:500',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    ];
+        'category' => 'required',
+     ];
 
-    public function selectStudent($id)
-    {
-        $this->selectedStudentId = $id;
-    }
-
-    public function save()
-    {
-        try {
-            $this->validate();
-
-            $student = Student::findOrFail($this->selectedStudentId);
-            $image_path = $this->image ? $this->image->store('uploaded_images', 'public') : null;
-
-            $student->dietaryAndActivities()->create([
-            'dietary' => $this->dietary,
-            'activities' => $this->activities,
-            'image' => $image_path,
-            ]);
-
-            session()->flash('message', 'Diet plan and activities saved successfully!');
-
-            // Reset inputs and modal state
-            $this->reset(['dietary', 'activities', 'selectedStudentId']);
-        } catch (\Exception $e) {
-            session()->flash('error', 'An error occurred while saving the data: ' . $e->getMessage());
-        }
-    }
+   
+     public function updatedCategory()
+     {
+         if ($this->category) {
+             $this->studentIds = BMI::where('result', $this->category)
+                 ->pluck('student_id')
+                 ->toArray();
+         }
+     }
+     
+     public function save()
+     {
+         $this->validate();
+ 
+         if (empty($this->studentIds)) {
+             session()->flash('error', 'No students found in this category.');
+             return;
+         }
+ 
+         try {
+             foreach ($this->studentIds as $studentId) {
+                 DietaryAndActivities::updateOrCreate(
+                     ['student_id' => $studentId, 'category' => $this->category],
+                     ['dietary' => $this->dietary, 'activities' => $this->activities]
+                 );
+             }
+ 
+             session()->flash('success', 'Meal Plan and Activities successfully sent!');
+             $this->reset(['dietary', 'activities', 'category', 'studentIds']);
+ 
+         } catch (\Exception $e) {
+             session()->flash('error', 'An error occurred: ' . $e->getMessage());
+         }
+     }
+     
 }

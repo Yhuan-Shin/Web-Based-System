@@ -143,24 +143,7 @@
             </thead>
             <tbody>
              @foreach($accounts as $account)
-              <!-- Confirm Deactivate Modal -->
-              <div class="modal fade" wire:ignore.self id="confirmDeactivateModal{{$account->id}}" tabindex="-1" aria-labelledby="confirmDeactivateModalLabel{{$account->id}}" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="confirmDeactivateModalLabel{{$account->id}}">Deactivate Account</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            Are you sure you want to deactivate this account?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-danger" wire:click="deactivate({{$account->id}})" data-bs-dismiss="modal">Deactivate</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
                 <tr>
                         <td>
                             @if($account->last_name == null  && $account->first_name == null && $account->middle_name == null)
@@ -193,7 +176,7 @@
                        </td>
                        <td>
                         <!-- Delete Confirmation Modal -->
-                        <div class="modal fade" id="confirmDelete{{$account->id}}" tabindex="-1" aria-labelledby="confirmDeleteLabel{{$account->id}}" aria-hidden="true">
+                        <div class="modal fade" id="confirmDelete{{$account->id}}" wire:ignore.self tabindex="-1" aria-labelledby="confirmDeleteLabel{{$account->id}}" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
