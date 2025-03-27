@@ -15,6 +15,7 @@
                         <div class="card-body">
                             <p class="card-text">{{ $dietary->dietary }}</p>
                             <p class="card-text">{{ $dietary->activities }}</p>
+                            <p class="card-text">{{ $dietary->created_at->diffForHumans() }}</p>
 
                         </div>
                     </div>

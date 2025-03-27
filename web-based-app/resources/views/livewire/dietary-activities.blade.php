@@ -2,11 +2,21 @@
     {{-- In work, do what you enjoy. --}}
     <!-- Modal -->
     <div class="container">
-        @if(session()->has('message'))
-            <div class="alert alert-success">
-                {{session('message')}}
+        @if(session()->has('warning'))
+            <div class="alert alert-warning">
+                {{session('warning')}}
             </div>
         @endif
+        @if(session()->has('success'))
+            <div class="alert alert-success">
+                {{session('success')}}
+            </div>
+        @endif
+        @if(session()->has('error'))
+            <div class="alert alert-danger">
+                {{session('error')}}
+            </div>
+        @endif 
     </div>
     <div class="modal fade"  wire:ignore id="createDietPlanModal" tabindex="-1"  aria-labelledby="createDietPlanModalLabel" aria-hidden="true">
         <div class="modal-dialog" >
@@ -53,7 +63,7 @@
             <div class="col-md-4">
                 <input type="text" name="search" class="form-control" wire:model="search" id="search" placeholder="Search Student">
             </div>
-            <div class="col-md-2">
+            {{-- <div class="col-md-2">
                 <select name="filter" wire:model="filter" class="form-select">
                     <option value="">Select Category</option>
                     <option value="Severely Wasted">Severely Wasted</option>
@@ -61,17 +71,17 @@
                     <option value="Normal">Normal</option>
                     <option value="Overweight">Overweight</option>
                 </select>
-            </div>
+            </div> --}}
             <div class="col-md-2">
                 <select class="form-select" id="grade" name="grade" wire:model="gradeFilter" required>
                     <option value="">Select Grade</option>
                     <option value="kinder">Kinder</option>
-                    <option value="Grade1">Grade 1</option>
-                    <option value="Grade2">Grade 2</option> 
-                    <option value="Grade3">Grade 3</option>
-                    <option value="Grade4">Grade 4</option>
-                    <option value="Grade5">Grade 5</option>
-                    <option value="Grade6">Grade 6</option>
+                    <option value="Grade 1">Grade 1</option>
+                    <option value="Grade 2">Grade 2</option> 
+                    <option value="Grade 3">Grade 3</option>
+                    <option value="Grade 4">Grade 4</option>
+                    <option value="Grade 5">Grade 5</option>
+                    <option value="Grade 6">Grade 6</option>
                 </select>
             </div>
             <div class="col-md">
@@ -95,26 +105,27 @@
                         <th scope="col">Section</th>
                         <th scope="col">Gender</th>
                         <th scope="col">Age</th>
-                        <th scope="col">BMI</th>
-                        <th scope = "col">Category</th>
-                        <th scope="col">Information</th>
+                        <th scope="col">Dietary</th>
+                        <th scope="col">Activities</th>
+                        <th scope="col">Date Created</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($students as $student)
                     <tr>
                         <th scope="row">{{$loop->iteration}}</th>
-                        <td>{{$student->student_no}}</td>
-                        <td>{{$student->st_last_name}}</td>
-                        <td>{{$student->st_first_name}}</td>
-                        <td>{{$student->grade}}</td>
-                        <td>{{$student->section}}</td>
-                        <td>{{$student->gender}}</td>
-                        <td>{{$student->age}}</td>
-                        <td>{{ $student->bmi ? $student->bmi->bmi : 'N/A' }}</td>
-                        <td>{{ $student->bmi ? $student->bmi->result : 'N/A' }}</td>
+                        <td>{{$student->student->student_no}}</td>
+                        <td>{{$student->student->st_last_name}}</td>
+                        <td>{{$student->student->st_first_name}}</td>
+                        <td>{{$student->student->grade}}</td>
+                        <td>{{$student->student->section}}</td>
+                        <td>{{$student->student->gender}}</td>
+                        <td>{{$student->student->age}}</td>
+                        {{-- <td>{{ $student->bmi ? $student->bmi->bmi : 'N/A' }}</td>
+                        <td>{{ $student->bmi ? $student->bmi->result : 'N/A' }}</td> --}}
                         <td>{{$student->dietary}}</td> 
-                   
+                        <td>{{$student->activities}}</td> 
+                        <td>{{$student->created_at}}</td>
                     </tr>
                     @endforeach
                     {{$students->links()}}
