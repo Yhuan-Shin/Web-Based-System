@@ -1,4 +1,16 @@
 <div wire:poll.3000ms>
+    @if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+@if(session('error'))
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
     <div class="modal fade" id="createAccountModal" wire:ignore tabindex="-1" aria-labelledby="createAccountModalLabel" aria-hidden="true">
         <div class="modal-dialog ">
             <div class="modal-content">
@@ -35,12 +47,24 @@
                             <label for="role" class="form-label">Role</label>
                             <select class="form-control" id="role" name="role" required>
                                 <option value="" disabled>Select Role</option>
-                                <option value="teacher" {{ old('role') == 'teacher' ? 'selected' : '' }}>Teacher</option>
-                                <option value="parent" {{ old('role') == 'parent' ? 'selected' : '' }}>Parent/Guardian</option>
+                                <option value="teacher">Teacher</option>
+                                <option value="parent">Parent/Guardian</option>
                             </select>
                             @error('role')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
+                        </div>
+                        <div class="mb-3">
+                            <label for="section" class="form-label">Section</label>
+                            <select class="form-control" id="section" name="section" required>
+                                <option value="" >Select Section</option>   
+                                <option value="Section A">Section A</option>
+                                <option value="Section B">Section B</option>
+                                <option value="Section C">Section C</option>
+                                <option value="Section D">Section D</option>
+                                <option value="Section E">Section E</option>
+                                <option value="Section F">Section F</option>
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="address" class="form-label">Address</label>
@@ -98,18 +122,7 @@
             </div>
         </div>
     </div>
-    @if(session('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
-    @if(session('error'))
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            {{ session('error') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    @endif
+   
     <div class="container">
         <div class="row">
             <div class="col-md-4">
@@ -132,7 +145,6 @@
             <thead>
                 <tr>
                     <th scope="col">Name</th>
-                    {{-- <th scope="col">Student/s</th> --}}
                     <th scope="col">Email</th>
                     <th scope="col">Address</th>
                     <th scope="col">Contact</th>
@@ -152,24 +164,14 @@
                                 {{$account->last_name}}, {{$account->first_name}} {{$account->middle_name}}
                             @endif
                         </td>
-                        {{-- <td>
-                            @foreach($account->students as $student)
-                                @if($loop->first && $loop->count > 1)
-                                    <ul>
-                                @endif
-                                <li>{{$student->st_first_name}}, {{$student->st_last_name}}</li>
-                                @if($loop->last && $loop->count > 1)
-                                    </ul>
-                                @endif
-                            @endforeach
-                        </td> --}}
-  
+                      
                        <td>{{$account->email}}</td>
                        <td>{{$account->address}}</td>
                        <td>{{$account->phone_number}}</td>  
                        <td>
                         @if($account->role == 'teacher')
                             <span class="badge bg-primary">Teacher</span>
+                            <span class="badge bg-secondary">{{$account->section}}</span>
                         @elseif($account->role == 'parent')
                             <span class="badge bg-success">Parent/Guardian</span>
                         @endif

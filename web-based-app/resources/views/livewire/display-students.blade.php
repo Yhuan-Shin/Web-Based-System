@@ -32,6 +32,7 @@
                     <p>Weight: {{ $student->bmi ? $student->bmi->weight : 'N/A' }} lbs</p>
                     <p>BMI: {{ $student->bmi ? $student->bmi->bmi : 'N/A' }}</p>
                     <p>Category: {{ $student->bmi ? $student->bmi->result : 'N/A' }}</p>
+                    <p>Teacher: {{ $student->teacher ? $student->teacher->first_name . ' ' . $student->teacher->last_name : 'N/A' }}</p>
                 </div>
             </div>
         </div>
@@ -162,7 +163,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                    <form action="{{ route('student.destroy', $student->id) }}" method="POST">
+                                    <form action="{{ route('admin.student.destroy', $student->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger">Delete</button>

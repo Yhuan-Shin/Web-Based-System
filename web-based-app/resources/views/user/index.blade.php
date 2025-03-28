@@ -14,12 +14,9 @@
     @livewireStyles
 </head>
 <body>
-
   
-        @include('components.confirm-delete')
-        @include('components.view-child-info-modal')
-        @livewire('update-info')
-        @livewire('bmi-calculator-test')
+  
+
     <!-- Logout Confirmation Modal -->
     <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -40,6 +37,9 @@
     </div>
  
     @include('components.navbar')
+    @include('components.view-child-info-modal')
+
+   
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
           <h5 class="offcanvas-title" id="offcanvasExampleLabel">Notifications</h5>
@@ -91,6 +91,7 @@
                                         </ul>
                                     </li>
                                 </ol>
+                                @livewire('bmi-calculator-test')
                                 <div class="d-flex justify-content-center mt-3">
                                     <button type="button" class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#bmiModalTest">BMI Calculator</button>
                                   
@@ -154,6 +155,8 @@
 
         
     </div>
+    @livewire('update-info')
+
     @include('components.footer')
 
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

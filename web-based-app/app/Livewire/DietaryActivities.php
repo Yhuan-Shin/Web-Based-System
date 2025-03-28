@@ -36,10 +36,12 @@ class DietaryActivities extends Component
                     ->orWhere('st_last_name', 'like', '%'.$this->search.'%')
                     ->orWhere('student_no', 'like', '%'.$this->search.'%');
             });
-        }
-        if ($query->count() == 0) {
-            session()->flash('warning', 'No results found. Please enter again.');
+            if ($query->count() == 0) {
+                session()->flash('warning', 'No results found. Please enter again.');
             }
+            
+        }
+      
         
         if ($this->gradeFilter) {
                 $query->whereHas('student', function ($q) {
@@ -47,38 +49,7 @@ class DietaryActivities extends Component
                 });
         }
 
-        // if ($this->filter) {
-        //     switch($this->filter){
-        //     case 'Severely Wasted':
-        //         $query->whereHas('bmi', function ($q) {
-        //         $q->where('result', 'Severely Wasted');
-        //         });
-        //         break;
-        //     case 'Underweight':
-        //         $query->whereHas('bmi', function ($q) {
-        //         $q->where('result', 'Underweight');
-        //         });
-        //         break;
-        //     case 'Normal':
-        //         $query->whereHas('bmi', function ($q) {
-        //         $q->where('result', 'Normal');
-        //         });
-        //         break;
-        //     case 'Overweight':
-        //         $query->whereHas('bmi', function ($q) {
-        //         $q->where('result', 'Overweight');
-        //         });
-        //         break;
-
-        //     case 'Obese':
-        //         $query->whereHas('bmi', function ($q) {
-        //         $q->where('result', 'Obese');
-        //         });
-        //         break;
-        //     default:
-        //         break;
-        //     }
-        // }
+      
         $students = $query->paginate(10);
         return view('livewire.dietary-activities', ['students' => $students]);
         
@@ -110,7 +81,7 @@ class DietaryActivities extends Component
  
          try {
              foreach ($this->studentIds as $studentId) {
-                 DietaryAndActivities::updateOrCreate(
+                 DietaryAndActivities::UpdateOrCreate(
                      ['student_id' => $studentId, 'category' => $this->category],
                      ['dietary' => $this->dietary, 'activities' => $this->activities]
                  );

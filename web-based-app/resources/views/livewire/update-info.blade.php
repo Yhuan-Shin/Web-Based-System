@@ -1,4 +1,4 @@
-<div wire:poll.3000ms>
+<div>
     <!-- Child's Update Modal -->
     @foreach ($students as $child)
     <div class="modal fade" wire:ignore.self id="childEditModal{{ $child->id }}" tabindex="-1" aria-labelledby="childInfoModalLabel" aria-hidden="true">
@@ -31,7 +31,7 @@
                 </div>
                 <div class="modal-body">
                     <!-- Child's Information content goes here -->
-                    <form action="{{ route('student.update', $child->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="mb-3">
@@ -78,7 +78,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="Grade" class="form-label">Grade</label>
-                            <select class="form-select" id="grade" readonly name="grade" required>
+                            <select class="form-select" id="grade" readonly name="grade" disabled required>
                                 <option value="{{ $child->grade }}" selected>{{ $child->grade }}</option>
                                 <option value="Kinder">Kinder</option>
                                 <option value="Grade 1">Grade 1</option>
@@ -91,7 +91,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="section" class="form-label">Section</label>
-                            <select class="form-select" id="section" readonly name="section" required>
+                            <select class="form-select" id="section" readonly name="section" disabled required>
                                 <option value="{{ $child->section }}" selected>{{ $child->section }}</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -106,7 +106,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="childDOB" class="form-label">Child's Date of Birth</label>
-                            <input type="date" class="form-control" readonly id="date" x-model="birthday" @change="calculateAge()"  name="birthday" required>
+                            <input type="date" class="form-control" readonly id="date" disabled x-model="birthday" @change="calculateAge()"  name="birthday" required>
                             @error('birthday')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
@@ -118,9 +118,7 @@
                             @error('age')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
-                            <!-- Error message -->
-                            {{-- <p x-show="ageError !== ''" class="text-danger">{{ ageError }}</p> --}}
-                        </div>
+                           
                         <div class="mb-3">
                             <label for="gender" class="form-label">Gender</label>
                             <select class="form-select" id="gender" name="gender" readonly required>
@@ -133,8 +131,7 @@
                             @enderror
                         </div>
 
-                        <!-- Disable button if age error exists -->
-                        {{-- <button type="submit" class="btn btn-primary float-end">Update</button> --}}
+                        
                     </form>
                 </div>
             </div>

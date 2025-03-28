@@ -11,10 +11,8 @@
 <body>
 
     
-    @include('components.confirm-delete')
     @include('components.view-child-info-modal')
-    @livewire('update-info')
-    @livewire('add-child')
+   
 
     <!-- Logout Confirmation Modal -->
     <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
@@ -153,6 +151,7 @@
             </div>
         </div>
     </div>
+    @livewire('update-info')
     <script>
         document.getElementById('toggle-password').addEventListener('click', function () {
             var passwordInput = document.getElementById('password');

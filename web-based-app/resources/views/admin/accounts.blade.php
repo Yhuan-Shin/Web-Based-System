@@ -17,18 +17,7 @@
            
             @include('components.admin.header')
             <div class="container">
-            @if(session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
-            @if(session('error'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{ session('error') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
+         
                 <div class="row">
                     <div class="col">
                         <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
@@ -103,11 +92,14 @@
         document.getElementById('role').addEventListener('change', function () {
             const relation = document.getElementById('relation');
             const role = document.getElementById('role');
+            const section = document.getElementById('section');
             if (this.value === 'parent') {
                 relation.disabled = false;
+                section.disabled = true;
                 relation.value = 'Parent/Guardian';
             } else if(this.value === 'teacher') {
                 relation.disabled = true;
+                section.disabled = false;
                 relation.value = '';
             } 
         });

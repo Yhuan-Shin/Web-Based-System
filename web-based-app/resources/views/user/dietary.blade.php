@@ -10,9 +10,7 @@
     @livewireStyles
 </head>
 <body>
-    @include('components.confirm-delete')
     @include('components.view-child-info-modal')
-    @livewire('update-info')
     <!-- Logout Confirmation Modal -->
     <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -60,6 +58,8 @@
                 </div>
             @endif
        </div>
+       @livewire('view-dietary')
+
        <div class="container">
         <div class="row">
             <div class="col-md">
@@ -234,8 +234,8 @@
             </div>
         </div>
     </div>
-        @livewire('view-dietary')
     </div>
+    @livewire('update-info')
 
 
 @include('components.footer')

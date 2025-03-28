@@ -56,7 +56,8 @@
         </div>
     </div>
        
-  
+    @livewire('update-info')
+
     <script>
         const hamBurger = document.querySelector(".toggle-btn");
 

@@ -125,7 +125,12 @@
                         <td>{{ $student->bmi ? $student->bmi->result : 'N/A' }}</td> --}}
                         <td>{{$student->dietary}}</td> 
                         <td>{{$student->activities}}</td> 
-                        <td>{{$student->created_at}}</td>
+                        <td>
+                           
+                         <span class="badge bg-black">
+                                Updated: {{$student->created_at->timezone('Asia/Manila')->format('Y-m-d h:i:s A')}} -- {{ $student->created_at->diffForHumans() }}
+                            </span>
+                        </td>
                     </tr>
                     @endforeach
                     {{$students->links()}}

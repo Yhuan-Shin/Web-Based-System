@@ -13,8 +13,8 @@ class TeacherAccountUpdate extends Controller
 {
     //
     public function index(){
-
-        return view('teacher.account-update');
+        $teacher = User::where('user_id', Auth::user()->id);
+        return view('teacher.account-update', compact('teacher'));
     }
     public function update(Request $request)
     {
@@ -24,6 +24,7 @@ class TeacherAccountUpdate extends Controller
             'last_name' => 'sometimes|string|max:255',
             'first_name' => 'sometimes|string|max:255',
             'middle_name' => 'sometimes|string|max:255',
+            'section' => 'sometimes|string|max:255',
             'email' => 'sometimes|string|email|max:255|unique:users,email,' . $user->id,
             'address' => 'sometimes|string|max:255',
             'phone_number' => 'sometimes|string|max:15|unique:users,phone_number,' . $user->id,
@@ -44,6 +45,9 @@ class TeacherAccountUpdate extends Controller
             }
             if ($request->filled('middle_name')) {
                 $user->middle_name = $request->middle_name;
+            }
+            if ($request->filled('section')) {
+                $user->section = $request->section;
             }
             if ($request->filled('email')) {
                 $user->email = $request->email;

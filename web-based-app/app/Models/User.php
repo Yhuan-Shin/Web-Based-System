@@ -28,6 +28,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'section',
         'address',
         'phone_number',
         'relation',
@@ -61,5 +62,9 @@ class User extends Authenticatable
     public function students()
     {
         return $this->hasMany(Student::class);
+    }
+    public function studentsBySection()
+    {
+        return $this->hasMany(Student::class , 'section', 'section');
     }
 }

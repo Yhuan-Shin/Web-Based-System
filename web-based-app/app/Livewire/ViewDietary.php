@@ -11,19 +11,16 @@ class ViewDietary extends Component
 {
     public function render()
     {
-        $student = Student::where('user_id', Auth::user()->id)->first();
-    
-        $dietaries = []; // Default to an empty array if no student is found
-    
-        if ($student) {
-            $dietaries = DietaryAndActivities::with('student')
-                ->where('student_id', $student->id)
-                ->where('created_at', '>=', now()->subDays(7)) // Filter last 7 days
-                ->latest() // Order by newest first
-                ->get();
-        }
-    
-        return view('livewire.view-dietary', ['dietaries' => $dietaries]);
+        // Get all students related to the logged-in user
+        $students = Auth::user()->students; 
+
+        // Get all dietary records linked to the retrieved students
+        $dietaries = DietaryAndActivities::with('student')
+            ->whereIn('student_id', $students->pluck('id')) // Extract student IDs
+            ->where('created_at', '>=', now()->startOfWeek()) 
+            ->latest()
+            ->get();
+
+        return view('livewire.view-dietary', compact('dietaries'));
     }
-    
 }

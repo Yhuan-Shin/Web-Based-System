@@ -24,9 +24,12 @@ class DisplayStudents extends Component
                   ->latest('created_at')
                   ->limit(1); // Get only the latest BMI record
             },
+            'teacher:id,last_name,first_name,section',
             'user:id,last_name,first_name,phone_number'
         ])
         ->select('id', 'st_last_name', 'st_first_name', 'st_middle_name', 'age', 'gender', 'user_id', 'student_no', 'grade', 'section', 'profile_pic');
+        
+        
         
 
         if ($this->search) {

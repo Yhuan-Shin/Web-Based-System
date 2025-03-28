@@ -57,12 +57,8 @@ Route::get('/logout/admin', [AdminLogin::class, 'logout'])->name('admin.logout')
 
 //protected user page
 Route::middleware(['auth:user', 'verified'])->group(function () {
-    Route::get('/home', [Student::class, 'index'])->name('index') ->middleware([RedirectIfNotAuthenticated::class]);
-    Route::post('/home/student', [Student::class, 'submit'])->name('student.submit');
-    Route::put('/home/student/{id}', [Student::class, 'update'])->name('student.update');
-    Route::delete('/home/student/{id}', [Student::class, 'destroy'])->name('student.destroy');
+    Route::get('/home', [Student::class, 'index'])->name('index') ->middleware([RedirectIfNotAuthenticated::class]);;
     Route::get('/schedule',[Schedule::class, 'index'])->name('schedule');
-
     Route::put('/home/account/{id}', [AccountUpdate::class, 'update'])->name('account.update');
     Route::get('/home/account', [AccountUpdate::class, 'view'])->name('profile');
     Route::get('/home/dietary', [DietaryDisplay::class, 'index'])->name('dietary');

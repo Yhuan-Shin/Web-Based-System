@@ -5,6 +5,7 @@ use App\Models\Student as StudentModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use App\Models\BMI; // Ensure the BMI model is imported
 
 class UpdateStudent extends Controller
 {
@@ -83,7 +84,9 @@ class UpdateStudent extends Controller
     public function destroy($id)
     {
         try {
+            BMI::where('student_id', $id)->delete();
             $student = StudentModel::find($id);
+            
     
             if (!$student) {
                 return redirect()->back()->with(['error' => 'Student not found']);
@@ -97,9 +100,9 @@ class UpdateStudent extends Controller
             // Delete the student record
             $student->delete();
     
-            return redirect()->route('/student')->with(['success' => 'Student has been deleted']);
+            return redirect()->back()->with(['success' => 'Student has been deleted']);
         } catch (\Exception $e) {
-            return redirect()->route('/student')->with(['error' => 'Failed to delete student: ' . $e->getMessage()]);
+            return redirect()->back()->with(['error' => 'Failed to delete student: ' . $e->getMessage()]);
         }
     }
 }

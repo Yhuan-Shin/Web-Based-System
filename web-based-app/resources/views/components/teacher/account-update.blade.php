@@ -34,6 +34,18 @@
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
             </div>
+            <div class="mb-3">
+                <label for="section" class="form-label">Section</label>
+                <select class="form-control" id="section" name="section"  required>
+                    <option value="{{ Auth::user()->section}}"" selected disabled>{{ Auth::user()->section}}</option> 
+                    <option value="Section A">Section A</option>
+                    <option value="Section B">Section B</option>
+                    <option value="Section C">Section C</option>
+                    <option value="Section D">Section D</option>
+                    <option value="Section E">Section E</option>
+                    <option value="Section F">Section F</option>
+                </select>
+            </div>
             <div class="form-group">
                 <label for="phone" class="form-label text-muted">Phone</label>
                 <input type="text" class="form-control" id="phone" name="phone_number" value="{{ Auth::user()->phone_number }}" required>

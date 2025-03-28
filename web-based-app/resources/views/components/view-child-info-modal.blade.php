@@ -1,3 +1,4 @@
+
 <!-- Child Info Modal -->
 <div class="modal fade" id="childInfoModal" tabindex="-1" aria-labelledby="childInfoModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -24,8 +25,8 @@
                                 @elseif($child->gender == 'Female')
                                     <span class="badge bg-danger rounded-pill">Female</span>
                                 @endif
-                                <i class="bi bi-trash-fill  float-end" style="color: red;" data-bs-toggle="modal" data-bs-target="#childDeleteModal{{ $child->id }}"></i>
-                            
+                                {{-- <i class="bi bi-trash-fill  float-end" style="color: red;" data-bs-toggle="modal" data-bs-target="#childDeleteModal{{ $child->id }}"></i>
+                             --}}
                             </p>
                    
                     </div>
@@ -37,10 +38,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
-                {{-- <button type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#childAddModal">
-                    <i class="bi bi-plus"></i>
-                    Add
-                </button> --}}
+               
             </div>
         </div>
     </div>
