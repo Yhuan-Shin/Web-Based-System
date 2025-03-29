@@ -81,7 +81,7 @@ class DietaryActivities extends Component
  
          try {
              foreach ($this->studentIds as $studentId) {
-                 DietaryAndActivities::UpdateOrCreate(
+                 DietaryAndActivities::updateOrCreate(
                      ['student_id' => $studentId, 'category' => $this->category],
                      ['dietary' => $this->dietary, 'activities' => $this->activities]
                  );

@@ -128,7 +128,8 @@
                         <td>
                            
                          <span class="badge bg-black">
-                                Updated: {{$student->created_at->timezone('Asia/Manila')->format('Y-m-d h:i:s A')}} -- {{ $student->created_at->diffForHumans() }}
+                                Updated: {{$student->updated_at->timezone('Asia/Manila')->format('Y-m-d h:i:s A')}} -- 
+                                <br>Created: {{ $student->created_at->diffForHumans() }}
                             </span>
                         </td>
                     </tr>
