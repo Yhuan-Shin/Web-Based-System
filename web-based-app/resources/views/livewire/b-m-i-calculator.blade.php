@@ -10,7 +10,7 @@
                 <div class="modal-body">
                     <div class="container">
                         <div class="row">
-                            <div class="col border-end">
+                            <div class="col">
                                 @if (session()->has('message'))
                                     <div class="alert alert-success">
                                         {{ session('message') }}
@@ -29,7 +29,7 @@
                                     
                                     <div class="mb-3">
                                         <label for="student_no" class="form-label">Student No.</label>
-                                        <input type="text" class="form-control" id="student_no" wire:model="student_no" name="student_no" placeholder="Enter your child's Student No." required>
+                                        <input type="text" class="form-control" id="student_no" wire:model="student_no" name="student_no" placeholder="Enter your child's Student No." wire:change="fetchStudent" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="st_last_name" class="form-label">Last Name</label>

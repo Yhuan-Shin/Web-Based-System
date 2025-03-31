@@ -27,6 +27,7 @@ use App\Http\Middleware\RedirectIfNotAuthenticated;
 use Symfony\Component\HttpKernel\HttpCache\Store;
 use App\Http\Controllers\ChartController;
 use App\Http\Controllers\CreateAccount;
+use App\Http\Controllers\SearchStudentID;
 use App\Http\Controllers\Settings;
 use App\Http\Controllers\UpdateStudent;
 use App\Http\Controllers\TeacherAccountUpdate;

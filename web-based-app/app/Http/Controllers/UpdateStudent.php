@@ -5,6 +5,7 @@ use App\Models\Student as StudentModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use App\Models\DietaryAndActivities;
 use App\Models\BMI; // Ensure the BMI model is imported
 
 class UpdateStudent extends Controller
@@ -85,6 +86,7 @@ class UpdateStudent extends Controller
     {
         try {
             BMI::where('student_id', $id)->delete();
+            DietaryAndActivities::where('student_id', $id)->delete();
             $student = StudentModel::find($id);
             
     
