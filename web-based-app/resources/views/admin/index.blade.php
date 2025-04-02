@@ -92,6 +92,31 @@
                                             @endfor
                                         </select>
                                     </div>
+                                    <div class="col">
+                                        <label for="section" class="form-label">Select section:</label>
+                                        <select name="section" id="section" class="form-select" onchange="this.form.submit()">
+                                            <option value="all" {{ request('section', 'all') == 'all' ? 'selected' : '' }}>All Sections</option>
+                                            <option value="Section A" {{ request('section') == 'Section A' ? 'selected' : '' }}>Section A</option>
+                                            <option value="Section B" {{ request('section') == 'Section B' ? 'selected' : '' }}>Section B</option>
+                                            <option value="Section C" {{ request('section') == 'Section C' ? 'selected' : '' }}>Section C</option>
+                                            <option value="Section D" {{ request('section') == 'Section D' ? 'selected' : '' }}>Section D</option>
+                                            <option value="Section E" {{ request('section') == 'Section E' ? 'selected' : '' }}>Section E</option>
+                                            <option value="Section F" {{ request('section') == 'Section F' ? 'selected' : '' }}>Section F</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <label for="grade" class="form-label">Select grade:</label>
+                                        <select name="grade" id="grade" class="form-select" onchange="this.form.submit()">
+                                            <option value="all" {{ request('grade', 'all') == 'all' ? 'selected' : '' }}>All Grades</option>
+                                            <option value="Kinder" {{ request('grade') == 'Kinder' ? 'selected' : '' }}>Kinder</option>
+                                            <option value="Grade 1" {{ request('grade') == 'Grade 1' ? 'selected' : '' }}>Grade 1</option>
+                                            <option value="Grade 2" {{ request('grade') == 'Grade 2' ? 'selected' : '' }}>Grade 2</option>
+                                            <option value="Grade 3" {{ request('grade') == 'Grade 3' ? 'selected' : '' }}>Grade 3</option>
+                                            <option value="Grade 4" {{ request('grade') == 'Grade 4' ? 'selected' : '' }}>Grade 4</option>
+                                            <option value="Grade 5" {{ request('grade') == 'Grade 5' ? 'selected' : '' }}>Grade 5</option>
+                                            <option value="Grade 6" {{ request('grade') == 'Grade 6' ? 'selected' : '' }}>Grade 6</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </form>
 

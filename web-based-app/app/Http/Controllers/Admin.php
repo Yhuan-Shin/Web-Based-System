@@ -15,12 +15,24 @@ class Admin extends Controller
     {
         $year = $request->input('year', date('Y'));
         $month = $request->input('month', date('m'));
+        $section = $request->input('section', 'all');
+        $grade = $request->input('grade', 'all');
 
         $records = BMI::whereYear('created_at', $year)
-                    ->whereMonth('created_at', $month)
-                    ->distinct('student_id')  
-                    ->select('student_id', 'result')
-                    ->get();
+            ->whereMonth('created_at', $month)
+            ->when($section != 'all', function ($query) use ($section) {
+                return $query->whereHas('student', function ($subQuery) use ($section) {
+                    $subQuery->where('section', $section);
+                });
+            })
+            ->when($grade != 'all', function ($query) use ($grade) {
+                return $query->whereHas('student', function ($subQuery) use ($grade) {
+                    $subQuery->where('grade', $grade);
+                });
+            })
+            ->distinct('student_id')  
+            ->select('student_id', 'result')
+            ->get();
 
         $categories = ['Severely Wasted', 'Underweight', 'Normal', 'Overweight', 'Obese'];
 

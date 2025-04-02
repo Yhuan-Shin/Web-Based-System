@@ -88,7 +88,9 @@ Route::middleware(['auth:admin','verified'])->group(function () {
     Route::delete('/student/{id}', [UpdateStudent::class, 'destroy'])->name('admin.student.destroy');
     Route::get('/account-list', [AccountList::class, 'index'])->name('account-list.index');
 
-    Route::post('/account/store', [Accounts::class, 'register'])->name('create.account');
+    Route::post('/account/parent-store', [Accounts::class, 'register'])->name('create.account');
+    Route::put('/account/parent-update{id}', [Accounts::class, 'update'])->name('update.account');
+
     Route::get('/account-update', [TeacherAccountUpdate::class, 'index'])->name('teacher.account');
     Route::put('/account-update', [TeacherAccountUpdate::class, 'update'])->name('teacher.account.update');
 
