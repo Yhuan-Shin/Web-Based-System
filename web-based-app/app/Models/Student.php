@@ -10,7 +10,7 @@ class Student extends Model
     use SoftDeletes;
     //
     protected $table = 'student';
-    protected $fillable = ['st_last_name', 'st_first_name', 'st_middle_name', 'birthday', 'student_no', 'age', 'gender', 'grade', 'section','profile_pic', 'user_id'];
+    protected $fillable = ['st_last_name', 'st_first_name', 'st_middle_name', 'birthday', 'student_no', 'age', 'gender', 'grade', 'section','profile_pic', 'user_id','allergies','health_conditions','religion'];
     public function bmi(): HasOne
     {
         return $this->hasOne(BMI::class, 'student_id'); // Assuming 'student_id' is the foreign key in the Bmi table

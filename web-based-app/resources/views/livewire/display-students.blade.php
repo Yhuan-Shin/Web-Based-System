@@ -26,6 +26,9 @@
                     <p>Name: {{ $student->st_last_name }} {{ $student->st_first_name }} {{ $student->st_middle_name }}</p>
                     <p>Age: {{ $student->age }}</p>
                     <p>Gender: {{ $student->gender }}</p>
+                    <p>Religion: {{ $student->religion }}</p>
+                    <p>Health Condition: {{ $student->health_condition ? $student->health_condition : 'N/A' }}</p>
+                    <p>Allergies: {{ $student->allergies ? $student->allergies : 'N/A' }}</p>
                     <p>Parent/Guardian: {{ $student->user ? ($student->user->last_name && $student->user->first_name ? $student->user->last_name . ', ' . $student->user->first_name : $student->user->google_name) : 'N/A' }}</p>
                     <p>Phone Number: {{ $student->user ? $student->user->phone_number : 'N/A' }}</p>
                     <p>Height: {{ $student->bmi ? $student->bmi->height : 'N/A' }} cm</p>
@@ -217,7 +220,7 @@
                                     @else
                                         <span class="badge bg-warning p-2"> No Profile Picture</span>
                                     @endif
-                                    <input type="file" class="form-control mt-2" id="profile_pic" name="profile_pic" value="{{ $student->profile_pic }}" accept="image/*" required>
+                                    <input type="file" class="form-control mt-2" id="profile_pic" name="profile_pic" value="{{ $student->profile_pic }}" accept="image/*" >
                                     @error('profile_pic')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
@@ -251,6 +254,27 @@
                                     @enderror
                                 </div>
                                 <div class="mb-3">
+                                    <label for="religion" class="form-label">Religion</label>
+                                    <input type="text" class="form-control" id="religion" name="religion" value="{{ $student->religion }}" required>
+                                    @error('religion')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="health_condition" class="form-label">Health Condition</label>
+                                    <input type="text" class="form-control" id="health_condition" name="health_conditions" value="{{ $student->health_conditions }}" >
+                                    @error('health_condition')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="allergies" class="form-label">Allergies</label>
+                                    <input type="text" class="form-control" id="allergies" name="allergies" value="{{ $student->allergies }}" >
+                                    @error('allergies')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
                                     <label for="Grade" class="form-label">Grade</label>
                                     <select class="form-select" id="grade" name="grade" required>
                                         <option value="{{ $student->grade }}" selected>{{ $student->grade }}</option>
@@ -280,7 +304,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="childDOB" class="form-label">Child's Date of Birth</label>
-                                    <input type="date" class="form-control" id="date" x-model="birthday" @change="calculateAge()" name="birthday" value="{{$student->birthday}}"     required>
+                                    <input type="date" class="form-control" id="date" x-model="birthday" @change="calculateAge()" name="birthday" value="{{$student->birthday}}"     >
                                     
                                     @error('birthday')
                                         <span class="text-danger">{{ $message }}</span>

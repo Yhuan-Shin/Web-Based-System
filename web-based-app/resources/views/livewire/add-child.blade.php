@@ -1,6 +1,17 @@
 <div wire:poll.3000ms >
     <!-- Child's Add Modal -->
- 
+    @if(session()->has('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+    @if(session()->has('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>  
+    @endif
     
     <div class="modal fade" id="childAddModal" wire:ignore.self tabindex="-1" aria-labelledby="childAddModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -76,6 +87,18 @@
                             @enderror
                         </div>
                         <div class="mb-3">
+                            <label for="Allergies">Allergies</label>
+                            <input type="text" class="form-control" wire:model="allergies" placeholder="Allergies" id="allergies" name="allergies">
+                        </div>
+                        <div class="mb-3">
+                            <label for="religion">Religion</label>
+                            <input type="text" class="form-control" wire:model="religion" placeholder="Religion" id="religion" name="religion" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="health_condition">Health Condition</label>
+                            <input type="text" class="form-control" wire:model="health_condition" placeholder="Health Condition" id="health_conditions" name="health_condition">
+                        </div>
+                        <div class="mb-3">
                             <label for="Grade" class="form-label">Grade</label>
 
                             <select class="form-select" id="grade"  wire:model="grade" name="grade" required>
@@ -148,7 +171,7 @@
 
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary float-end" >Submit</button>
+                        <button type="submit" class="btn btn-primary float-end"  >Submit</button>
                     </form>
                 </div>
             </div>

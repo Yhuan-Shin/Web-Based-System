@@ -19,10 +19,13 @@ class UpdateStudent extends Controller
             'st_first_name' => 'required|string|max:255',
             'st_middle_name' => 'required|string|max:255',
             'grade' => 'required|string|max:255',
+            'religion' => 'required|string|max:255',
+            'allergies' => 'nullable|string|max:255',
+            'health_conditions' => 'nullable|string|max:255',
             'section' => 'required|string|max:255',
             'age' => 'integer',
             'gender' => 'string|max:255',
-            'birthday' => 'required|date',
+            'birthday' => 'nullable|date',
             'student_no' => 'required|string|unique:student,student_no,' . $id,
             'profile_pic' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
@@ -36,6 +39,10 @@ class UpdateStudent extends Controller
         $gender = $request->gender;
         $grade = $request->grade;
         $section = $request->section;
+        $religion = $request->religion;
+        $allergies = $request->allergies;
+        $health_conditions = $request->health_conditions;
+
     
         // Check if age is valid
         if ($age > 12 || $age < 5) { 
@@ -60,6 +67,9 @@ class UpdateStudent extends Controller
             $student->grade = $grade;
             $student->section = $section;
             $student->gender = $gender;
+            $student->religion = $religion;
+            $student->allergies = $allergies;
+            $student->health_conditions = $health_conditions;
 
     
             // Check if the profile picture is uploaded

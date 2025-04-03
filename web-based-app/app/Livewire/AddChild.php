@@ -49,6 +49,9 @@ class AddChild extends Component
             'grade' => 'required',
             'section' => 'required',
             'parent' => 'required',
+            'religion' => 'required|string|max:255',
+            'allergies' => 'nullable|string|max:255',
+            'health_conditions' => 'nullable|string|max:255',
             
         ]);
         $image_path = $this->profile_pic->store('uploaded_profile_pics', 'public');
@@ -66,7 +69,11 @@ class AddChild extends Component
                 'st_middle_name' => $this->st_middle_name,
                 'grade' => $this->grade,
                 'section' => $this->section,
+                'religion' => $this->religion,
+                'allergies' => $this->allergies,
+                'health_conditions' => $this->health_conditions,
             ]);
+            
         } catch (\Exception $e) {
             session()->flash('error', 'There was an error adding the student: ' . $e->getMessage());
         }
