@@ -17,6 +17,9 @@
         @include('components.admin.navbar')
         <div class="main">
             @include('components.admin.header')
+
+            @include('components.admin.confirm-logout')
+
             @livewire('create-reminder')
             <div class="container mt-3">
                 <div class="row">

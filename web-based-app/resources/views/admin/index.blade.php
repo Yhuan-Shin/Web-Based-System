@@ -24,25 +24,8 @@
         <div class="main">
             @include('components.admin.header')
             <div>
-                <!-- Logout Confirmation Modal -->
-                <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                Are you sure you want to logout?
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <a href="{{ route('admin.logout') }}" class="btn btn-danger">Logout</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                
+                @include('components.admin.confirm-logout')
                    {{-- Main content --}}
                   
                    <div class="container justify-content-center">
@@ -61,74 +44,74 @@
                     </div>
                 
                    <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-md-6">
-                        <div class="container">
-                            <div id="chartData" 
-                                data-labels='@json($data["labels"])' 
-                                data-counts='@json($data["counts"])'>
-                            </div>
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <div class="container">
+                                    <div id="chartData" 
+                                        data-labels='@json($data["labels"])' 
+                                        data-counts='@json($data["counts"])'>
+                                    </div>
 
-                            <form action="{{ route('admin.index') }}" method="GET" class="form-control">
+                                    <form action="{{ route('admin.index') }}" method="GET" class="form-control">
 
-                                <div class="row">
-                                    <div class="col">
-                                        <label for="year" class="form-label">Select a year:</label>
-                                        <select name="year" id="year" class="form-select" onchange="this.form.submit()">
-                                            @for ($y = date('Y') - 12; $y <= date('Y'); $y++) <!-- Shows last 5 years -->
-                                                <option value="{{ $y }}" {{ (int) request('year', date('Y')) == $y ? 'selected' : '' }}>
-                                                    {{ $y }}
-                                                </option>
-                                            @endfor
-                                        </select>
-                                    </div>
-                                    <div class="col">
-                                        <label for="month" class="form-label ">Select a month:</label>
-                                        <select name="month" id="month" class="form-select" onchange="this.form.submit()">
-                                            @for ($i = 1; $i <= 12; $i++)
-                                                <option value="{{ $i }}" {{ (int) request('month', date('n')) == $i ? 'selected' : '' }}>
-                                                    {{ date('F', mktime(0, 0, 0, $i, 1)) }}
-                                                </option>
-                                            @endfor
-                                        </select>
-                                    </div>
-                                    <div class="col">
-                                        <label for="section" class="form-label">Select section:</label>
-                                        <select name="section" id="section" class="form-select" onchange="this.form.submit()">
-                                            <option value="all" {{ request('section', 'all') == 'all' ? 'selected' : '' }}>All Sections</option>
-                                            <option value="Section A" {{ request('section') == 'Section A' ? 'selected' : '' }}>Section A</option>
-                                            <option value="Section B" {{ request('section') == 'Section B' ? 'selected' : '' }}>Section B</option>
-                                            <option value="Section C" {{ request('section') == 'Section C' ? 'selected' : '' }}>Section C</option>
-                                            <option value="Section D" {{ request('section') == 'Section D' ? 'selected' : '' }}>Section D</option>
-                                            <option value="Section E" {{ request('section') == 'Section E' ? 'selected' : '' }}>Section E</option>
-                                            <option value="Section F" {{ request('section') == 'Section F' ? 'selected' : '' }}>Section F</option>
-                                        </select>
-                                    </div>
-                                    <div class="col">
-                                        <label for="grade" class="form-label">Select grade:</label>
-                                        <select name="grade" id="grade" class="form-select" onchange="this.form.submit()">
-                                            <option value="all" {{ request('grade', 'all') == 'all' ? 'selected' : '' }}>All Grades</option>
-                                            <option value="Kinder" {{ request('grade') == 'Kinder' ? 'selected' : '' }}>Kinder</option>
-                                            <option value="Grade 1" {{ request('grade') == 'Grade 1' ? 'selected' : '' }}>Grade 1</option>
-                                            <option value="Grade 2" {{ request('grade') == 'Grade 2' ? 'selected' : '' }}>Grade 2</option>
-                                            <option value="Grade 3" {{ request('grade') == 'Grade 3' ? 'selected' : '' }}>Grade 3</option>
-                                            <option value="Grade 4" {{ request('grade') == 'Grade 4' ? 'selected' : '' }}>Grade 4</option>
-                                            <option value="Grade 5" {{ request('grade') == 'Grade 5' ? 'selected' : '' }}>Grade 5</option>
-                                            <option value="Grade 6" {{ request('grade') == 'Grade 6' ? 'selected' : '' }}>Grade 6</option>
-                                        </select>
-                                    </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <label for="year" class="form-label">Select a year:</label>
+                                                <select name="year" id="year" class="form-select" onchange="this.form.submit()">
+                                                    @for ($y = date('Y') - 12; $y <= date('Y'); $y++) <!-- Shows last 5 years -->
+                                                        <option value="{{ $y }}" {{ (int) request('year', date('Y')) == $y ? 'selected' : '' }}>
+                                                            {{ $y }}
+                                                        </option>
+                                                    @endfor
+                                                </select>
+                                            </div>
+                                            <div class="col">
+                                                <label for="month" class="form-label ">Select a month:</label>
+                                                <select name="month" id="month" class="form-select" onchange="this.form.submit()">
+                                                    @for ($i = 1; $i <= 12; $i++)
+                                                        <option value="{{ $i }}" {{ (int) request('month', date('n')) == $i ? 'selected' : '' }}>
+                                                            {{ date('F', mktime(0, 0, 0, $i, 1)) }}
+                                                        </option>
+                                                    @endfor
+                                                </select>
+                                            </div>
+                                            <div class="col">
+                                                <label for="section" class="form-label">Select section:</label>
+                                                <select name="section" id="section" class="form-select" onchange="this.form.submit()">
+                                                    <option value="all" {{ request('section', 'all') == 'all' ? 'selected' : '' }}>All Sections</option>
+                                                    <option value="Section A" {{ request('section') == 'Section A' ? 'selected' : '' }}>Section A</option>
+                                                    <option value="Section B" {{ request('section') == 'Section B' ? 'selected' : '' }}>Section B</option>
+                                                    <option value="Section C" {{ request('section') == 'Section C' ? 'selected' : '' }}>Section C</option>
+                                                    <option value="Section D" {{ request('section') == 'Section D' ? 'selected' : '' }}>Section D</option>
+                                                    <option value="Section E" {{ request('section') == 'Section E' ? 'selected' : '' }}>Section E</option>
+                                                    <option value="Section F" {{ request('section') == 'Section F' ? 'selected' : '' }}>Section F</option>
+                                                </select>
+                                            </div>
+                                            <div class="col">
+                                                <label for="grade" class="form-label">Select grade:</label>
+                                                <select name="grade" id="grade" class="form-select" onchange="this.form.submit()">
+                                                    <option value="all" {{ request('grade', 'all') == 'all' ? 'selected' : '' }}>All Grades</option>
+                                                    <option value="Kinder" {{ request('grade') == 'Kinder' ? 'selected' : '' }}>Kinder</option>
+                                                    <option value="Grade 1" {{ request('grade') == 'Grade 1' ? 'selected' : '' }}>Grade 1</option>
+                                                    <option value="Grade 2" {{ request('grade') == 'Grade 2' ? 'selected' : '' }}>Grade 2</option>
+                                                    <option value="Grade 3" {{ request('grade') == 'Grade 3' ? 'selected' : '' }}>Grade 3</option>
+                                                    <option value="Grade 4" {{ request('grade') == 'Grade 4' ? 'selected' : '' }}>Grade 4</option>
+                                                    <option value="Grade 5" {{ request('grade') == 'Grade 5' ? 'selected' : '' }}>Grade 5</option>
+                                                    <option value="Grade 6" {{ request('grade') == 'Grade 6' ? 'selected' : '' }}>Grade 6</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </form>
+
                                 </div>
-                            </form>
+                                
 
-                        </div>
-                           
-
-                        <div class="mt-4">
-                            <canvas id="healthChart"></canvas>
+                                <div class="mt-4">
+                                    <canvas id="healthChart"></canvas>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
                     
             </div>
         </div>
