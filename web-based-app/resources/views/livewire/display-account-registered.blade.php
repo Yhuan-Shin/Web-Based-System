@@ -90,3 +90,35 @@
             {{ $accounts->links() }}    
     </div>
 </div>
+<script>
+    document.getElementById('togglePassword').addEventListener('click', function () {
+        const password = document.getElementById('password');
+        const passwordIcon = document.getElementById('togglePasswordIcon');
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        passwordIcon.classList.toggle('bi-eye');
+        passwordIcon.classList.toggle('bi-eye-slash');
+    });
+
+    document.getElementById('toggleConfirmPassword').addEventListener('click', function () {
+        const confirmPassword = document.getElementById('password_confirmation');
+        const confirmPasswordIcon = document.getElementById('toggleConfirmPasswordIcon');
+        const type = confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+        confirmPassword.setAttribute('type', type);
+        confirmPasswordIcon.classList.toggle('bi-eye');
+        confirmPasswordIcon.classList.toggle('bi-eye-slash');
+    });
+
+    document.getElementById('password_confirmation').addEventListener('input', function () {
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('password_confirmation').value;
+        const message = document.getElementById('passwordMatchMessage');
+        if (password === confirmPassword) {
+            message.textContent = 'Passwords match';
+            message.style.color = 'green';
+        } else {
+            message.textContent = 'Passwords do not match';
+            message.style.color = 'red';
+        }
+    });
+</script>

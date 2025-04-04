@@ -20,23 +20,7 @@
          
                 <div class="row">
                     <div class="col">
-                        <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="logoutModalLabel">Confirm Logout</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Are you sure you want to logout?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                        <a href="{{ route('admin.logout') }}" class="btn btn-danger">Logout</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                       @include('components.admin.confirm-logout')
                         @livewire('display-account-registered') 
                     </div>
                     
@@ -49,7 +33,38 @@
    
    
    
+    <script>
+        document.getElementById('togglePassword').addEventListener('click', function () {
+            const password = document.getElementById('password');
+            const passwordIcon = document.getElementById('togglePasswordIcon');
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            passwordIcon.classList.toggle('bi-eye');
+            passwordIcon.classList.toggle('bi-eye-slash');
+        });
 
+        document.getElementById('toggleConfirmPassword').addEventListener('click', function () {
+            const confirmPassword = document.getElementById('password_confirmation');
+            const confirmPasswordIcon = document.getElementById('toggleConfirmPasswordIcon');
+            const type = confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+            confirmPassword.setAttribute('type', type);
+            confirmPasswordIcon.classList.toggle('bi-eye');
+            confirmPasswordIcon.classList.toggle('bi-eye-slash');
+        });
+
+        document.getElementById('password_confirmation').addEventListener('input', function () {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('password_confirmation').value;
+            const message = document.getElementById('passwordMatchMessage');
+            if (password === confirmPassword) {
+                message.textContent = 'Passwords match';
+                message.style.color = 'green';
+            } else {
+                message.textContent = 'Passwords do not match';
+                message.style.color = 'red';
+            }
+        });
+    </script>
     <script>
         const hamBurger = document.querySelector(".toggle-btn");
 

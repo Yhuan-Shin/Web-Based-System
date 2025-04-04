@@ -34,7 +34,7 @@
                     <div class="mb-3">
                         <label for="role" class="form-label">Role</label>
                         <select class="form-control" id="role" name="role" required>
-                            <option value="">Select Role</option>
+                            <option value="{{$account->role}}" disabled selected>{{$account->role}}</option>
                             <option value="teacher">Teacher</option>
                             <option value="parent">Parent/Guardian</option>
                         </select>
@@ -44,8 +44,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="section" class="form-label">Section</label>
-                        <select class="form-control" id="section" name="section">
-                            <option value="" >Select Section</option>   
+                        <select class="form-control" id="section" name="section" >
+                            <option value="{{ $account->section }}" disabled selected>{{ $account->section ? $account->section: 'For Teachers Only'}}</option>   
                             <option value="Section A">Section A</option>
                             <option value="Section B">Section B</option>
                             <option value="Section C">Section C</option>
