@@ -12,14 +12,11 @@
 </head>
 <body>
 
-@include('components.view-child-info-modal')
-
-@include('components.parent.confirm-logout')
-   
-    
+    @include('components.parent.confirm-logout')
+    @include('components.parent.navbar')
+    @include('components.parent.view-child-info-modal')
     
  
-    @include('components.navbar')
    
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">

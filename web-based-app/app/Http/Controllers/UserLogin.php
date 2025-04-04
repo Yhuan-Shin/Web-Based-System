@@ -25,7 +25,7 @@ class UserLogin extends Controller
             if ($user->role == 'parent') {
                 $request->session()->regenerate(); 
                 return redirect('/home');
-            } else if ($user->role == 'admin') {
+            } else if ($user->role == 'admin' || $user->role == 'teacher') {
                 return redirect()->back()->with('error', 'Unable to login'); 
             }
         }

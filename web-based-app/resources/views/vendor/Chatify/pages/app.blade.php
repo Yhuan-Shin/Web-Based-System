@@ -68,7 +68,7 @@
                     <a href="/dashboard"><i class="fas fa-home"></i></a> 
 
                     <!-- Admin-specific features here -->
-                    @elseif(auth('user')->check())
+                    @elseif(auth('user')->check() || auth()->user()->role == 'parent')
                     <a href="/home"><i class="fas fa-home"></i></a> 
                     @endif
                     <a href="#" class="show-infoSide"><i class="fas fa-info-circle"></i></a>

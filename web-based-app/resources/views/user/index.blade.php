@@ -19,8 +19,8 @@
 
    
     @include('components.parent.confirm-logout')
-    @include('components.navbar')
-    @include('components.view-child-info-modal')
+    @include('components.parent.navbar')
+    @include('components.parent.view-child-info-modal')
 
    
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
@@ -60,7 +60,7 @@
                         <div class="card mt-5">
                             <div class="card-body">
                                 <ol class="text-start text-muted">
-                                    <p class="text-muted">Make sure to add your information of your <span class="fw-bold text-decoration-underline text-primary"><a href="#" data-bs-toggle="modal" data-bs-target="#childAddModal">child</a></span> first.</p>
+                                
 
                                     <li>Measure your weight in kilograms (kg).</li>
                                     <li>Measure your height in meters (m).</li>
