@@ -31,7 +31,7 @@
                       
                         <div class="form-group mb-3">
                             <label for="diet-plan">Diet Plan</label>
-                            <textarea class="form-control" wire:model="dietary" id="diet-plan" rows="3"></textarea>
+                            <textarea class="form-control" wire:model.live="dietary" id="diet-plan" rows="3" readonly></textarea>
                         </div>
                         <div class="form-group mb-3">
                             <label for="activities">Activities</label>
@@ -39,7 +39,7 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="category">Category</label>
-                            <select class="form-select" id="category" name="category" wire:model="category" required>
+                            <select class="form-select" id="category" name="category" wire:model.live="category" required>
                                 <option value="">Select Category</option>
                                 <option value="Severely Wasted">Severely Wasted</option>
                                 <option value="Underweight">Underweight</option>
